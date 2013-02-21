@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+	<title>Delivery Tracker</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
+	<link href="Content/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link href="Content/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
+	<link href="Content/Site.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div class="container">
+		
+		@*<div id="loading" class="text-center"><img src="Images/loading.gif" alt="loading" /></div>*@
+
+		<div data-bind="template: { name: selectedPage.template, data: selectedPage.data }"></div>
+
+		<script type="text/html" id="login">
+			<form class="form-signin">
+				<h2 class="form-signin-heading">Please sign in</h2>
+				Username:
+				<input type="text" class="input-block-level" placeholder="Username" data-bind="value: UserName" />
+				Password:
+				<input type="password" class="input-block-level" placeholder="Password" data-bind="value: Password" />
+				Truck:
+				<select class="input-block-level" data-bind="value: Truck">
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+				</select>
+				<button class="btn btn-primary" type="submit">Sign in</button>
+				<button class="btn" type="submit">New User?</button>
+			</form>
+		</script>
+
+		<script type="text/html" id="passwordHint">
+			<form class="form-signin">
+				<h2 class="form-signin-heading">Reset Password</h2>
+				<span data-bind="text: Hint"></span>?
+				<input type="text" class="input-block-level" placeholder="Answer" />
+				<button class="btn btn-primary" type="submit">Submit</button>
+			</form>
+		</script>
+	</div>
+</body>
+<script src="Scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="Scripts/jquery.cookie.js" type="text/javascript"></script>
+<script src="Scripts/knockout-2.2.1.js" type="text/javascript"></script>
+<script src="Scripts/dt.viewmodels.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		var userAuth = $.cookie('dtuserauth'),
+			dt = DT.viewModels;
+
+		var viewModel = new dt.ViewModel([
+			new dt.Page('login', new dt.Login())
+		]);
+
+		ko.applyBindings(viewModel);
+
+		if (typeof userAuth === 'undefined') {
+
+		}
+
+		//		$.ajax({
+		//			type: 'GET',
+		//			cache: false,
+		//			url: 'Authentications/' + userAuth
+		//		}).done(function (data) {
+
+		//		});
+
+	});
+</script>
+</html>
