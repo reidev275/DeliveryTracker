@@ -6,16 +6,41 @@ namespace DeliveryTracker.Controllers
 {
 	public class AuthenticationsController : ApiController
 	{
+        private readonly IAuthenticationsRepository _repository;
+        private readonly IAuthenticationCodeCreator _codeCreator;
+
+        public AuthenticationsController()
+        {
+
+        }
+
 		// GET api/authentications/5
-		public string Get(string id)
+        public AuthenticationResponse Get(string id)
 		{
-			return "value";
+            if (id == null) throw new ArgumentNullException("id");
+            var result = _repository.GetByCode(id);
+            return result;
 		}
 
 		// POST api/authentications
 		public string Post([FromBody]Authentication value)
 		{
-			throw new NotImplementedException();
+            if (value == null) throw new ArgumentNullException("value");
+            var result = _repository.Save(value);
+            return result.Code;
 		}
 	}
+
+    public interface IAuthenticationCodeCreator
+    {
+        string CreateAuthenticationCode(Authentication authentication);
+    }
+
+    public interface IAuthenticationsRepository
+    {
+        AuthenticationResponse Save(Authentication authentication);
+        AuthenticationResponse GetByCode(string authCode);
+    }
+
+
 }
