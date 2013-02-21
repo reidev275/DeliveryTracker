@@ -3,9 +3,10 @@
 	padding: 19px 29px 29px;
 	margin: 20px auto 20px;
     background-color: white;
-    box-shadow: rgba(0,0,0,0.4) 0 0 8px;
+    box-shadow: rgba(0,0,0,0.3) 0 0 10px;
 }
 
 body {
-    background-color: #aba;
+    /*background-color: #aba;*/
+    background: #eee;
 }
