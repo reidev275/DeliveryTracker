@@ -18,7 +18,7 @@
 
 		<script type="text/html" id="login">
 			<form class="form-signin">
-				<h2 class="form-signin-heading">Please sign in</h2>
+				<h2 class="form-signin-heading">Sign in</h2>
 				Username:
 				<input type="text" class="input-block-level" placeholder="Username" data-bind="value: UserName" />
 				Password:
@@ -30,13 +30,13 @@
 					<option>3</option>
 				</select>
 				<button class="btn btn-primary" type="submit">Sign in</button>
-				<button class="btn" type="submit" data-bind="click: function() { $root.goToPage('register'); }">New User?</button>
+				<button class="btn" type="submit" data-bind="click: Register">New User?</button>
 			</form>
 		</script>
 
         <script type="text/html" id="register">
             <form class="form-signin">
-				<h2 class="form-signin-heading">Registration</h2>
+				<h2 class="form-signin-heading">Register</h2>
 				Username:
 				<input type="text" class="input-block-level" placeholder="Username" data-bind="value: UserName" />
 				Password:
@@ -45,7 +45,7 @@
                 <input type="password" class="input-block-level" placeholder="Password" data-bind="value: PasswordConfirm" />
                 Hint Question (Will be asked if you forget your password):
                 <input type="text" class="input-block-level" placeholder="Hint Question" data-bind="value: HintQuestion" />
-                Hint Answer (The answer to the Hint Question):
+                Hint Answer:
                 <input type="text" class="input-block-level" placeholder="Hint Answer" data-bind="value: HintAnswer" />
                 <button class="btn btn-primary" type="submit">Register</button>
             </form>
