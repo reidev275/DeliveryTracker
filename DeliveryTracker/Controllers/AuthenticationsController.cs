@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Web.Http;
 using DeliveryTracker.Models;
+using DeliveryTracker.Repositories;
 
 namespace DeliveryTracker.Controllers
 {
 	public class AuthenticationsController : ApiController
 	{
         private readonly IAuthenticationsRepository _repository;
-        private readonly IAuthenticationCodeCreator _codeCreator;
 
-        public AuthenticationsController()
+        public AuthenticationsController() : this(new MemoryAuthenticationsRepository()) { }
+
+        public AuthenticationsController(IAuthenticationsRepository repository)
         {
-
+            if (repository == null) throw new ArgumentNullException("repository");
+            this._repository = repository;
         }
 
 		// GET api/authentications/5
@@ -30,17 +33,4 @@ namespace DeliveryTracker.Controllers
             return result.Code;
 		}
 	}
-
-    public interface IAuthenticationCodeCreator
-    {
-        string CreateAuthenticationCode(Authentication authentication);
-    }
-
-    public interface IAuthenticationsRepository
-    {
-        AuthenticationResponse Save(Authentication authentication);
-        AuthenticationResponse GetByCode(string authCode);
-    }
-
-
 }
