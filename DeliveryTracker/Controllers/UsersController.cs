@@ -9,18 +9,13 @@ namespace DeliveryTracker.Controllers
 	{
         private readonly IUsersRepository _repository;
 
+        public UsersController() : this(new MemoryUsersRepository()) { }
+
         public UsersController(IUsersRepository repository)
         {
             if (repository == null) throw new ArgumentNullException("repository");
             _repository = repository;
         }
-
-		// GET api/users/5
-		public string Get(string id)
-		{
-			//get user by id
-			return "value";
-		}
 
 		// POST api/users
 		public void Post([FromBody]User value)
