@@ -51,6 +51,16 @@
 	    self.PasswordConfirm = ko.observable('');
 	    self.HintQuestion = ko.observable('');
 	    self.HintAnswer = ko.observable('');
+
+	    self.Register = function () {
+	        var user = {
+	            Id: self.UserName(),
+	            Password: self.Password(),
+	            HintQuestion: self.HintQuestion(),
+                HintAnswer: self.HintAnswer()
+	        };
+	        dt.users.create(user);
+	    };
 	};
 
 	return dt;
