@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace DeliveryTracker.Models
 {
@@ -23,13 +21,11 @@ namespace DeliveryTracker.Models
         public string Contact { get; set; }
         public string PoNumber { get; set; }
 		public string Signature { get; set; }
+        public string Printed { get; set; }
 		public int Truck { get; set; }
         public DateTime? Completed { get; set; }
 
 		public IEnumerable<Item> Items { get; set; }
-
-		//public IEnumerable<Point> Points { get; set; }
-		//public IEnumerable<int> Penups { get; set; }
 	}
 
 	public class Item
@@ -39,6 +35,6 @@ namespace DeliveryTracker.Models
 		public double Allocated { get; set; }
 		public double Delivered { get; set; }
 		public string UnitOfMeasure { get; set; }
-        public string LineNumber { get; set; }
+        public string Line { get; set; }
 	}
 }
