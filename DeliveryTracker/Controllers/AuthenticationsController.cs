@@ -9,8 +9,6 @@ namespace DeliveryTracker.Controllers
 	{
         private readonly IAuthenticationsRepository _repository;
 
-        public AuthenticationsController() : this(new MemoryAuthenticationsRepository()) { }
-
         public AuthenticationsController(IAuthenticationsRepository repository)
         {
             if (repository == null) throw new ArgumentNullException("repository");
