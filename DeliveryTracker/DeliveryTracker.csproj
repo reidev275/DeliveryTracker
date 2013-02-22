@@ -138,6 +138,7 @@
     <Compile Include="Repositories\IAuthenticationsRepository.cs" />
     <Compile Include="Repositories\IUsersRepository.cs" />
     <Compile Include="Repositories\MemoryAuthenticationsRepository.cs" />
+    <Compile Include="Repositories\MemoryUsersRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-responsive.css" />
