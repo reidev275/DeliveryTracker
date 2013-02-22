@@ -140,6 +140,7 @@
     <Compile Include="Controllers\AuthenticationsController.cs" />
     <Compile Include="Controllers\DeliveriesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Filters\DeviceAuthRequiredAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -179,7 +180,9 @@
     <Content Include="Scripts\lib\knockout-2.2.1.debug.js" />
     <Content Include="Scripts\lib\knockout-2.2.1.js" />
     <Content Include="Scripts\lib\modernizr-2.5.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
