@@ -29,7 +29,7 @@
 					<option>2</option>
 					<option>3</option>
 				</select>
-				<button class="btn btn-primary" type="submit">Sign in</button>
+				<button class="btn btn-primary" type="submit" data-bind="click: Login">Sign in</button>
 				<button class="btn" type="submit" data-bind="click: Register">New User?</button>
 			</form>
 		</script>
@@ -47,7 +47,7 @@
                 <input type="text" class="input-block-level" placeholder="Hint Question" data-bind="value: HintQuestion" />
                 Hint Answer:
                 <input type="text" class="input-block-level" placeholder="Hint Answer" data-bind="value: HintAnswer" />
-                <button class="btn btn-primary" type="submit">Register</button>
+                <button class="btn btn-primary" type="submit" data-bind="click: Register">Register</button>
             </form>
         </script>
 
@@ -59,12 +59,22 @@
 				<button class="btn btn-primary" type="submit">Submit</button>
 			</form>
 		</script>
+
+        <script type="text/html" id="welcome">
+            <form class="form-signin">
+                <h2 class="form-signin-heading">Welcome</h2>
+                <span data-bind="text: $root.authCode"></span>
+            </form>
+        </script>
 	</div>
 </body>
-<script src="Scripts/lib/jquery-1.9.1.min.js" type="text/javascript"></script>
-<script src="Scripts/lib/jquery.cookie.js" type="text/javascript"></script>
-<script src="Scripts/lib/knockout-2.2.1.js" type="text/javascript"></script>
-<script src="Scripts/dt.viewmodels.js" type="text/javascript"></script>
+<script src="~/Scripts/lib/jquery-1.9.1.min.js"></script>
+<script src="~/Scripts/lib/jquery.cookie.js"></script>
+<script src="~/Scripts/lib/knockout-2.2.1.js"></script>
+<script src="~/Scripts/dt.viewmodels.js"></script>
+<script src="~/Scripts/dt.authentications.js"></script>
+<script src="~/Scripts/dt.users.js"></script>
+<script src="~/Scripts/dt.deliveries.js"></script>
 
 <script type="text/javascript">
 	$(document).ready(function () {
@@ -73,7 +83,8 @@
 
 		var viewModel = new dt.ViewModel([
 			new dt.Page('login', new dt.Login()),
-            new dt.Page('register', new dt.Register())
+            new dt.Page('register', new dt.Register()),
+            new dt.Page('welcome', {})
 		]);
 
 		ko.applyBindings(viewModel);

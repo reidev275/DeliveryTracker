@@ -1,13 +1,13 @@
 ﻿var DT = (function (dt, $, json) {
-    var o = dt.users = dt.users || {};
+    var o = dt.authentications = dt.authentications || {};
 
-    o.create = function (user, callback) {
+    o.create = function (login, callback) {
         $.ajax({
             type: 'POST',
-            data: user,
+            data: login,
             datatype: 'json',
             cache: false,
-            url: 'Users'
+            url: 'Authentications'
         }).done(function (data) {
             if (callback) callback(data);
         });

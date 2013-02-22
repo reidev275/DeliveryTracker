@@ -150,6 +150,7 @@
     <Content Include="Images\glyphicons-halflings-white.png" />
     <Content Include="Images\glyphicons-halflings.png" />
     <Content Include="Images\loading.gif" />
+    <Content Include="Scripts\dt.authentications.js" />
     <Content Include="Scripts\dt.users.js" />
     <Content Include="Scripts\lib\bootstrap.js" />
     <Content Include="Scripts\lib\bootstrap.min.js" />

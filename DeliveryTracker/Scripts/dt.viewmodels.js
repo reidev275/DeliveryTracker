@@ -1,8 +1,9 @@
 ﻿var DT = (function (dt, ko) {
 
-	var o = dt.viewModels = dt.viewModels || {};
+    var o = dt.viewModels = dt.viewModels || {},
+        route = ko.observable(''),
+        authCode = ko.observable('');
 
-	var route = ko.observable('');
 
 	o.Page = function (template, data) {
 		var self = this;
@@ -16,6 +17,11 @@
 
 		self.pages = ko.observableArray(pages);
 		self.selectedPage = ko.observable();
+		self.authCode;
+
+		authCode.subscribe(function (value) {
+		    self.authCode = value;
+		});
 
 		route.subscribe(function (value) {
 		    if (value === '') return;
@@ -42,6 +48,20 @@
 	    self.Register = function () {
 	        route('register');
 	    }
+
+	    self.Login = function () {
+	        var login = {
+	            UserId: self.UserName(),
+	            Truck: self.Truck(),
+                Password: self.Password()
+	        };
+	        dt.authentications.create(login, function (data) {
+	            if (typeof data !== 'undefined') {
+	                authCode(data);
+	                route('welcome');
+	            }
+	        });
+	    }
 	};
 
 	o.Register = function () {
@@ -59,7 +79,9 @@
 	            HintQuestion: self.HintQuestion(),
                 HintAnswer: self.HintAnswer()
 	        };
-	        dt.users.create(user);
+	        dt.users.create(user, function() {
+	            route('login');
+	        });
 	    };
 	};
 
