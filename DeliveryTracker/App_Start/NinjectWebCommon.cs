@@ -64,7 +64,6 @@ namespace DeliveryTracker.App_Start
         {
             kernel.Bind<IDapperQueryExecutor>().To<SqlDapperQueryExecutor>();
 
-
             kernel.Bind<IAuthenticationsRepository>().To<MemoryAuthenticationsRepository>();
             kernel.Bind<IUsersRepository>().To<MemoryUsersRepository>();
         }        
