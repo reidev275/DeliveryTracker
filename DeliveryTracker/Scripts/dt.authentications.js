@@ -10,6 +10,8 @@
             url: 'Authentications'
         }).done(function (data) {
             if (callback) callback(data);
+        }).error(function (jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
         });
     };
 

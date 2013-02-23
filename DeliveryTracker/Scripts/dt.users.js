@@ -10,7 +10,9 @@
             url: 'Users'
         }).done(function (data) {
             if (callback) callback(data);
-        });
+        }).error(function (jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+        });;
     };
 
     return dt;

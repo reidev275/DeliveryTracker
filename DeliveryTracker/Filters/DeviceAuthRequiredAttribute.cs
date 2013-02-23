@@ -23,15 +23,21 @@ namespace DeliveryTracker.Filters
 
         public static bool IsAuthorizedDevice(this HttpRequestMessage request)
         {
+            var deviceHeader = request.Headers.GetValue("EmpireDevice");
+            return deviceHeader == DeviceKey;
+        }
+
+        public static string GetValue(this System.Net.Http.Headers.HttpRequestHeaders obj, string key)
+        {
             IEnumerable<string> enumerableHeader;
-            request.Headers.TryGetValues("EmpireDevice", out enumerableHeader);
-            if (enumerableHeader == null) return false;
+            obj.TryGetValues(key, out enumerableHeader);
+
+            if (enumerableHeader == null) return null;
 
             var list = enumerableHeader as IList<string> ?? enumerableHeader.ToList();
-            if (list.Count == 0) return false;
+            if (list.Count == 0) return null;
 
-            var csAuthString = list.First();
-            return csAuthString == DeviceKey;
+            return list.First();
         }
     }
 }
