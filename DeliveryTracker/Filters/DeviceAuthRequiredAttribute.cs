@@ -13,7 +13,7 @@ namespace DeliveryTracker.Filters
             base.OnAuthorization(actionContext);
 
             var result = actionContext.Request.IsAuthorizedDevice();
-            if (!result) throw new UnauthorizedAccessException();
+            if (!result) actionContext.Response = actionContext.Request.CreateErrorResponse(System.Net.HttpStatusCode.Unauthorized, new UnauthorizedAccessException());
         }
     }
 

@@ -6,7 +6,7 @@ using System.Web.Http;
 
 namespace DeliveryTracker.Controllers
 {
-    //[DeviceAuthRequired]
+    [DeviceAuthRequired]
 	public class AuthenticationsController : ApiController
 	{
         private readonly IAuthenticationsRepository _repository;
