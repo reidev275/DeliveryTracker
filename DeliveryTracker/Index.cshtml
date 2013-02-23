@@ -66,13 +66,22 @@
                 <span data-bind="text: $root.authCode"></span>
             </form>
         </script>
+
+        <script type="text/html" id="deviceauth">
+            <form class="form-signin">
+                <h2 class="form-signin-heading">Device Authorization</h2>
+                <input type="text" data-bind="value: deviceAuth" />
+                <button class="btn btn-primary" data-bind="click: setAuthCode">Submit</button>
+            </form>
+        </script>
 	</div>
 </body>
 <script src="~/Scripts/lib/jquery-1.9.1.min.js"></script>
 <script src="~/Scripts/lib/jquery.cookie.js"></script>
 <script src="~/Scripts/lib/knockout-2.2.1.js"></script>
-<script src="~/Scripts/dt.viewmodels.js"></script>
 <script src="~/Scripts/dt.authentications.js"></script>
+<script src="~/Scripts/dt.viewmodels.js"></script>
+
 <script src="~/Scripts/dt.users.js"></script>
 <script src="~/Scripts/dt.deliveries.js"></script>
 
@@ -82,25 +91,13 @@
 			dt = DT.viewModels;
 
 		var viewModel = new dt.ViewModel([
+            new dt.Page('deviceauth', new dt.DeviceAuth()),
 			new dt.Page('login', new dt.Login()),
             new dt.Page('register', new dt.Register()),
             new dt.Page('welcome', {})
 		]);
 
 		ko.applyBindings(viewModel);
-
-		if (typeof userAuth === 'undefined') {
-
-		}
-
-		//		$.ajax({
-		//			type: 'GET',
-		//			cache: false,
-		//			url: 'Authentications/' + userAuth
-		//		}).done(function (data) {
-
-		//		});
-
 	});
 </script>
 </html>

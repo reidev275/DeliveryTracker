@@ -1,5 +1,6 @@
 ﻿var DT = (function (dt, $, json) {
-    var o = dt.authentications = dt.authentications || {};
+    var o = dt.authentications = dt.authentications || {},
+        deviceCookie = 'dtdeviceauth';
 
     o.create = function (login, callback) {
         $.ajax({
@@ -14,6 +15,14 @@
             alert(errorThrown);
         });
     };
+
+    o.setDeviceAuth = function (auth) {
+        $.cookie(deviceCookie, auth, { expires: 365, path: '/' });
+    };
+
+    o.getDeviceAuth = function () {
+        return $.cookie(deviceCookie);
+    }
 
     return dt;
 })(DT || {}, jQuery, JSON);

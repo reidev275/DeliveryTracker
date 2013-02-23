@@ -2,7 +2,8 @@
 
     var o = dt.viewModels = dt.viewModels || {},
         route = ko.observable(''),
-        authCode = ko.observable('');
+        authCode = ko.observable(''),
+        deviceAuth = ko.observable(dt.authentications.getDeviceAuth());
 
 
 	o.Page = function (template, data) {
@@ -14,10 +15,13 @@
 
 	o.ViewModel = function (pages) {
 		var self = this;
-
 		self.pages = ko.observableArray(pages);
 		self.selectedPage = ko.observable();
 		self.authCode;
+
+		deviceAuth.subscribe(function (value) {
+		    if (typeof value == 'undefined') route('deviceauth');
+		});
 
 		authCode.subscribe(function (value) {
 		    self.authCode = value;
@@ -35,7 +39,9 @@
 		    alert('Page: ' + value + ' not found.');
 		});
 
-		if (self.pages().length > 0) self.selectedPage(self.pages()[0]);
+		route('login');
+
+		if (typeof deviceAuth() == 'undefined') route('deviceauth');		
 	};
 
 	o.Login = function () {
@@ -83,6 +89,16 @@
 	            route('login');
 	        });
 	    };
+	};
+
+	o.DeviceAuth = function () {
+	    var self = this;
+	    self.deviceAuth = ko.observable();
+	    self.setAuthCode = function () {
+	        dt.authentications.setDeviceAuth(self.deviceAuth());
+	    };
+
+	    if (typeof authCode() == 'undefined') route('deviceauth');
 	};
 
 	return dt;
