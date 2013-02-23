@@ -2,9 +2,7 @@
 
     var o = dt.viewModels = dt.viewModels || {},
         route = ko.observable(''),
-        authCode = ko.observable(''),
-        deviceAuth = ko.observable(dt.authentications.getDeviceAuth());
-
+        authCode = ko.observable('');
 
 	o.Page = function (template, data) {
 		var self = this;
@@ -18,10 +16,6 @@
 		self.pages = ko.observableArray(pages);
 		self.selectedPage = ko.observable();
 		self.authCode;
-
-		deviceAuth.subscribe(function (value) {
-		    if (typeof value == 'undefined') route('deviceauth');
-		});
 
 		authCode.subscribe(function (value) {
 		    self.authCode = value;
@@ -39,9 +33,11 @@
 		    alert('Page: ' + value + ' not found.');
 		});
 
-		route('login');
+		self.GoToLogin = function () {
+		    route('login');
+		};
 
-		if (typeof deviceAuth() == 'undefined') route('deviceauth');		
+		route('login');	
 	};
 
 	o.Login = function () {
@@ -53,7 +49,13 @@
 
 	    self.Register = function () {
 	        route('register');
-	    }
+	    };
+
+	    self.AuthDevice = function () {
+	        route('deviceauth');
+	    };
+
+
 
 	    self.Login = function () {
 	        var login = {
@@ -78,6 +80,8 @@
 	    self.HintQuestion = ko.observable('');
 	    self.HintAnswer = ko.observable('');
 
+
+
 	    self.Register = function () {
 	        var user = {
 	            Id: self.UserName(),
@@ -93,12 +97,11 @@
 
 	o.DeviceAuth = function () {
 	    var self = this;
-	    self.deviceAuth = ko.observable();
+	    self.deviceAuth = ko.observable(dt.authentications.getDeviceAuth());
 	    self.setAuthCode = function () {
 	        dt.authentications.setDeviceAuth(self.deviceAuth());
+	        route('login');
 	    };
-
-	    if (typeof authCode() == 'undefined') route('deviceauth');
 	};
 
 	return dt;
