@@ -6,7 +6,7 @@ using System.Web.Http;
 
 namespace DeliveryTracker.Controllers
 {
-    //[DeviceAuthRequired]
+    [DeviceAuthRequired]
 	public class UsersController : ApiController
 	{
         private readonly IUsersRepository _repository;
@@ -21,6 +21,7 @@ namespace DeliveryTracker.Controllers
 		public void Post([FromBody]User value)
 		{
             if (value == null) throw new ArgumentNullException("value");
+
             _repository.Create(value);
 		}
 
