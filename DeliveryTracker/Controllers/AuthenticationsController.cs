@@ -1,7 +1,9 @@
 ﻿using DeliveryTracker.Filters;
+using DeliveryTracker.Managers;
 using DeliveryTracker.Models;
 using DeliveryTracker.Repositories;
 using System;
+using System.Net;
 using System.Web.Http;
 
 namespace DeliveryTracker.Controllers
@@ -9,19 +11,19 @@ namespace DeliveryTracker.Controllers
     [DeviceAuthRequired]
 	public class AuthenticationsController : ApiController
 	{
-        private readonly IAuthenticationsRepository _repository;
+        private readonly IAuthenticationManager _manager;
 
-        public AuthenticationsController(IAuthenticationsRepository repository)
+        public AuthenticationsController(IAuthenticationManager manager)
         {
-            if (repository == null) throw new ArgumentNullException("repository");
-            this._repository = repository;
+            if (manager == null) throw new ArgumentNullException("manager");
+            _manager = manager;
         }
 
 		// GET api/authentications/5
         public AuthenticationResponse Get(string id)
 		{
             if (id == null) throw new ArgumentNullException("id");
-            var result = _repository.GetByCode(id);
+            var result = _manager.GetAuthentication(id);
             return result;
 		}
 
@@ -29,8 +31,10 @@ namespace DeliveryTracker.Controllers
 		public string Post([FromBody]Authentication value)
 		{
             if (value == null) throw new ArgumentNullException("value");
-            var result = _repository.Save(value);
-            return result.Code;
+
+            var result = _manager.Authenticate(value);
+            if (result == null) throw new HttpResponseException(HttpStatusCode.Unauthorized);
+            return result;
 		}
 	}
 }

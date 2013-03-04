@@ -12,13 +12,13 @@ namespace DeliveryTracker.Repositories
         public User GetByUserName(string userName)
         {
             if (userName == null) throw new ArgumentNullException("userName");
-            return _users.FirstOrDefault(x => x.Id == userName);
+            return _users.FirstOrDefault(x => x.Name == userName);
         }
 
         public void Update(User user)
         {
             if (user == null) throw new ArgumentNullException("user");
-            var tobeUpdated = GetByUserName(user.Id);
+            var tobeUpdated = GetByUserName(user.Name);
             tobeUpdated.HintAnswer = user.HintAnswer;
             tobeUpdated.HintQuestion = user.HintQuestion;
             tobeUpdated.Password = user.Password;

@@ -6,5 +6,6 @@ namespace DeliveryTracker.Repositories
     {
         AuthenticationResponse Save(Authentication authentication);
         AuthenticationResponse GetByCode(string authCode);
+        AuthenticationResponse GetByUserId(int userId);
     }
 }

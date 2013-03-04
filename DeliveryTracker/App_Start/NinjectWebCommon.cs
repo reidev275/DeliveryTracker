@@ -14,6 +14,7 @@ namespace DeliveryTracker.App_Start
     using System.Web.Http.Dispatcher;
     using DapperQueryExecutor;
     using DeliveryTracker.Repositories;
+    using DeliveryTracker.Managers;
 
     public static class NinjectWebCommon 
     {
@@ -37,10 +38,6 @@ namespace DeliveryTracker.App_Start
             bootstrapper.ShutDown();
         }
         
-        /// <summary>
-        /// Creates the kernel that will manage your application.
-        /// </summary>
-        /// <returns>The created kernel.</returns>
         private static IKernel CreateKernel()
         {
             var kernel = new StandardKernel();
@@ -56,14 +53,15 @@ namespace DeliveryTracker.App_Start
             return kernel;
         }
 
-        /// <summary>
-        /// Load your modules or register your services here!
-        /// </summary>
-        /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            //QueryExecutors
             kernel.Bind<IDapperQueryExecutor>().To<SqlDapperQueryExecutor>();
 
+            //Managers
+            kernel.Bind<IAuthenticationManager>().To<AuthenticationManager>();
+
+            //Repositories
             kernel.Bind<IAuthenticationsRepository>().To<MemoryAuthenticationsRepository>();
             kernel.Bind<IUsersRepository>().To<MemoryUsersRepository>();
         }        

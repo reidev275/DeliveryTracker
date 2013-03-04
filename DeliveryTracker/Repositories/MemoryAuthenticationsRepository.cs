@@ -26,5 +26,14 @@ namespace DeliveryTracker.Repositories
             result.Updated = DateTime.Now;
             return result;
         }
+
+
+        public AuthenticationResponse GetByUserId(int userId)
+        {
+            var result = _authentications.FirstOrDefault(x => x.UserId == userId);
+            if (result == null) return null;
+            result.Updated = DateTime.Now;
+            return result;
+        }
     }
 }

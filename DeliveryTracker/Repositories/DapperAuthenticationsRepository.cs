@@ -21,5 +21,10 @@ namespace DeliveryTracker.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public AuthenticationResponse GetByUserId(int userId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

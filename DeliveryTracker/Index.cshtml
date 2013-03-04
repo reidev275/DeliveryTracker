@@ -18,7 +18,7 @@
 
 		<script type="text/html" id="login">
 			<form class="form-signin">
-				<h2 class="form-signin-heading">Sign in</h2>
+				<h3 class="form-signin-heading">Sign in</h3>
 				Username:
 				<input type="text" class="input-block-level" placeholder="Username" data-bind="value: UserName" />
 				Password:
@@ -30,14 +30,14 @@
 					<option>3</option>
 				</select>
 				<button class="btn btn-primary" type="submit" data-bind="click: Login">Sign in</button>
-				<button class="btn" type="submit" data-bind="click: Register">New User?</button>
-                <button class="btn" type="submit" data-bind="click: AuthDevice">Authorize Device</button>
+				<button class="btn" type="submit" data-bind="click: Register">Register</button>
+                <button class="btn" type="submit" data-bind="click: AuthDevice">Authorize</button>
 			</form>
 		</script>
 
         <script type="text/html" id="register">
             <form class="form-signin">
-				<h2 class="form-signin-heading">Register</h2>
+				<h3 class="form-signin-heading">Register</h3>
 				Username:
 				<input type="text" class="input-block-level" placeholder="Username" data-bind="value: UserName" />
 				Password:
@@ -55,7 +55,7 @@
 
 		<script type="text/html" id="passwordHint">
 			<form class="form-signin">
-				<h2 class="form-signin-heading">Reset Password</h2>
+				<h3 class="form-signin-heading">Reset Password</h3>
 				<span data-bind="text: Hint"></span>?
 				<input type="text" class="input-block-level" placeholder="Answer" />
 				<button class="btn btn-primary" type="submit">Submit</button>
@@ -64,14 +64,14 @@
 
         <script type="text/html" id="welcome">
             <form class="form-signin">
-                <h2 class="form-signin-heading">Welcome</h2>
+                <h3 class="form-signin-heading">Welcome</h3>
                 <span data-bind="text: $root.authCode"></span>
             </form>
         </script>
 
         <script type="text/html" id="deviceauth">
             <form class="form-signin">
-                <h2 class="form-signin-heading">Device Authorization</h2>
+                <h3 class="form-signin-heading">Device Authorization</h3>
                 Auth Code:
                 <input type="text" class="input-block-level" data-bind="value: deviceAuth" />
                 <button class="btn btn-primary" data-bind="click: setAuthCode">Submit</button>
