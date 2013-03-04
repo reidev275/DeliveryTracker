@@ -49,7 +49,7 @@
                 Hint Answer:
                 <input type="text" class="input-block-level" placeholder="Hint Answer" data-bind="value: HintAnswer" />
                 <button class="btn btn-primary" type="submit" data-bind="click: Register">Register</button>
-                <button class="btn" type="submit" data-bind="click: $parent.GoToLogin">Cancel</button>
+                <button class="btn" type="submit" data-bind="click: $root.GoToLogin">Cancel</button>
             </form>
         </script>
 
@@ -75,7 +75,7 @@
                 Auth Code:
                 <input type="text" class="input-block-level" data-bind="value: deviceAuth" />
                 <button class="btn btn-primary" data-bind="click: setAuthCode">Submit</button>
-                <button class="btn" type="submit" data-bind="click: $parent.GoToLogin">Cancel</button>
+                <button class="btn" type="submit" data-bind="click: $root.GoToLogin">Cancel</button>
             </form>
         </script>
 	</div>
