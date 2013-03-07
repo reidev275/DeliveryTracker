@@ -91,8 +91,13 @@
 
 <script type="text/javascript">
 	$(document).ready(function () {
-		var userAuth = $.cookie('dtuserauth'),
+	    var userAuth = $.cookie('dtuserauth'),
+            deviceAuth = $.cookie('dtdeviceauth'),
 			dt = DT.viewModels;
+
+		$.ajaxSetup({
+		    headers: { "EmpireDevice": deviceAuth }
+		});
 
 		var viewModel = new dt.ViewModel([
             new dt.Page('deviceauth', new dt.DeviceAuth()),

@@ -18,6 +18,9 @@
 
     o.setDeviceAuth = function (auth) {
         $.cookie(deviceCookie, auth, { expires: 365, path: '/' });
+        $.ajaxSetup({
+            headers: { "EmpireDevice": auth }
+        });
     };
 
     o.getDeviceAuth = function () {
