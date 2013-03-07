@@ -20,16 +20,16 @@
 			<form class="form-signin">
 				<h3 class="form-signin-heading">Sign in</h3>
 				Username:
-				<input type="text" class="input-block-level" placeholder="Username" data-bind="value: UserName" />
+				<input type="text" class="input-block-level" placeholder="Username" data-bind="value: UserName, valueUpdate:'afterkeydown'" />
 				Password:
-				<input type="password" class="input-block-level" placeholder="Password" data-bind="value: Password" />
+				<input type="password" class="input-block-level" placeholder="Password" data-bind="value: Password, valueUpdate:'afterkeydown'" />
 				Truck:
 				<select class="input-block-level" data-bind="value: Truck">
 					<option>1</option>
 					<option>2</option>
 					<option>3</option>
 				</select>
-				<button class="btn btn-primary" type="submit" data-bind="click: Login">Sign in</button>
+				<button class="btn btn-primary" type="submit" data-bind="click: Login, css: { disabled: IsInvalid }">Sign in</button>
 				<button class="btn btn-info" type="submit" data-bind="click: Register">Register</button>
                 <button class="btn" type="submit" data-bind="click: AuthDevice">Authorize</button>
 			</form>
@@ -39,16 +39,16 @@
             <form class="form-signin">
 				<h3 class="form-signin-heading">Register</h3>
 				Username:
-				<input type="text" class="input-block-level" placeholder="Username" data-bind="value: UserName" />
+				<input type="text" class="input-block-level" placeholder="Username" data-bind="value: UserName, valueUpdate:'afterkeydown'" />
 				Password:
-				<input type="password" class="input-block-level" placeholder="Password" data-bind="value: Password" />
+				<input type="password" class="input-block-level" placeholder="Password" data-bind="value: Password, valueUpdate:'afterkeydown'" />
                 Confirm Password:
-                <input type="password" class="input-block-level" placeholder="Password" data-bind="value: PasswordConfirm" />
+                <input type="password" class="input-block-level" placeholder="Password" data-bind="value: PasswordConfirm, valueUpdate:'afterkeydown'" />
                 Hint Question (Will be asked if you forget your password):
-                <input type="text" class="input-block-level" placeholder="Hint Question" data-bind="value: HintQuestion" />
+                <input type="text" class="input-block-level" placeholder="Hint Question" data-bind="value: HintQuestion, valueUpdate:'afterkeydown'" />
                 Hint Answer:
-                <input type="text" class="input-block-level" placeholder="Hint Answer" data-bind="value: HintAnswer" />
-                <button class="btn btn-primary" type="submit" data-bind="click: Register">Register</button>
+                <input type="text" class="input-block-level" placeholder="Hint Answer" data-bind="value: HintAnswer, valueUpdate:'afterkeydown'" />
+                <button class="btn btn-primary" type="submit" data-bind="click: Register, css: { disabled: IsInvalid }">Register</button>
                 <button class="btn" type="submit" data-bind="click: $root.GoToLogin">Cancel</button>
             </form>
         </script>

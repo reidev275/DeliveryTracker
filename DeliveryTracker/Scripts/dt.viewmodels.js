@@ -55,20 +55,25 @@
 	        route('deviceauth');
 	    };
 
-
+	    self.IsInvalid = ko.computed(function () {
+	        return !(self.UserName() !== '' &&
+                self.Password() !== '');
+	    });
 
 	    self.Login = function () {
-	        var login = {
-	            UserId: self.UserName(),
-	            Truck: self.Truck(),
-                Password: self.Password()
-	        };
-	        dt.authentications.create(login, function (data) {
-	            if (typeof data !== 'undefined') {
-	                authCode(data);
-	                route('welcome');
-	            }
-	        });
+	        if (!self.IsInvalid()) {
+	            var login = {
+	                UserId: self.UserName(),
+	                Truck: self.Truck(),
+	                Password: self.Password()
+	            };
+	            dt.authentications.create(login, function (data) {
+	                if (typeof data !== 'undefined') {
+	                    authCode(data);
+	                    route('welcome');
+	                }
+	            });
+	        }
 	    }
 	};
 
@@ -80,18 +85,27 @@
 	    self.HintQuestion = ko.observable('');
 	    self.HintAnswer = ko.observable('');
 
-
+	    self.IsInvalid = ko.computed(function () {
+	        return !(self.UserName() !== '' &&
+                self.Password() !== '' &&
+                self.PasswordConfirm() !== '' &&
+                self.HintQuestion() !== '' &&
+                self.HintAnswer() !== '' &&
+                self.Password() === self.PasswordConfirm());
+	    });
 
 	    self.Register = function () {
-	        var user = {
-	            Id: self.UserName(),
-	            Password: self.Password(),
-	            HintQuestion: self.HintQuestion(),
-                HintAnswer: self.HintAnswer()
-	        };
-	        dt.users.create(user, function() {
-	            route('login');
-	        });
+	        if (!self.IsInvalid()) {
+	            var user = {
+	                Id: self.UserName(),
+	                Password: self.Password(),
+	                HintQuestion: self.HintQuestion(),
+	                HintAnswer: self.HintAnswer()
+	            };
+	            dt.users.create(user, function () {
+	                route('login');
+	            });
+	        }
 	    };
 	};
 
