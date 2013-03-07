@@ -22,7 +22,7 @@ namespace DeliveryTracker.Repositories
             throw new NotImplementedException();
         }
 
-        public void Create(User user)
+        public bool Create(User user)
         {
             throw new NotImplementedException();
         }

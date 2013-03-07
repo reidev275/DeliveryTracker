@@ -2,6 +2,8 @@
 using DeliveryTracker.Models;
 using DeliveryTracker.Repositories;
 using System;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 
 namespace DeliveryTracker.Controllers
@@ -18,11 +20,12 @@ namespace DeliveryTracker.Controllers
         }
 
 		// POST api/users
-		public void Post([FromBody]User value)
+        public HttpResponseMessage Post([FromBody]User value)
 		{
             if (value == null) throw new ArgumentNullException("value");
 
-            _repository.Create(value);
+            var created = _repository.Create(value);
+            return created ? Request.CreateResponse(HttpStatusCode.Created) : Request.CreateResponse(HttpStatusCode.Conflict);
 		}
 
 		// PUT api/users/5

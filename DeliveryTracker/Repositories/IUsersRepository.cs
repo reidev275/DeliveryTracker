@@ -6,6 +6,6 @@ namespace DeliveryTracker.Repositories
     {
         User GetByUserName(string userName);
         void Update(User user);
-        void Create(User user);
+        bool Create(User user);
     }
 }

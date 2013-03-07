@@ -24,10 +24,14 @@ namespace DeliveryTracker.Repositories
             tobeUpdated.Password = user.Password;
         }
 
-        public void Create(User user)
+        public bool Create(User user)
         {
             if (user == null) throw new ArgumentNullException("user");
+
+            if (_users.Any(x => x.Name == user.Name)) return false;
+
             _users.Add(user);
+            return true;
         }
     }
 }
