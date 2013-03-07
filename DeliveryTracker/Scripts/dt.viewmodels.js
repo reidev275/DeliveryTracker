@@ -104,6 +104,11 @@
 	            };
 	            dt.users.create(user, function () {
 	                route('login');
+	                self.UserName('');
+	                self.Password('');
+	                self.PasswordConfirm('');
+	                self.HintQuestion('');
+	                self.HintAnswer('');
 	            });
 	        }
 	    };
