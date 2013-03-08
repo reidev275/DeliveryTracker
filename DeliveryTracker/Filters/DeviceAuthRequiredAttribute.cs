@@ -23,7 +23,7 @@ namespace DeliveryTracker.Filters
 
         public static bool IsAuthorizedDevice(this HttpRequestMessage request)
         {
-            var deviceHeader = request.Headers.GetValue("EmpireDevice");
+            var deviceHeader = request.Headers.GetValue("DeviceAuth");
             return deviceHeader == DeviceKey;
         }
 
