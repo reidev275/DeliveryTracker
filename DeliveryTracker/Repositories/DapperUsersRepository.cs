@@ -22,7 +22,7 @@ namespace DeliveryTracker.Repositories
 
             var query = new DapperQuery(ConnectionString)
             {
-                Sql = "Select Id, Name, HintQuestion from dbo.[User] with (nolock) where [Name] = @Name",
+                Sql = "Select Id, Name, Salt, Hash, HintQuestion, HintAnswer from dbo.[User] with (nolock) where [Name] = @Name",
                 Parameters = new { Name = userName }
             };
             return QueryExecutor.Query<User>(query).FirstOrDefault();

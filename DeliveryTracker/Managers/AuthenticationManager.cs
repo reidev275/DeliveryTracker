@@ -8,13 +8,16 @@ namespace DeliveryTracker.Managers
     {
         readonly IAuthenticationsRepository _authentications;
         readonly IUsersRepository _users;
+        readonly IPasswordHasher _hasher;
 
-        public AuthenticationManager(IAuthenticationsRepository authentiations, IUsersRepository users)
+        public AuthenticationManager(IAuthenticationsRepository authentiations, IUsersRepository users, IPasswordHasher hasher)
         {
             if (authentiations == null) throw new ArgumentNullException("authentiations");
             if (users == null) throw new ArgumentNullException("users");
+            if (hasher == null) throw new ArgumentNullException("hasher");
             _authentications = authentiations;
             _users = users;
+            _hasher = hasher;
         }
 
         public string Authenticate(Authentication authentication)
@@ -26,7 +29,8 @@ namespace DeliveryTracker.Managers
             if (user == null) return null;
 
             //Password Matches?
-            if (user.Password != authentication.Password) return null;
+            user.Password = authentication.Password;
+            if (!_hasher.IsValid(user)) return null;
 
             var result = _authentications.Save(authentication);
             return result.Code;
