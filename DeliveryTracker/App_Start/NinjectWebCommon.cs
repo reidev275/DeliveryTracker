@@ -56,7 +56,7 @@ namespace DeliveryTracker.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             //QueryExecutors
-            kernel.Bind<IDapperQueryExecutor>().To<SqlDapperQueryExecutor>();
+            kernel.Bind<IDapperQueryExecutor>().To<SqlDapperQueryExecutor>().InSingletonScope();
 
             //Managers
             kernel.Bind<IAuthenticationManager>().To<AuthenticationManager>();
@@ -64,6 +64,7 @@ namespace DeliveryTracker.App_Start
             //Repositories
             kernel.Bind<IAuthenticationsRepository>().To<MemoryAuthenticationsRepository>();
             kernel.Bind<IUsersRepository>().To<MemoryUsersRepository>();
+            kernel.Bind<ITrucksRepository>().To<MemoryTrucksRepository>();
         }        
     }
 }

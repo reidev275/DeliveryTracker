@@ -46,6 +46,8 @@
 	    self.UserName = ko.observable('');
 	    self.Password = ko.observable('');
 	    self.Truck = ko.observable('');
+	    self.Trucks = ko.observableArray();
+	    dt.trucks.get(self.Trucks);
 
 	    self.Register = function () {
 	        route('register');
@@ -56,8 +58,9 @@
 	    };
 
 	    self.IsInvalid = ko.computed(function () {
-	        return !(self.UserName() !== '' &&
-                self.Password() !== '');
+	        return self.UserName() === '' ||
+                self.Password() === '' ||
+	            typeof self.Truck() === 'undefined';
 	    });
 
 	    self.Login = function () {
