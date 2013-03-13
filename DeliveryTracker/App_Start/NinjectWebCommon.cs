@@ -62,8 +62,8 @@ namespace DeliveryTracker.App_Start
             kernel.Bind<IAuthenticationManager>().To<AuthenticationManager>();
 
             //Repositories
-            kernel.Bind<IAuthenticationsRepository>().To<MemoryAuthenticationsRepository>();
-            kernel.Bind<IUsersRepository>().To<MemoryUsersRepository>();
+            kernel.Bind<IAuthenticationsRepository>().To<DapperAuthenticationsRepository>();
+            kernel.Bind<IUsersRepository>().To<DapperUsersRepository>();
             kernel.Bind<ITrucksRepository>().To<MemoryTrucksRepository>();
             kernel.Bind<IPasswordHasher>().To<PasswordHasher>();
         }        
