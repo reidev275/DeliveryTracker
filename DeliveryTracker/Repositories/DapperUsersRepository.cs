@@ -76,5 +76,15 @@ namespace DeliveryTracker.Repositories
             }
 
         }
+
+        public User GetById(int id)
+        {
+            var query = new DapperQuery(ConnectionString)
+            {
+                Sql = "Select Id, Name, Salt, Hash, HintQuestion, HintAnswer from dbo.[User] with (nolock) where [Id] = @Id",
+                Parameters = new { Id = id }
+            };
+            return QueryExecutor.Query<User>(query).FirstOrDefault();
+        }
     }
 }

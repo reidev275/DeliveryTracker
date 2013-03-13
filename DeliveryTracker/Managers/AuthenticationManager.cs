@@ -27,6 +27,7 @@ namespace DeliveryTracker.Managers
             //User Exists?
             var user = _users.GetByUserName(authentication.UserName);
             if (user == null) return null;
+            authentication.UserId = user.Id;
 
             //Password Matches?
             user.Password = authentication.Password;
@@ -39,7 +40,13 @@ namespace DeliveryTracker.Managers
         public AuthenticationResponse GetAuthentication(string code)
         {
             if (!String.IsNullOrEmpty(code)) throw new ArgumentNullException("code");
-            return _authentications.GetByCode(code);
+            var authentication = _authentications.GetByCode(code);
+            if (authentication == null) return null;
+
+            var user = _users.GetById(authentication.UserId);
+            if (user == null) return null;
+            authentication.UserName = user.Name;
+            return (AuthenticationResponse)authentication;
         }
     }
 }

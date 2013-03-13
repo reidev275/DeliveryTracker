@@ -33,5 +33,11 @@ namespace DeliveryTracker.Repositories
             _users.Add(user);
             return true;
         }
+
+
+        public User GetById(int id)
+        {
+            return _users.FirstOrDefault(x => x.Id == id);
+        }
     }
 }

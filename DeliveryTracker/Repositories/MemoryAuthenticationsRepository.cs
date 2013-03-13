@@ -18,19 +18,10 @@ namespace DeliveryTracker.Repositories
             return authentication;
         }
 
-        public AuthenticationResponse GetByCode(string authCode)
+        public Authentication GetByCode(string authCode)
         {
             if (authCode == null) throw new ArgumentNullException("authCode");
             var result = _authentications.FirstOrDefault(x => x.Code == authCode);
-            if (result == null) return null;
-            result.Updated = DateTime.Now;
-            return result;
-        }
-
-
-        public AuthenticationResponse GetByUserId(int userId)
-        {
-            var result = _authentications.FirstOrDefault(x => x.UserId == userId);
             if (result == null) return null;
             result.Updated = DateTime.Now;
             return result;
