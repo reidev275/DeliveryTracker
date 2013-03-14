@@ -66,7 +66,7 @@
 	    self.Login = function () {
 	        if (!self.IsInvalid()) {
 	            var login = {
-	                UserId: self.UserName(),
+	                UserName: self.UserName(),
 	                Truck: self.Truck(),
 	                Password: self.Password()
 	            };
@@ -100,7 +100,7 @@
 	    self.Register = function () {
 	        if (!self.IsInvalid()) {
 	            var user = {
-	                Id: self.UserName(),
+	                Name: self.UserName(),
 	                Password: self.Password(),
 	                HintQuestion: self.HintQuestion(),
 	                HintAnswer: self.HintAnswer()

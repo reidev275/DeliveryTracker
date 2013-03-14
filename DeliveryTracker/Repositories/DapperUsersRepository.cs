@@ -7,14 +7,8 @@ namespace DeliveryTracker.Repositories
 {
     public class DapperUsersRepository : DapperRepository, IUsersRepository
     {
-        readonly IPasswordHasher _hasher;
-
-        public DapperUsersRepository(IDapperQueryExecutor queryExecutor, IPasswordHasher hasher, string connectionString)
-            : base(queryExecutor, connectionString) 
-        {
-            if (hasher == null) throw new ArgumentNullException("hasher");
-            _hasher = hasher;
-        }
+        public DapperUsersRepository(IDapperQueryExecutor queryExecutor, string connectionString)
+            : base(queryExecutor, connectionString) {  }
 
         public User GetByUserName(string userName)
         {
@@ -32,7 +26,6 @@ namespace DeliveryTracker.Repositories
         {
             if (user == null) throw new ArgumentNullException("user");
 
-            user = _hasher.Hash(user);
             var query = new DapperQuery(ConnectionString)
             {
                 Sql = @"Update dbo.[User] set [Hash] = @Hash, [Salt] = @Salt, [hintquestion] = @HintQuestion, [hintanswer] = @HintAnswer
@@ -51,7 +44,6 @@ namespace DeliveryTracker.Repositories
         {
             if (user == null) throw new ArgumentNullException("user");
 
-            user = _hasher.Hash(user);
             var query = new DapperQuery(ConnectionString)
             {
                 Sql = @"Insert into dbo.[User]([name], [Hash], [Salt], [hintquestion], [hintanswer])

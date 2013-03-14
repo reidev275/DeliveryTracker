@@ -1,6 +1,6 @@
 ﻿using DeliveryTracker.Models;
 
-namespace DeliveryTracker.Repositories
+namespace DeliveryTracker.Managers
 {
     public interface IPasswordHasher
     {

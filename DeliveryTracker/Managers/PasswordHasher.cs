@@ -3,7 +3,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace DeliveryTracker.Repositories
+namespace DeliveryTracker.Managers
 {
     public class PasswordHasher : IPasswordHasher
     {

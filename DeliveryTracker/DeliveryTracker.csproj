@@ -147,6 +147,8 @@
     </Compile>
     <Compile Include="Managers\AuthenticationManager.cs" />
     <Compile Include="Managers\IAuthenticationManager.cs" />
+    <Compile Include="Managers\IUsersManager.cs" />
+    <Compile Include="Managers\UsersManager.cs" />
     <Compile Include="Models\Authentication.cs" />
     <Compile Include="Models\AuthenticationResponse.cs" />
     <Compile Include="Models\Delivery.cs" />
@@ -156,13 +158,13 @@
     <Compile Include="Repositories\DapperUsersRepository.cs" />
     <Compile Include="Repositories\IAuthenticationCodeCreator.cs" />
     <Compile Include="Repositories\IAuthenticationsRepository.cs" />
-    <Compile Include="Repositories\IPasswordHasher.cs" />
+    <Compile Include="Managers\IPasswordHasher.cs" />
     <Compile Include="Repositories\ITrucksRepository.cs" />
     <Compile Include="Repositories\IUsersRepository.cs" />
     <Compile Include="Repositories\MemoryAuthenticationsRepository.cs" />
     <Compile Include="Repositories\MemoryTrucksRepository.cs" />
     <Compile Include="Repositories\MemoryUsersRepository.cs" />
-    <Compile Include="Repositories\PasswordHasher.cs" />
+    <Compile Include="Managers\PasswordHasher.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-responsive.css" />
