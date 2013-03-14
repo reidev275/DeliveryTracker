@@ -71,6 +71,9 @@
 	                Password: self.Password()
 	            };
 	            dt.authentications.create(login, function (data) {
+	                self.UserName('');
+	                self.Password('');
+	                self.Truck('');
 	                if (typeof data !== 'undefined') {
 	                    authCode(data);
 	                    route('welcome');
