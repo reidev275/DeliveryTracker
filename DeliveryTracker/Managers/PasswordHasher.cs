@@ -7,17 +7,17 @@ namespace DeliveryTracker.Managers
 {
     public class PasswordHasher : IPasswordHasher
     {
-        public User Hash(User user)
+        public IHashable Hash(IHashable hashable)
         {
-            user.Salt = Guid.NewGuid().ToString();
-            user.Hash = GetHash(user.Password, user.Salt);
-            return user;
+            hashable.Salt = Guid.NewGuid().ToString();
+            hashable.Hash = GetHash(hashable.Password, hashable.Salt);
+            return hashable;
         }
 
-        public bool IsValid(User user)
+        public bool IsValid(IHashable hashable)
         {
-            var hash = GetHash(user.Password, user.Salt);
-            return hash == user.Hash;
+            var hash = GetHash(hashable.Password, hashable.Salt);
+            return hash == hashable.Hash;
         }
 
         string GetHash(string password, string salt)

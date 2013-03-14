@@ -1,6 +1,6 @@
 ﻿namespace DeliveryTracker.Models
 {
-	public class User
+	public class User : IHashable
 	{
 		public int Id { get; set; }
         public string Name { get; set; }

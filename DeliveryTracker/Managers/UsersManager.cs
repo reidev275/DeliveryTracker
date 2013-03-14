@@ -20,16 +20,14 @@ namespace DeliveryTracker.Managers
         public void Update(User user)
         {
             if (user == null) throw new ArgumentNullException("user");
-
-            user = _hasher.Hash(user);
+            user = (User)_hasher.Hash(user);
             _repository.Update(user);
         }
 
         public bool Create(User user)
         {
             if (user == null) throw new ArgumentNullException("user");
-
-            user = _hasher.Hash(user);
+            user = (User)_hasher.Hash(user);
             return _repository.Create(user);
         }
     }
