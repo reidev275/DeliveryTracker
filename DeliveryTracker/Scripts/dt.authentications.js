@@ -17,7 +17,7 @@
     o.setDeviceAuth = function (auth) {
         $.ajax({
             type: 'POST',
-            data: auth,
+            data: { AuthCode: auth },
             datatype: 'json',
             cache: false,
             url: 'DeviceAuthentications'

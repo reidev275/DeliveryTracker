@@ -122,10 +122,16 @@
 
 	o.DeviceAuth = function () {
 	    var self = this;
-	    self.deviceAuth = ko.observable(dt.authentications.getDeviceAuth());
+	    self.deviceAuth = ko.observable('');
+	    self.IsInvalid = ko.computed(function () {
+	        return self.deviceAuth() === '';
+	    });
 	    self.setAuthCode = function () {
-	        dt.authentications.setDeviceAuth(self.deviceAuth());
-	        route('login');
+	        if (!self.IsInvalid()) {
+	            dt.authentications.setDeviceAuth(self.deviceAuth());
+	            self.deviceAuth('');
+	            route('login');
+	        }
 	    };
 	};
 

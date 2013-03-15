@@ -15,6 +15,7 @@ namespace DeliveryTracker.App_Start
     using DapperQueryExecutor;
     using DeliveryTracker.Repositories;
     using DeliveryTracker.Managers;
+using System.Configuration;
 
     public static class NinjectWebCommon 
     {
@@ -53,6 +54,14 @@ namespace DeliveryTracker.App_Start
             return kernel;
         }
 
+        public static void WithConnectionString<T>(this Ninject.Syntax.IBindingWithSyntax<T> obj)
+        {
+            obj.WithConstructorArgument("connectionString", _connectionString);
+        }
+
+        static string _authCode = ConfigurationManager.AppSettings["authCode"];
+        static string _connectionString = ConfigurationManager.ConnectionStrings["Deliveries"].ConnectionString;
+
         private static void RegisterServices(IKernel kernel)
         {
             //QueryExecutors
@@ -61,12 +70,16 @@ namespace DeliveryTracker.App_Start
             //Managers
             kernel.Bind<IAuthenticationManager>().To<AuthenticationManager>();
             kernel.Bind<IUsersManager>().To<UsersManager>();
+            kernel.Bind<IDeviceAuthManager>().To<DeviceAuthManager>().WithConstructorArgument("authCode", _authCode);
 
             //Repositories
-            kernel.Bind<IAuthenticationsRepository>().To<MemoryAuthenticationsRepository>();
-            kernel.Bind<IUsersRepository>().To<MemoryUsersRepository>();
-            kernel.Bind<ITrucksRepository>().To<MemoryTrucksRepository>();
+            kernel.Bind<IAuthenticationsRepository>().To<MemoryAuthenticationsRepository>().WithConnectionString();
+            kernel.Bind<IUsersRepository>().To<MemoryUsersRepository>().WithConnectionString();
+            kernel.Bind<ITrucksRepository>().To<MemoryTrucksRepository>().WithConnectionString();
+            kernel.Bind<IDeviceAuthRepository>().To<DapperDeviceAuthRepository>().WithConnectionString();
+
+            //Workers
             kernel.Bind<IPasswordHasher>().To<PasswordHasher>();
-        }        
+        }
     }
 }
