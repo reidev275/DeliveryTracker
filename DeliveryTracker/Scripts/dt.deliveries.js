@@ -8,7 +8,7 @@
 			url: 'Deliveries/?truck=' + truck
 		}).done(function (data) {
 			callback(data);
-		});
+		}).error(dt.handleError);
 	};
 
 	return dt;

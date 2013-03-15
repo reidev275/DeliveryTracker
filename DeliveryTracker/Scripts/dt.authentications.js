@@ -11,16 +11,22 @@
             url: 'Authentications'
         }).done(function (data) {
             if (callback) callback(data);
-        }).error(function (jqXHR, textStatus, errorThrown) {
-            alert(errorThrown);
-        });
+        }).error(dt.handleError);
     };
 
     o.setDeviceAuth = function (auth) {
-        $.cookie(deviceCookie, auth, { expires: 365, path: '/' });
-        $.ajaxSetup({
-            headers: { "EmpireDevice": auth }
-        });
+        $.ajax({
+            type: 'POST',
+            data: auth,
+            datatype: 'json',
+            cache: false,
+            url: 'DeviceAuthentications'
+        }).done(function (data) {
+            $.cookie(deviceCookie, data, { expires: 365, path: '/' });
+            $.ajaxSetup({
+                headers: { "EmpireDevice": auth }
+            });
+        }).error(dt.handleError);
     };
 
     o.getDeviceAuth = function () {
