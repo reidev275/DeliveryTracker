@@ -1,7 +1,8 @@
-﻿namespace DeliveryTracker.Managers
+﻿using DeliveryTracker.Models;
+namespace DeliveryTracker.Managers
 {
     public interface IDeviceAuthManager
     {
-        string CreateDeviceAuth(string authCode);
+        string CreateDeviceAuth(DeviceAuthRequest authCode);
     }
 }

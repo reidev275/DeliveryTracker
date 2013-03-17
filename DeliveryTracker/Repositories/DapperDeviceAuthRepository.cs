@@ -10,12 +10,12 @@ namespace DeliveryTracker.Repositories
         public DapperDeviceAuthRepository(IDapperQueryExecutor queryExecutor, string connectionString)
             : base(queryExecutor, connectionString) { }
 
-        public bool CreateAuth(string auth)
+        public bool CreateAuth(DeviceAuthRequest auth)
         {
             var query = new DapperQuery(ConnectionString)
             {
-                Sql = @"INSERT INTO DeviceAuthentication([Code]) VALUES (@Code)",
-                Parameters = new { Code = auth }
+                Sql = @"INSERT INTO [empiredeliveries].[dbo].[DeviceAuthentication] ([Code], [Name]) VALUES (@Code, @Name)",
+                Parameters = new { Code = auth.AuthCode, Name = auth.Name }
             };
             try
             {

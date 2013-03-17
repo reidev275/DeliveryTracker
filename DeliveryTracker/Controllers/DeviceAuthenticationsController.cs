@@ -18,7 +18,7 @@ namespace DeliveryTracker.Controllers
         public string Post([FromBody]DeviceAuthRequest authCode)
         {
             if (authCode == null) throw new ArgumentException("authCode cannot be null or empty");
-            var result = _manager.CreateDeviceAuth(authCode.AuthCode);
+            var result = _manager.CreateDeviceAuth(authCode);
             if (result == null) throw new HttpResponseException(HttpStatusCode.Unauthorized);
             return result;
         }

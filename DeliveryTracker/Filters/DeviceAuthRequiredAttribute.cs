@@ -4,21 +4,19 @@ using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using DeliveryTracker.Repositories;
-using Ninject;
 
 namespace DeliveryTracker.Filters
 {
     public class DeviceAuthRequiredAttribute : System.Web.Http.Filters.AuthorizationFilterAttribute
     {
-        [Inject]
-        public IDeviceAuthRepository AuthRepository { get; set; }
+        static IDeviceAuthRepository _repository = App_Start.NinjectWebCommon.Resolve<IDeviceAuthRepository>();
 
         public override void OnAuthorization(System.Web.Http.Controllers.HttpActionContext actionContext)
         {
             base.OnAuthorization(actionContext);
             var auth = actionContext.Request.Headers.GetValue("DeviceAuth");
             if (String.IsNullOrEmpty(auth)) actionContext.Request.CreateErrorResponse(System.Net.HttpStatusCode.Unauthorized, new UnauthorizedAccessException());
-            var result = AuthRepository.GetDeviceAuth(auth);
+            var result = _repository.GetDeviceAuth(auth);
             if (!result.IsValid) actionContext.Response = actionContext.Request.CreateErrorResponse(System.Net.HttpStatusCode.Unauthorized, new UnauthorizedAccessException());
         }
     }

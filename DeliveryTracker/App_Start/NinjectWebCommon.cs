@@ -50,8 +50,15 @@ using System.Configuration;
             GlobalConfiguration.Configuration.Services.Replace(
                 typeof(IHttpControllerActivator),
                 new NinjectKernelActivator(kernel));
-
+            _kernel = kernel;
             return kernel;
+        }
+
+        private static IKernel _kernel;
+
+        public static T Resolve<T>()
+        {
+            return _kernel.Get<T>();
         }
 
         public static void WithConnectionString<T>(this Ninject.Syntax.IBindingWithSyntax<T> obj)
@@ -73,8 +80,8 @@ using System.Configuration;
             kernel.Bind<IDeviceAuthManager>().To<DeviceAuthManager>().WithConstructorArgument("authCode", _authCode);
 
             //Repositories
-            kernel.Bind<IAuthenticationsRepository>().To<MemoryAuthenticationsRepository>().WithConnectionString();
-            kernel.Bind<IUsersRepository>().To<MemoryUsersRepository>().WithConnectionString();
+            kernel.Bind<IAuthenticationsRepository>().To<DapperAuthenticationsRepository>().WithConnectionString();
+            kernel.Bind<IUsersRepository>().To<DapperUsersRepository>().WithConnectionString();
             kernel.Bind<ITrucksRepository>().To<MemoryTrucksRepository>().WithConnectionString();
             kernel.Bind<IDeviceAuthRepository>().To<DapperDeviceAuthRepository>().WithConnectionString();
 

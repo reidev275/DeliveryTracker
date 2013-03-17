@@ -1,4 +1,5 @@
-﻿using DeliveryTracker.Repositories;
+﻿using DeliveryTracker.Models;
+using DeliveryTracker.Repositories;
 using System;
 
 namespace DeliveryTracker.Managers
@@ -17,12 +18,12 @@ namespace DeliveryTracker.Managers
             _repository = repository;
         }
 
-        public string CreateDeviceAuth(string authCode)
+        public string CreateDeviceAuth(DeviceAuthRequest authCode)
         {
-            if (authCode != _authCode) return null;
-            var auth = Guid.NewGuid().ToString();
-            var result = _repository.CreateAuth(auth);
-            return result ? auth : null;
+            if (authCode.AuthCode != _authCode) return null;
+            authCode.AuthCode = Guid.NewGuid().ToString();
+            var result = _repository.CreateAuth(authCode);
+            return result ? authCode.AuthCode : null;
         }
     }
 }

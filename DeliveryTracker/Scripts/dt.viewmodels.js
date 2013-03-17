@@ -123,12 +123,18 @@
 	o.DeviceAuth = function () {
 	    var self = this;
 	    self.deviceAuth = ko.observable('');
+	    self.deviceName = ko.observable('');
 	    self.IsInvalid = ko.computed(function () {
-	        return self.deviceAuth() === '';
+	        return self.deviceAuth() === '' ||
+	            self.deviceName() === '';
 	    });
 	    self.setAuthCode = function () {
 	        if (!self.IsInvalid()) {
-	            dt.authentications.setDeviceAuth(self.deviceAuth());
+	            var device = {
+	                AuthCode: self.deviceAuth(),
+                    Name: self.deviceName()
+	            };
+	            dt.authentications.setDeviceAuth(device);
 	            self.deviceAuth('');
 	            route('login');
 	        }

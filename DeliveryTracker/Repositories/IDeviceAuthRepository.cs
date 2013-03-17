@@ -3,7 +3,7 @@ namespace DeliveryTracker.Repositories
 {
     public interface IDeviceAuthRepository
     {
-        bool CreateAuth(string auth);
+        bool CreateAuth(DeviceAuthRequest auth);
         DeviceAuth GetDeviceAuth(string auth);
     }
 }
