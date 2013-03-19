@@ -23,14 +23,6 @@ namespace DeliveryTracker.Filters
 
     public static class ApiExtensions
     {
-        private static readonly string DeviceKey = ConfigurationManager.AppSettings["deviceAuthKey"];
-
-        public static bool IsAuthorizedDevice(this HttpRequestMessage request)
-        {
-            var deviceHeader = request.Headers.GetValue("DeviceAuth");
-            return deviceHeader == DeviceKey;
-        }
-
         public static string GetValue(this System.Net.Http.Headers.HttpRequestHeaders obj, string key)
         {
             IEnumerable<string> enumerableHeader;
