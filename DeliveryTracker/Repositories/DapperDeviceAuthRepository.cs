@@ -10,7 +10,7 @@ namespace DeliveryTracker.Repositories
         public DapperDeviceAuthRepository(IDapperQueryExecutor queryExecutor, string connectionString)
             : base(queryExecutor, connectionString) { }
 
-        public bool CreateAuth(DeviceAuthRequest auth)
+        public bool Save(DeviceAuthRequest auth)
         {
             var query = new DapperQuery(ConnectionString)
             {

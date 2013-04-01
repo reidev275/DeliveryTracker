@@ -24,7 +24,7 @@
         }).done(function (data) {
             $.cookie(deviceCookie, data, { expires: 365, path: '/' });
             $.ajaxSetup({
-                headers: { "EmpireDevice": auth }
+                headers: { "DeviceAuth": data }
             });
         }).error(dt.handleError);
     };

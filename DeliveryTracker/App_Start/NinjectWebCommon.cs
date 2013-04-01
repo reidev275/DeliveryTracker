@@ -46,6 +46,8 @@ using System.Configuration;
             kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
             RegisterServices(kernel);
+            //SqlRepositories(kernel);
+            MemoryRepositories(kernel);
 
             GlobalConfiguration.Configuration.Services.Replace(
                 typeof(IHttpControllerActivator),
@@ -79,14 +81,24 @@ using System.Configuration;
             kernel.Bind<IUsersManager>().To<UsersManager>();
             kernel.Bind<IDeviceAuthManager>().To<DeviceAuthManager>().WithConstructorArgument("authCode", _authCode);
 
-            //Repositories
-            kernel.Bind<IAuthenticationsRepository>().To<DapperAuthenticationsRepository>().WithConnectionString();
-            kernel.Bind<IUsersRepository>().To<DapperUsersRepository>().WithConnectionString();
-            kernel.Bind<ITrucksRepository>().To<MemoryTrucksRepository>().WithConnectionString();
-            kernel.Bind<IDeviceAuthRepository>().To<DapperDeviceAuthRepository>().WithConnectionString();
-
             //Workers
             kernel.Bind<IPasswordHasher>().To<PasswordHasher>();
+        }
+
+        private static void MemoryRepositories(IKernel kernel)
+        {
+            kernel.Bind<IAuthenticationsRepository>().To<MemoryAuthenticationsRepository>();
+            kernel.Bind<IUsersRepository>().To<MemoryUsersRepository>();
+            kernel.Bind<ITrucksRepository>().To<MemoryTrucksRepository>();
+            kernel.Bind<IDeviceAuthRepository>().To<MemoryDeviceAuthRepository>();
+        }
+
+        private static void SqlRepositories(IKernel kernel)
+        {
+            kernel.Bind<IAuthenticationsRepository>().To<DapperAuthenticationsRepository>().WithConnectionString();
+            kernel.Bind<IUsersRepository>().To<DapperUsersRepository>().WithConnectionString();
+            kernel.Bind<ITrucksRepository>().To<MemoryTrucksRepository>();
+            kernel.Bind<IDeviceAuthRepository>().To<DapperDeviceAuthRepository>().WithConnectionString();
         }
     }
 }

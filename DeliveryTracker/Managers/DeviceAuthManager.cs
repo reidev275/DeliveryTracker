@@ -22,7 +22,7 @@ namespace DeliveryTracker.Managers
         {
             if (authCode.AuthCode != _authCode) return null;
             authCode.AuthCode = Guid.NewGuid().ToString();
-            var result = _repository.CreateAuth(authCode);
+            var result = _repository.Save(authCode);
             return result ? authCode.AuthCode : null;
         }
     }

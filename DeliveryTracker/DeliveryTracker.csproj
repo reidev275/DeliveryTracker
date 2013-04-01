@@ -163,13 +163,13 @@
     <Compile Include="Repositories\DapperAuthenticationsRepository.cs" />
     <Compile Include="Repositories\DapperDeviceAuthRepository.cs" />
     <Compile Include="Repositories\DapperUsersRepository.cs" />
-    <Compile Include="Repositories\IAuthenticationCodeCreator.cs" />
     <Compile Include="Repositories\IAuthenticationsRepository.cs" />
     <Compile Include="Managers\IPasswordHasher.cs" />
     <Compile Include="Repositories\IDeviceAuthRepository.cs" />
     <Compile Include="Repositories\ITrucksRepository.cs" />
     <Compile Include="Repositories\IUsersRepository.cs" />
     <Compile Include="Repositories\MemoryAuthenticationsRepository.cs" />
+    <Compile Include="Repositories\MemoryDeviceAuthRepository.cs" />
     <Compile Include="Repositories\MemoryTrucksRepository.cs" />
     <Compile Include="Repositories\MemoryUsersRepository.cs" />
     <Compile Include="Managers\PasswordHasher.cs" />
