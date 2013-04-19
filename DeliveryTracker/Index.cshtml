@@ -21,7 +21,7 @@
 				<h3 class="form-signin-heading">Sign in</h3>
 				Username:
 				<input type="text" class="input-block-level" placeholder="Username" data-bind="value: UserName, valueUpdate:'afterkeydown'" />
-				Password: @*<a href="#" data-bind="click: Forgot">Forgot?</a>*@
+				Password: <a href="#" data-bind="click: Forgot">Forgot?</a>
 				<input type="password" class="input-block-level" placeholder="Password" data-bind="value: Password, valueUpdate:'afterkeydown'" />
 				Truck:
 				<select class="input-block-level" data-bind="value: Truck, options: Trucks, optionsCaption: 'Select a Truck...'"></select>
@@ -110,7 +110,9 @@
             new dt.Page('deviceauth', new dt.DeviceAuth()),
 			new dt.Page('login', new dt.Login()),
             new dt.Page('register', new dt.Register()),
-            new dt.Page('welcome', {})
+            new dt.Page('welcome', {}),
+            new dt.Page('enterUsername', {}),
+            new dt.Page('passwordHint', {})
 		]);
 
 		ko.applyBindings(viewModel);

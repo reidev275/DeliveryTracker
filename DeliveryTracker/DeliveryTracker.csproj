@@ -131,7 +131,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectKernelActivator.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
@@ -140,6 +139,7 @@
     <Compile Include="Controllers\AuthenticationsController.cs" />
     <Compile Include="Controllers\DeliveriesController.cs" />
     <Compile Include="Controllers\DeviceAuthenticationsController.cs" />
+    <Compile Include="Controllers\HintsController.cs" />
     <Compile Include="Controllers\TrucksController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Filters\DeviceAuthRequiredAttribute.cs" />

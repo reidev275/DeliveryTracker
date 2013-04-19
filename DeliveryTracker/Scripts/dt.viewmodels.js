@@ -57,6 +57,10 @@
 	        route('deviceauth');
 	    };
 
+	    self.Forgot = function () {
+	        route('forgotPassword');
+	    };
+
 	    self.IsInvalid = ko.computed(function () {
 	        return self.UserName() === '' ||
                 self.Password() === '' ||
@@ -83,7 +87,7 @@
 	    }
 	};
 
-	o.Register = function () {
+	o.Register = function() {
 	    var self = this;
 	    self.UserName = ko.observable('');
 	    self.Password = ko.observable('');
@@ -120,7 +124,7 @@
 	    };
 	};
 
-	o.DeviceAuth = function () {
+	o.DeviceAuth = function() {
 	    var self = this;
 	    self.deviceAuth = ko.observable('');
 	    self.deviceName = ko.observable('');
@@ -139,6 +143,15 @@
 	            route('login');
 	        }
 	    };
+	};
+
+	o.ForgotPassword = function() {
+	    var self = this;
+
+	    self.UserName = ko.observable('');
+	    self.HintQuestion = ko.observable('');
+	    self.HintAnswer = ko.observable('');
+
 	};
 
 	return dt;
