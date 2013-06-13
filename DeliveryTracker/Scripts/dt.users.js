@@ -16,8 +16,7 @@
     o.getHint = function (user, callback) {
         $.ajax({
             type: 'GET',
-            url: 'Hints/' + user,
-            cache: false
+            url: 'Hints/' + user
         }).done(function (data) {
             if (callback) callback(data);
         }).error(dt.handleError);

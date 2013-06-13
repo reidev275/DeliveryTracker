@@ -52,16 +52,16 @@
         <script type="text/html" id="enterUsername">
             <form class="form-signin">
                 <h3 class="form-signin-heading">Enter Username</h3>
-                <input type="text" class="input-block-level" placeholder="Username" />
-                <button class="btn btn-primary" type="submit">Submit</button>
+                <input type="text" class="input-block-level" placeholder="Username" data-bind="value: UserName" />
+                <button class="btn btn-primary" type="submit" data-bind="click: SubmitUserName, css: { disabled: UserIsInvalid }">Submit</button>
             </form>
         </script>
 
 		<script type="text/html" id="passwordHint">
 			<form class="form-signin">
 				<h3 class="form-signin-heading">Reset Password</h3>
-				<span data-bind="text: Hint"></span>?
-				<input type="text" class="input-block-level" placeholder="Answer" />
+				<span data-bind="text: HintQuestion"></span>?
+				<input type="text" class="input-block-level" placeholder="Answer" data-bind="value: HintAnswer" />
 				<button class="btn btn-primary" type="submit">Submit</button>
 			</form>
 		</script>
@@ -105,14 +105,15 @@
 		$.ajaxSetup({
 		    headers: { "DeviceAuth": deviceAuth }
 		});
+		var forgotPassword = new dt.ForgotPassword();
 
 		var viewModel = new dt.ViewModel([
             new dt.Page('deviceauth', new dt.DeviceAuth()),
 			new dt.Page('login', new dt.Login()),
             new dt.Page('register', new dt.Register()),
             new dt.Page('welcome', {}),
-            new dt.Page('enterUsername', {}),
-            new dt.Page('passwordHint', {})
+            new dt.Page('enterUsername', forgotPassword),
+            new dt.Page('passwordHint', forgotPassword)
 		]);
 
 		ko.applyBindings(viewModel);

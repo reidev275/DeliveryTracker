@@ -152,6 +152,27 @@
 	    self.HintQuestion = ko.observable('');
 	    self.HintAnswer = ko.observable('');
 
+	    self.UserIsInvalid = ko.computed(function () {
+	        return self.UserName() === '';
+	    });
+
+	    self.SubmitUserName = function () {
+	        if (!self.UserIsInvalid()) {
+	            dt.users.getHint(self.UserName(), self.HintQuestion);
+	            route('passwordHint');
+	        }
+	    };
+
+	    self.AnswerIsInvalid = ko.computed(function () {
+	        return self.HintAnswer() === '';
+	    });
+
+	    self.SubmitAnswer = function () {
+	        if (!self.AnswerIsInvalid()) {
+                
+	        }
+	    };
+
 	};
 
 	return dt;
