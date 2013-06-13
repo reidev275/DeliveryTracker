@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using DeliveryTracker.Models;
+using DeliveryTracker.Filters;
 
 namespace DeliveryTracker.Controllers
 {
+    [DeviceAuthRequired]
 	public class DeliveriesController : ApiController
 	{
 		// GET deliveries

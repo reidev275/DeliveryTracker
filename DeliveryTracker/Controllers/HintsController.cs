@@ -1,10 +1,12 @@
-﻿using DeliveryTracker.Repositories;
+﻿using DeliveryTracker.Filters;
+using DeliveryTracker.Repositories;
 using System;
 using System.Net;
 using System.Web.Http;
 
 namespace DeliveryTracker.Controllers
 {
+    [DeviceAuthRequired]
     public class HintsController : ApiController
     {
         readonly IUsersRepository _repository;
