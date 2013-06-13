@@ -46,8 +46,8 @@ using System.Configuration;
             kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
             RegisterServices(kernel);
-            //SqlRepositories(kernel);
-            MemoryRepositories(kernel);
+            SqlRepositories(kernel);
+            //MemoryRepositories(kernel);
 
             GlobalConfiguration.Configuration.Services.Replace(
                 typeof(IHttpControllerActivator),
