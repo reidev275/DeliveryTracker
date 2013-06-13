@@ -54,6 +54,7 @@
                 <h3 class="form-signin-heading">Enter Username</h3>
                 <input type="text" class="input-block-level" placeholder="Username" data-bind="value: UserName" />
                 <button class="btn btn-primary" type="submit" data-bind="click: SubmitUserName, css: { disabled: UserIsInvalid }">Submit</button>
+                <button class="btn" type="submit" data-bind="click: $root.GoToLogin">Cancel</button>
             </form>
         </script>
 
@@ -63,6 +64,7 @@
 				<span data-bind="text: HintQuestion"></span>?
 				<input type="text" class="input-block-level" placeholder="Answer" data-bind="value: HintAnswer" />
 				<button class="btn btn-primary" type="submit">Submit</button>
+                <button class="btn" type="submit" data-bind="click: $root.GoToLogin">Cancel</button>
 			</form>
 		</script>
 
