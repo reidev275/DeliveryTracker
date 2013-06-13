@@ -58,7 +58,7 @@
 	    };
 
 	    self.Forgot = function () {
-	        route('forgotPassword');
+	        route('enterUsername');
 	    };
 
 	    self.IsInvalid = ko.computed(function () {
