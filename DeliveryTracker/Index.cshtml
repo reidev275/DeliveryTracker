@@ -59,14 +59,16 @@
         </script>
 
 		<script type="text/html" id="passwordHint">
-			<form class="form-signin" data-bind="if: HintQuestion() !== ''">
-				<h3 class="form-signin-heading">Answer Hint</h3>
-				<span data-bind="text: HintQuestion"></span>?
-				<input type="text" class="input-block-level" placeholder="Answer" data-bind="value: HintAnswer, valueUpdate:'afterkeydown'" />
-				<button class="btn btn-primary" type="submit">Submit</button>
-                <button class="btn" type="submit" data-bind="click: $root.GoToLogin">Cancel</button>
-			</form>
-            <div id="loading" class="text-center" data-bind="if: HintQuestion() == ''"><img src="Images/loading.gif" alt="loading" /></div>
+			<form class="form-signin">
+                <div data-bind="if: HintQuestion() !== ''">
+				    <h3 class="form-signin-heading">Answer Hint</h3>
+				    <span data-bind="text: HintQuestion"></span>?
+				    <input type="text" class="input-block-level" placeholder="Answer" data-bind="value: HintAnswer, valueUpdate:'afterkeydown'" />
+				    <button class="btn btn-primary" type="submit">Submit</button>
+                    <button class="btn" type="submit" data-bind="click: $root.GoToLogin">Cancel</button>
+                </div>
+                <div id="loading" class="text-center" data-bind="if: HintQuestion() == ''"><img src="Images/loading.gif" alt="loading" /></div>
+			</form>            
 		</script>
 
         <script type="text/html" id="passwordReset">
