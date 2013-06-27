@@ -59,14 +59,27 @@
         </script>
 
 		<script type="text/html" id="passwordHint">
-			<form class="form-signin">
-				<h3 class="form-signin-heading">Reset Password</h3>
+			<form class="form-signin" data-bind="if: HintQuestion() !== ''">
+				<h3 class="form-signin-heading">Answer Hint</h3>
 				<span data-bind="text: HintQuestion"></span>?
 				<input type="text" class="input-block-level" placeholder="Answer" data-bind="value: HintAnswer, valueUpdate:'afterkeydown'" />
 				<button class="btn btn-primary" type="submit">Submit</button>
                 <button class="btn" type="submit" data-bind="click: $root.GoToLogin">Cancel</button>
 			</form>
+            <div id="loading" class="text-center" data-bind="if: HintQuestion() == ''"><img src="Images/loading.gif" alt="loading" /></div>
 		</script>
+
+        <script type="text/html" id="passwordReset">
+            <form class="form-signin">
+                <h3 class="form-signin-heading">Reset Password</h3>
+                Password:
+				<input type="password" class="input-block-level" placeholder="Password" data-bind="value: Password, valueUpdate:'afterkeydown'" />
+                Confirm Password:
+                <input type="password" class="input-block-level" placeholder="Password" data-bind="value: PasswordConfirm, valueUpdate:'afterkeydown'" />
+                <button class="btn btn-primary" type="submit">Submit</button>
+                <button class="btn" type="submit" data-bind="click: $root.GoToLogin">Cancel</button>
+            </form>
+        </script>
 
         <script type="text/html" id="welcome">
             <form class="form-signin">
@@ -115,7 +128,8 @@
             new dt.Page('register', new dt.Register()),
             new dt.Page('welcome', {}),
             new dt.Page('enterUsername', forgotPassword),
-            new dt.Page('passwordHint', forgotPassword)
+            new dt.Page('passwordHint', forgotPassword),
+            new dt.Page('passwordReset', new dt.ChangePassword())
 		]);
 
 		ko.applyBindings(viewModel);

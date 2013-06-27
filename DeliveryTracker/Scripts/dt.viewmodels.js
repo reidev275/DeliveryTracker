@@ -169,10 +169,23 @@
 
 	    self.SubmitAnswer = function () {
 	        if (!self.AnswerIsInvalid()) {
-                
+                //Get authorization to allow password change?
 	        }
 	    };
 
+	};
+
+	o.ChangePassword = function () {
+	    var self = this;
+
+	    self.Password = ko.observable('');
+	    self.PasswordConfirm = ko.observable('');
+
+	    self.IsInvalid = ko.computed(function () {
+	        return !(self.Password() !== '' &&
+                self.PasswordConfirm() !== '' &&
+                self.Password() === self.PasswordConfirm());
+	    });
 	};
 
 	return dt;

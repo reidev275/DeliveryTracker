@@ -23,7 +23,6 @@ namespace DeliveryTracker.Managers
         string GetHash(string password, string salt)
         {
             byte[] byteRepresentation = UnicodeEncoding.UTF8.GetBytes(password + salt);
-
             byte[] hashedTextInBytes = null;
 
             var sha1 = new SHA1CryptoServiceProvider();
