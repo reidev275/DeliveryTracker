@@ -32,7 +32,8 @@ namespace DeliveryTracker.Repositories
                         WHERE Id = @Id",
                 Parameters = new {
                     Id = user.Id,
-                    Password = user.Password,
+                    Salt = user.Salt,
+                    Hash = user.Hash,
                     HintQuestion = user.HintQuestion,
                     HintAnswer = user.HintAnswer
                 }
