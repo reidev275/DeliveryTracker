@@ -22,7 +22,7 @@ namespace DeliveryTracker.Repositories
             return QueryExecutor.Query<User>(query).FirstOrDefault();
         }
 
-        public void Update(User user)
+        public bool Update(User user)
         {
             if (user == null) throw new ArgumentNullException("user");
 
@@ -37,7 +37,15 @@ namespace DeliveryTracker.Repositories
                     HintAnswer = user.HintAnswer
                 }
             };
-            QueryExecutor.Execute(query);
+            try
+            {
+                QueryExecutor.Execute(query);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public bool Create(User user)

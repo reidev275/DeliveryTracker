@@ -152,6 +152,9 @@
 	    self.HintQuestion = ko.observable('');
 	    self.HintAnswer = ko.observable('');
 
+	    self.Password = ko.observable('');
+	    self.PasswordConfirm = ko.observable('');
+
 	    self.UserIsInvalid = ko.computed(function () {
 	        return self.UserName() === '';
 	    });
@@ -163,29 +166,33 @@
 	        }
 	    };
 
-	    self.AnswerIsInvalid = ko.computed(function () {
-	        return self.HintAnswer() === '';
-	    });
-
-	    self.SubmitAnswer = function () {
-	        if (!self.AnswerIsInvalid()) {
-                //Get authorization to allow password change?
-	        }
-	    };
-
-	};
-
-	o.ChangePassword = function () {
-	    var self = this;
-
-	    self.Password = ko.observable('');
-	    self.PasswordConfirm = ko.observable('');
-
 	    self.IsInvalid = ko.computed(function () {
-	        return !(self.Password() !== '' &&
+	        return !(self.HintAnswer() !== '' &&
+                self.Password() !== '' &&
                 self.PasswordConfirm() !== '' &&
                 self.Password() === self.PasswordConfirm());
 	    });
+
+	    self.SavePassword = function () {
+	        if (!self.IsInvalid()) {
+	            var user = {
+	                Name: self.UserName(),
+	                Password: self.Password(),
+	                HintAnswer: self.HintAnswer(),
+                    HintQuestion: self.HintQuestion()
+	            };
+	            dt.users.update(user, function (success) {
+	                self.Password('');
+	                self.PasswordConfirm('');
+	                self.HintAnswer('');
+	                self.UserName('');
+	                self.HintQuestion('');
+	                if (success) alert('Password Changed');
+	                route('login');
+	            });                
+            }
+	    };
+
 	};
 
 	return dt;

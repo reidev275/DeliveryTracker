@@ -17,11 +17,15 @@ namespace DeliveryTracker.Managers
             _hasher = hasher;
         }
 
-        public void Update(User user)
+        public bool Update(User user)
         {
             if (user == null) throw new ArgumentNullException("user");
+            var repoUser = _repository.GetByUserName(user.Name);
+            if (repoUser == null) return false;
+            if (repoUser.HintAnswer.ToLower() != user.HintAnswer.ToLower()) return false;
             user = (User)_hasher.Hash(user);
-            _repository.Update(user);
+            user.Id = repoUser.Id;
+            return _repository.Update(user);
         }
 
         public bool Create(User user)

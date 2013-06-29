@@ -8,6 +8,7 @@ namespace DeliveryTracker.Repositories
     public class MemoryUsersRepository : IUsersRepository
     {
         private static readonly List<User> _users = new List<User>();
+        static int _maxId = 0;
 
         public User GetByUserName(string userName)
         {
@@ -15,19 +16,22 @@ namespace DeliveryTracker.Repositories
             return _users.FirstOrDefault(x => x.Name == userName);
         }
 
-        public void Update(User user)
+        public bool Update(User user)
         {
             if (user == null) throw new ArgumentNullException("user");
             var tobeUpdated = GetByUserName(user.Name);
             tobeUpdated.HintAnswer = user.HintAnswer;
             tobeUpdated.HintQuestion = user.HintQuestion;
-            tobeUpdated.Password = user.Password;
+            tobeUpdated.Password = "";
+            tobeUpdated.Hash = user.Hash;
+            tobeUpdated.Salt = user.Salt;
+            return true;
         }
 
         public bool Create(User user)
         {
             if (user == null) throw new ArgumentNullException("user");
-
+            user.Id = _maxId++;
             if (_users.Any(x => x.Name == user.Name)) return false;
 
             _users.Add(user);

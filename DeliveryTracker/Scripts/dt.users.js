@@ -22,5 +22,17 @@
         }).error(dt.handleError);
     };
 
+    o.update = function (user, callback) {
+        $.ajax({
+            type: 'PUT',
+            data: user,
+            url: 'Users/' + user.Name,
+            datatype: 'json',
+            cache: false
+        }).done(function (data) {
+            if (callback) callback(data);
+        }).error(dt.handleError);
+    };
+
     return dt;
 })(DT || {}, jQuery, JSON);

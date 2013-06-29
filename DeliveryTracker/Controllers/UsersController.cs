@@ -29,12 +29,14 @@ namespace DeliveryTracker.Controllers
 		}
 
 		// PUT /users/5
-		public void Put(string id, [FromBody]User value)
+		public bool Put(string id, [FromBody]User value)
 		{
             if (id == null) throw new ArgumentNullException("id");
             if (value == null) throw new ArgumentNullException("value");
 
-            _manager.Update(value);
+            var updated = _manager.Update(value);
+            if (!updated) throw new HttpResponseException(HttpStatusCode.Unauthorized);
+            return true;
 		}
 	}
 }
