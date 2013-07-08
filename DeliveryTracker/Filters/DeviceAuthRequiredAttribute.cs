@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
+﻿using DeliveryTracker.Repositories;
+using System;
 using System.Net.Http;
-using DeliveryTracker.Repositories;
 
 namespace DeliveryTracker.Filters
 {
@@ -18,22 +15,6 @@ namespace DeliveryTracker.Filters
             if (String.IsNullOrEmpty(auth)) actionContext.Request.CreateErrorResponse(System.Net.HttpStatusCode.Unauthorized, new UnauthorizedAccessException());
             var result = _repository.GetDeviceAuth(auth);
             if (result == null || !result.IsValid) actionContext.Response = actionContext.Request.CreateErrorResponse(System.Net.HttpStatusCode.Unauthorized, new UnauthorizedAccessException("Your device is not authorized."));
-        }
-    }
-
-    public static class ApiExtensions
-    {
-        public static string GetValue(this System.Net.Http.Headers.HttpRequestHeaders obj, string key)
-        {
-            IEnumerable<string> enumerableHeader;
-            obj.TryGetValues(key, out enumerableHeader);
-
-            if (enumerableHeader == null) return null;
-
-            var list = enumerableHeader as IList<string> ?? enumerableHeader.ToList();
-            if (list.Count == 0) return null;
-
-            return list.First();
         }
     }
 }
