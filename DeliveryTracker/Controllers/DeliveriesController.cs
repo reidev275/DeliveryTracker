@@ -10,7 +10,7 @@ namespace DeliveryTracker.Controllers
 	public class DeliveriesController : ApiController
 	{
 		// GET deliveries
-		public IEnumerable<Delivery> Get(int truck)
+		public IEnumerable<Delivery> Get(int truck = 0, bool delivered = false)
 		{
 			throw new NotImplementedException();
 		}
