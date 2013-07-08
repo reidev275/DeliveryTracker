@@ -3,15 +3,31 @@ using System.Collections.Generic;
 using System.Web.Http;
 using DeliveryTracker.Models;
 using DeliveryTracker.Filters;
+using DeliveryTracker.QuerystringStrategies;
 
 namespace DeliveryTracker.Controllers
 {
     [DeviceAuthRequired]
 	public class DeliveriesController : ApiController
 	{
+        readonly IEnumerable<IDeliveryQueryStrategy> _strategies;
+
+        public DeliveriesController(IEnumerable<IDeliveryQueryStrategy> strategies)
+        {
+            if (strategies == null) throw new ArgumentNullException("strategies");
+            _strategies = strategies;
+
+        }
+
 		// GET deliveries
-		public IEnumerable<Delivery> Get(int truck = 0, bool delivered = false)
+		public IEnumerable<Delivery> Get()
 		{
+            foreach (var strategy in _strategies)
+            {
+                strategy.Apply(Request.RequestUri.Query);
+            }
+            
+
 			throw new NotImplementedException();
 		}
 

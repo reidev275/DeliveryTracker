@@ -140,8 +140,10 @@
     <Compile Include="Controllers\DeliveriesController.cs" />
     <Compile Include="Controllers\DeviceAuthenticationsController.cs" />
     <Compile Include="Controllers\HintsController.cs" />
+    <Compile Include="QuerystringStrategies\IDeliveryQueryStrategy.cs" />
     <Compile Include="Controllers\TrucksController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Filters\ApiExtensions.cs" />
     <Compile Include="Filters\DeviceAuthRequiredAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
