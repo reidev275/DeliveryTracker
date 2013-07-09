@@ -4,14 +4,10 @@
 <head>
 	<title>Delivery Tracker</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
-	<link href="Content/bootstrap.css" rel="stylesheet" type="text/css" />
-	<link href="Content/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
-	<link href="Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="/DeliveryTracker.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 	<div class="container">
-		
-		@*<div id="loading" class="text-center"><img src="Images/loading.gif" alt="loading" /></div>*@
         <div data-bind="with: selectedPage">
 		    <div data-bind="template: { name: template, data: data }"></div>
         </div>
@@ -96,17 +92,6 @@
 	</div>
 </body>
 <script src="~/DeliveryTracker.min.js"></script>
-@*
-<script src="~/Scripts/lib/jquery-1.9.1.min.js"></script>
-<script src="~/Scripts/lib/jquery.cookie.js"></script>
-<script src="~/Scripts/lib/knockout-2.2.1.js"></script>
-<script src="~/Scripts/dt.authentications.js"></script>
-<script src="~/Scripts/dt.viewmodels.js"></script>
-<script src="~/Scripts/dt.trucks.js"></script>
-<script src="~/Scripts/dt.users.js"></script>
-<script src="~/Scripts/dt.deliveries.js"></script>
-<script src="~/Scripts/dt.handleError.js"></script>
-*@
 <script type="text/javascript">
 	$(document).ready(function () {
 	    var userAuth = $.cookie('dtuserauth'),

@@ -16,13 +16,24 @@ module.exports = function(grunt) {
 				'DeliveryTracker/Scripts/*.js']
 		}
       }
-    }
+    },
+	cssmin: {
+		compress: {
+			files: {
+				'DeliveryTracker/<%= pkg.name %>.min.css': [
+					'DeliveryTracker/Content/bootstrap.min.css',
+					'DeliveryTracker/Content/bootstrap-responsive.min.css',
+					'DeliveryTracker/Content/Site.css']
+			}
+		}
+	}
   });
 
   // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
 
   // Default task(s).
-  grunt.registerTask('default', ['uglify']);
+  grunt.registerTask('default', ['uglify', 'cssmin']);
 
 };

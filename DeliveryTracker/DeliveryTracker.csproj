@@ -181,6 +181,7 @@
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="DeliveryTracker.min.css" />
     <Content Include="DeliveryTracker.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
