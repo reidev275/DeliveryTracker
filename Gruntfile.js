@@ -10,10 +10,10 @@ module.exports = function(grunt) {
       my_target: {
         files: {
 			'DeliveryTracker/<%= pkg.name %>.min.js' : [
-				'DeliveryTracker/Scripts/*.js',
-				'DeliveryTracker/Scripts/lib/jquery.cookie.js',
 				'DeliveryTracker/Scripts/lib/jquery-1.9.1.min.js',
-				'DeliveryTracker/Scripts/lib/knockout-2.2.1.js']
+				'DeliveryTracker/Scripts/lib/jquery.cookie.js',				
+				'DeliveryTracker/Scripts/lib/knockout-2.2.1.js',
+				'DeliveryTracker/Scripts/*.js']
 		}
       }
     }
