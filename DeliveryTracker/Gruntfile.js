@@ -9,21 +9,21 @@ module.exports = function(grunt) {
       },
       my_target: {
         files: {
-			'DeliveryTracker/<%= pkg.name %>.min.js' : [
-				'DeliveryTracker/Scripts/lib/jquery-1.9.1.min.js',
-				'DeliveryTracker/Scripts/lib/jquery.cookie.js',				
-				'DeliveryTracker/Scripts/lib/knockout-2.2.1.js',
-				'DeliveryTracker/Scripts/*.js']
+			'<%= pkg.name %>.min.js' : [
+				'Scripts/lib/jquery-1.9.1.min.js',
+				'Scripts/lib/jquery.cookie.js',				
+				'Scripts/lib/knockout-2.2.1.js',
+				'Scripts/*.js']
 		}
       }
     },
 	cssmin: {
 		compress: {
 			files: {
-				'DeliveryTracker/<%= pkg.name %>.min.css': [
-					'DeliveryTracker/Content/bootstrap.min.css',
-					'DeliveryTracker/Content/bootstrap-responsive.min.css',
-					'DeliveryTracker/Content/Site.css']
+				'<%= pkg.name %>.min.css': [
+					'Content/bootstrap.min.css',
+					'Content/bootstrap-responsive.min.css',
+					'Content/Site.css']
 			}
 		}
 	}
