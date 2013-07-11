@@ -1348,8 +1348,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>npm install -g grunt-cli
-grunt js css</PostBuildEvent>
+    <PostBuildEvent>grunt js css</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
