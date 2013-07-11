@@ -1550,7 +1550,8 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>node $(ProjectDir)/node_modules/grunt-cli/bin/grunt js
+    <PostBuildEvent>npm install
+node $(ProjectDir)/node_modules/grunt-cli/bin/grunt js
 node $(ProjectDir)/node_modules/grunt-cli/bin/grunt css</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
