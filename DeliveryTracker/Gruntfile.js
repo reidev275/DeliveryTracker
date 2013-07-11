@@ -20,6 +20,14 @@ module.exports = function (grunt) {
                 }
             }
         },
+        csslint: {
+            strict: {
+                options: {
+                    import: false
+                },
+                src: ['Content/Site.css']
+            }
+        },
         cssmin: {
             compress: {
                 files: {
@@ -35,9 +43,10 @@ module.exports = function (grunt) {
     //Load the plugins
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-csslint');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
 
     // Default task(s).
-    grunt.registerTask('default', ['jshint', 'uglify', 'cssmin']);
+    grunt.registerTask('default', ['jshint', 'uglify', 'csslint', 'cssmin']);
 
 };
