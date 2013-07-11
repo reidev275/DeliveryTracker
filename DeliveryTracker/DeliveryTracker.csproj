@@ -1550,8 +1550,8 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>node $(SolutionDir)/DeliveryTracker/node_modules/grunt-cli/bin/grunt js
-node $(SolutionDir)/DeliveryTracker/node_modules/grunt-cli/bin/grunt css</PostBuildEvent>
+    <PostBuildEvent>node $(ProjectDir)/node_modules/grunt-cli/bin/grunt js
+node $(ProjectDir)/node_modules/grunt-cli/bin/grunt css</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
