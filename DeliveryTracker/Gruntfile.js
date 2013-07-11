@@ -7,9 +7,6 @@ module.exports = function (grunt) {
             all: ['Scripts/*.js']
         },
         uglify: {
-            options: {
-                banner: '/*! <%= pkg.name %> <%= grunt.template.today("mm-dd-yyyy") %> */\n'
-            },
             my_target: {
                 files: {
                     '<%= pkg.name %>.min.js': [
@@ -47,6 +44,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
 
     // Default task(s).
-    grunt.registerTask('default', ['jshint', 'uglify', 'csslint', 'cssmin']);
-
+    grunt.registerTask('js', ['jshint', 'uglify']);
+    grunt.registerTask('css', ['csslint', 'cssmin']);
 };

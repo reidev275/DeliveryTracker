@@ -28,10 +28,7 @@ local.properties
 # PDT-specific
 .buildpath
 
-#################
-## Node
-#################
-node_modules/
+
 
 
 #################
