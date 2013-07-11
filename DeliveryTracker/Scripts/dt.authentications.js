@@ -31,7 +31,7 @@
 
     o.getDeviceAuth = function () {
         return $.cookie(deviceCookie);
-    }
+    };
 
     return dt;
 })(DT || {}, jQuery, JSON);
