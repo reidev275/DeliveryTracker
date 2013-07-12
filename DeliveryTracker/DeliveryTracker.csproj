@@ -185,7 +185,6 @@
     <Content Include="DeliveryTracker.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Gruntfile.js" />
     <Content Include="Images\glyphicons-halflings-white.png" />
     <Content Include="Images\glyphicons-halflings.png" />
     <Content Include="Images\loading.gif" />
@@ -215,7 +214,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="package.json" />
     <None Include="Scripts\lib\jquery-1.9.1.min.map" />
     <Content Include="Index.cshtml" />
   </ItemGroup>
