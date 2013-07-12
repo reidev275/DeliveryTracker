@@ -247,7 +247,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>npm install
+    <PostBuildEvent>
 node $(ProjectDir)/node_modules/grunt-cli/bin/grunt js
 node $(ProjectDir)/node_modules/grunt-cli/bin/grunt css</PostBuildEvent>
   </PropertyGroup>

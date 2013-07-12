@@ -2,7 +2,9 @@
 
     var o = dt.viewModels = dt.viewModels || {},
         route = ko.observable(''),
-        authCode = ko.observable('');
+        authCode = ko.observable(''),
+        truck = ko.observable(),
+        Deliveries = ko.observableArray([]);
 
     o.Page = function (template, data) {
         var self = this;
@@ -75,11 +77,17 @@
                     Password: self.Password()
                 };
                 dt.authentications.create(login, function (data) {
+                    truck(self.Truck());
                     self.UserName('');
                     self.Password('');
                     self.Truck('');
                     if (typeof data !== 'undefined') {
                         authCode(data);
+                        dt.deliveries.get(truck(), function (data) {
+                            for (var i = 0; i < data.length; i++) {
+                                Deliveries.push(data[i]);
+                            }
+                        });
                         route('welcome');
                     }
                 });
@@ -193,6 +201,18 @@
             }
         };
 
+    };
+
+    o.Deliveries = function () {
+        var self = this;
+        self.Deliveries = ko.observableArray([]);
+        self.CurrentDelivery = ko.observable();
+
+        Deliveries.subscribe(function (data) {
+            for (var i = 0; i < data.length; i++) {
+                self.Deliveries.push(data[i]);
+            }
+        });
     };
 
     return dt;

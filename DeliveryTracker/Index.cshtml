@@ -74,7 +74,12 @@
         <script type="text/html" id="welcome">
             <form class="form-signin">
                 <h3 class="form-signin-heading">Welcome</h3>
-                <span data-bind="text: $root.authCode"></span>
+                <div data-bind="foreach: Deliveries">
+                    <div>
+                        <span data-bind="text: Addr1 + ' ' + Contact"></span>
+                    </div>
+                </div>
+
             </form>
         </script>
 
@@ -91,7 +96,16 @@
         </script>
 	</div>
 </body>
-<script src="~/DeliveryTracker.min.js"></script>
+<script src="~/Scripts/lib/jquery-1.9.1.min.js"></script>
+<script src="~/Scripts/lib/jquery.cookie.js"></script>
+<script src="~/Scripts/lib/knockout-2.2.1.js"></script>
+<script src="~/Scripts/dt.authentications.js"></script>
+<script src="~/Scripts/dt.deliveries.js"></script>
+<script src="~/Scripts/dt.handleError.js"></script>
+<script src="~/Scripts/dt.trucks.js"></script>
+<script src="~/Scripts/dt.users.js"></script>
+<script src="~/Scripts/dt.viewmodels.js"></script>
+@*<script src="~/DeliveryTracker.min.js"></script>*@
 <script type="text/javascript">
 	$(document).ready(function () {
 	    var userAuth = $.cookie('dtuserauth'),
@@ -107,7 +121,7 @@
             new dt.Page('deviceauth', new dt.DeviceAuth()),
 			new dt.Page('login', new dt.Login()),
             new dt.Page('register', new dt.Register()),
-            new dt.Page('welcome', {}),
+            new dt.Page('welcome', new dt.Deliveries()),
             new dt.Page('enterUsername', forgotPassword),
             new dt.Page('passwordHint', forgotPassword)
 		]);

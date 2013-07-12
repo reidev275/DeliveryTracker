@@ -10,23 +10,43 @@ namespace DeliveryTracker.Controllers
     [DeviceAuthRequired]
 	public class DeliveriesController : ApiController
 	{
-        readonly IEnumerable<IDeliveryQueryStrategy> _strategies;
+        //readonly IEnumerable<IDeliveryQueryStrategy> _strategies;
 
-        public DeliveriesController(IEnumerable<IDeliveryQueryStrategy> strategies)
-        {
-            if (strategies == null) throw new ArgumentNullException("strategies");
-            _strategies = strategies;
+        //public DeliveriesController(IEnumerable<IDeliveryQueryStrategy> strategies)
+        //{
+        //    if (strategies == null) throw new ArgumentNullException("strategies");
+        //    _strategies = strategies;
 
-        }
+        //}
 
 		// GET deliveries
-		public IEnumerable<Delivery> Get()
+		public IEnumerable<Delivery> Get(int? truck = null)
 		{
-            foreach (var strategy in _strategies)
+            //foreach (var strategy in _strategies)
+            //{
+            //    strategy.Apply(Request.RequestUri.Query);
+            //}
+
+            return new List<Delivery>
             {
-                strategy.Apply(Request.RequestUri.Query);
-            }
-            
+                new Delivery
+                {
+                    Addr1 = "9302 Ashmeade Rd.",
+                    Contact = "Clark Kent",
+                    Truck = truck ?? 0,
+                    Items = new List<Item>
+                    {
+                        new Item
+                        {
+                            Number = "CTG43",
+                            Description = "Countertop",
+                            Allocated = 60,
+                            Delivered = 60,
+                            UnitOfMeasure = "IN"
+                        }
+                    }
+                }
+            };
 
 			throw new NotImplementedException();
 		}
@@ -46,10 +66,5 @@ namespace DeliveryTracker.Controllers
 		{
 
 		}
-
-		//public void Delete(string id)
-		//{
-		//    throw new NotImplementedException();
-		//}
 	}
 }
