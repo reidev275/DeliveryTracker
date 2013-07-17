@@ -88,7 +88,7 @@
                                 Deliveries.push(data[i]);
                             }
                         });
-                        route('welcome');
+                        route('deliveries');
                     }
                 });
             }
@@ -209,10 +209,20 @@
         self.CurrentDelivery = ko.observable();
 
         Deliveries.subscribe(function (data) {
+            self.Deliveries().length = 0;
             for (var i = 0; i < data.length; i++) {
                 self.Deliveries.push(data[i]);
             }
         });
+
+        self.goToDelivery = function () {
+            self.CurrentDelivery(this);
+            route('delivery');
+        };
+
+        self.goToDeliveries = function () {
+            route('deliveries');
+        }
     };
 
     return dt;

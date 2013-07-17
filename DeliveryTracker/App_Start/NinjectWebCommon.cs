@@ -15,7 +15,7 @@ namespace DeliveryTracker.App_Start
     using DapperQueryExecutor;
     using DeliveryTracker.Repositories;
     using DeliveryTracker.Managers;
-using System.Configuration;
+    using System.Configuration;
 
     public static class NinjectWebCommon 
     {

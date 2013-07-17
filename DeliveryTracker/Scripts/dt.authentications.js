@@ -1,6 +1,8 @@
-﻿var DT = (function (dt, $, json) {
+﻿var DT = (function (dt, $) {
     var o = dt.authentications = dt.authentications || {},
-        deviceCookie = 'dtdeviceauth';
+        deviceCookie = 'dtdeviceauth',
+        authCookie = 'dtuserauth';
+
 
     o.create = function (login, callback) {
         $.ajax({
@@ -10,6 +12,11 @@
             cache: false,
             url: 'Authentications'
         }).done(function (data) {
+            $.cookie(authCookie, data, { expires: 1, path: '/' });
+            headers.UserAuth = data;
+            $.ajaxSetup({
+                headers: headers
+            });
             if (callback) callback(data);
         }).error(dt.handleError);
     };
@@ -23,8 +30,9 @@
             url: 'DeviceAuthentications'
         }).done(function (data) {
             $.cookie(deviceCookie, data, { expires: 365, path: '/' });
+            headers.DeviceAuth = data;
             $.ajaxSetup({
-                headers: { "DeviceAuth": data }
+                headers: headers
             });
         }).error(dt.handleError);
     };
@@ -33,5 +41,21 @@
         return $.cookie(deviceCookie);
     };
 
+    o.getUserAuth = function () {
+        return $.cookie(authCookie);
+    };
+
+    o.getAuthHeaders = function () {
+        return {
+            "DeviceAuth": o.getDeviceAuth(),
+            "UserAuth": o.getUserAuth()
+        };
+    };
+
+    var headers = {
+        "DeviceAuth": o.getDeviceAuth(),
+        "UserAuth": o.getUserAuth()
+    };
+
     return dt;
-})(DT || {}, jQuery, JSON);
+})(DT || {}, jQuery);

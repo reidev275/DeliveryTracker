@@ -71,16 +71,50 @@
 			</form>            
 		</script>
 
-        <script type="text/html" id="welcome">
+        <script type="text/html" id="deliveries">
             <form class="form-signin">
-                <h3 class="form-signin-heading">Welcome</h3>
-                <div data-bind="foreach: Deliveries">
-                    <div>
-                        <span data-bind="text: Addr1 + ' ' + Contact"></span>
-                    </div>
-                </div>
-
+                <h3 class="form-signin-heading">Deliveries</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Address</th>
+                            <th>Contact</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: Deliveries">
+                        <tr>
+                            <td data-bind="text: Addr1"></td>
+                            <td data-bind="text: Contact"></td>
+                            <td><button class="btn" data-bind="click: $parent.goToDelivery">Details</button></td>
+                        </tr>
+                    </tbody>
+                </table>
             </form>
+        </script>
+
+        <script type="text/html" id="delivery">
+            <form class="form-signin" data-bind="with: CurrentDelivery">
+                <h3 class="form-signin-heading">Delivery</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Allocated</th>
+                            <th>Delivered</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: Items">
+                        <tr>
+                            <td><p data-bind="text: Number"></p><p data-bind="text: Description"></p></td>
+                            <td data-bind="text: Allocated"></td>
+                            <td><input type="number" data-bind="value: Delivered, valueUpdate:'afterkeydown'" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="btn" data-bind="click: $parent.goToDeliveries">Deliveries</button>
+            </form>
+
         </script>
 
         <script type="text/html" id="deviceauth">
@@ -109,19 +143,21 @@
 <script type="text/javascript">
 	$(document).ready(function () {
 	    var userAuth = $.cookie('dtuserauth'),
-            deviceAuth = DT.authentications.getDeviceAuth(),
+            authHeaders = DT.authentications.getAuthHeaders(),
 			dt = DT.viewModels;
 
 		$.ajaxSetup({
-		    headers: { "DeviceAuth": deviceAuth }
+		    headers: authHeaders
 		});
-		var forgotPassword = new dt.ForgotPassword();
+		var forgotPassword = new dt.ForgotPassword(),
+		    deliveries = new dt.Deliveries();
 
 		var viewModel = new dt.ViewModel([
             new dt.Page('deviceauth', new dt.DeviceAuth()),
 			new dt.Page('login', new dt.Login()),
             new dt.Page('register', new dt.Register()),
-            new dt.Page('welcome', new dt.Deliveries()),
+            new dt.Page('deliveries', deliveries),
+            new dt.Page('delivery', deliveries),
             new dt.Page('enterUsername', forgotPassword),
             new dt.Page('passwordHint', forgotPassword)
 		]);
