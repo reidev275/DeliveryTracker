@@ -45,10 +45,35 @@ namespace DeliveryTracker.Controllers
                             UnitOfMeasure = "IN"
                         }
                     }
+                },
+                new Delivery
+                {
+                    Addr1 = "1900 Bishops Bridge Rd.",
+                    Contact = "Lois Lane",
+                    Truck = truck ?? 0,
+                    Items = new List<Item>
+                    {
+                        new Item
+                        {
+                            Number = "01293",
+                            Description = "Widget",
+                            Allocated = 1,
+                            Delivered = 1,
+                            UnitOfMeasure = "EA"
+                        },
+                        new Item
+                        {
+                            Number = "203DFI-1",
+                            Description = "Brushed Nickel Faucet",
+                            Allocated = 2,
+                            Delivered = 2,
+                            UnitOfMeasure = "EA"
+                        }
+                    }
                 }
             };
 
-			throw new NotImplementedException();
+			//throw new NotImplementedException();
 		}
 
 		//// GET deliveries/O    1234

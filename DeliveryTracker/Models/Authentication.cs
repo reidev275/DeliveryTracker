@@ -9,5 +9,13 @@ namespace DeliveryTracker.Models
 		public string Password { get; set; }
         public DateTime Created { get; set; }
         public DateTime Updated { get; set; }
-	}
+
+        public bool IsValid
+        {
+            get
+            {
+                return Updated.DayOfYear == DateTime.Now.DayOfYear;
+            }
+        }
+    }
 }
