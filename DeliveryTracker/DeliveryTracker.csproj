@@ -1551,9 +1551,8 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>npm install
-node $(ProjectDir)/node_modules/grunt-cli/bin/grunt js
-node $(ProjectDir)/node_modules/grunt-cli/bin/grunt css</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
