@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 
-<html>
+<html lang="en">
 <head>
 	<title>Delivery Tracker</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
@@ -67,7 +67,7 @@
 				    <button class="btn btn-primary" type="submit" data-bind="click: SavePassword, css: { disabled: IsInvalid }">Submit</button>
                     <button class="btn" type="submit" data-bind="click: $root.GoToLogin">Cancel</button>
                 </div>
-                <div id="loading" class="text-center" data-bind="if: HintQuestion() == ''"><img src="Images/loading.gif" alt="loading" /></div>
+                <div id="loading" class="text-center" data-bind="if: HintQuestion() == ''"><img src="img/loading.gif" alt="loading" /></div>
 			</form>            
 		</script>
 
@@ -77,16 +77,19 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Address</th>
+                            <th>Company</th>
                             <th>Contact</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody data-bind="foreach: Deliveries">
                         <tr>
-                            <td data-bind="text: Addr1"></td>
+                            <td>
+                                <p data-bind="text: Company"></p>
+                                <p data-bind="text: Addr1"></p>
+                            </td>
                             <td data-bind="text: Contact"></td>
-                            <td><button class="btn" data-bind="click: $parent.goToDelivery">Details</button></td>
+                            <td><button class="btn" data-bind="click: $parent.goToDelivery">Details <i class="icon-chevron-right"></i></button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -95,7 +98,27 @@
 
         <script type="text/html" id="delivery">
             <form class="form-signin" data-bind="with: CurrentDelivery">
-                <h3 class="form-signin-heading">Delivery</h3>
+                <h3 class="form-signin-heading">Delivery <span data-bind="text: Number"></span></h3>
+                <div class="row-fluid">
+                    <div class="span6">
+                        <address>
+                            <strong data-bind="text: Company"></strong><br />
+                            <span data-bind="text: Contact"></span><br />
+                            <span data-bind="text: Addr1"></span><br />
+                            <span data-bind="text: City"></span>, <span data-bind="text: State"></span> <span data-bind="text: Zip"></span><br />
+                        </address>
+                    </div>
+                    <div class="span6">
+                        <dl class="dl-horizontal">
+                            <dt>PO #</dt>
+                            <dd data-bind="text: PoNumber"></dd>
+                            <dt>Phone</dt>
+                            <dd data-bind="text: Phone"></dd>
+                        </dl>
+
+                    </div>
+                </div>
+
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -108,11 +131,11 @@
                         <tr>
                             <td><p data-bind="text: Number"></p><p data-bind="text: Description"></p></td>
                             <td data-bind="text: Allocated"></td>
-                            <td><input type="number" data-bind="value: Delivered, valueUpdate:'afterkeydown'" /></td>
+                            <td><input type="number" class="input-mini" data-bind="value: Delivered, valueUpdate:'afterkeydown'" /></td>
                         </tr>
                     </tbody>
                 </table>
-                <button class="btn" data-bind="click: $parent.goToDeliveries">Deliveries</button>
+                <button class="btn" data-bind="click: $parent.goToDeliveries"><i class="icon-chevron-left"></i> Deliveries</button>
             </form>
 
         </script>

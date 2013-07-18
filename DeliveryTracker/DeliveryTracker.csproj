@@ -186,9 +186,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Gruntfile.js" />
-    <Content Include="Images\glyphicons-halflings-white.png" />
-    <Content Include="Images\glyphicons-halflings.png" />
-    <Content Include="Images\loading.gif" />
+    <Content Include="img\glyphicons-halflings-white.png" />
+    <Content Include="img\glyphicons-halflings.png" />
+    <Content Include="img\loading.gif" />
     <Content Include="node_modules\grunt-cli\Gruntfile.js" />
     <Content Include="node_modules\grunt-cli\lib\cli.js" />
     <Content Include="node_modules\grunt-cli\lib\completion.js" />

@@ -31,9 +31,16 @@ namespace DeliveryTracker.Controllers
             {
                 new Delivery
                 {
+                    Company = "Kryptonite Inc.",
                     Addr1 = "9302 Ashmeade Rd.",
                     Contact = "Clark Kent",
                     Truck = truck ?? 0,
+                    Number = "I    1234",
+                    PoNumber = "10923804",
+                    City = "Knoxville",
+                    State = "TN",
+                    Zip = "37922",
+                    Phone = "(865) 555-1122",
                     Items = new List<Item>
                     {
                         new Item
@@ -48,9 +55,16 @@ namespace DeliveryTracker.Controllers
                 },
                 new Delivery
                 {
+                    Company = "Art Vandalay",
                     Addr1 = "1900 Bishops Bridge Rd.",
                     Contact = "Lois Lane",
                     Truck = truck ?? 0,
+                    Number = "I    1235",
+                    PoNumber = "AEFD-82638",
+                    City = "Knoxville",
+                    State = "TN",
+                    Zip = "37922",
+                    Phone = "(865) 555-1122",
                     Items = new List<Item>
                     {
                         new Item

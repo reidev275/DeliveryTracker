@@ -2,7 +2,7 @@
 
     var o = dt.viewModels = dt.viewModels || {},
         route = ko.observable(''),
-        authCode = ko.observable(''),
+        userAuth = ko.observable(''),
         truck = ko.observable(),
         Deliveries = ko.observableArray([]);
 
@@ -17,10 +17,10 @@
         var self = this;
         self.pages = ko.observableArray(pages);
         self.selectedPage = ko.observable();
-        self.authCode = null;
+        self.userAuth = null;
 
-        authCode.subscribe(function (value) {
-            self.authCode = value;
+        userAuth.subscribe(function (value) {
+            self.userAuth = value;
         });
 
         route.subscribe(function (value) {
@@ -82,7 +82,7 @@
                     self.Password('');
                     self.Truck('');
                     if (typeof data !== 'undefined') {
-                        authCode(data);
+                        userAuth(data);
                         dt.deliveries.get(truck(), function (data) {
                             for (var i = 0; i < data.length; i++) {
                                 Deliveries.push(data[i]);
