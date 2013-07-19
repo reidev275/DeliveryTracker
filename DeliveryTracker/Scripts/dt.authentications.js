@@ -21,6 +21,19 @@
         }).error(dt.handleError);
     };
 
+    o.get = function (userAuth, callback, errorHandler) {
+        $.ajax({
+            type: 'GET',
+            datatype: 'json',
+            cache: false,
+            url: 'Authentications/' + userAuth
+        }).done(function (data) {
+            if (callback) callback(data);
+        }).error(function () {
+            if (errorHandler) errorHandler()
+        });
+    };
+
     o.setDeviceAuth = function (auth) {
         $.ajax({
             type: 'POST',

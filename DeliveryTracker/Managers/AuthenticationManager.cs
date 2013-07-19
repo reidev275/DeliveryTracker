@@ -39,7 +39,7 @@ namespace DeliveryTracker.Managers
 
         public AuthenticationResponse GetAuthentication(string code)
         {
-            if (!String.IsNullOrEmpty(code)) throw new ArgumentNullException("code");
+            if (String.IsNullOrEmpty(code)) throw new ArgumentNullException("code");
             var authentication = _authentications.GetByCode(code);
             if (authentication == null) return null;
 

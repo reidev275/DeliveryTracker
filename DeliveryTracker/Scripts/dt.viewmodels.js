@@ -2,9 +2,18 @@
 
     var o = dt.viewModels = dt.viewModels || {},
         route = ko.observable(''),
-        userAuth = ko.observable(''),
+        userAuth = ko.observable(dt.authentications.getUserAuth()),
         truck = ko.observable(),
         Deliveries = ko.observableArray([]);
+
+    var goToDeliveries = function (truck) {
+        dt.deliveries.get(truck, function (data) {
+            for (var i = 0; i < data.length; i++) {
+                Deliveries.push(data[i]);
+            }
+            route('deliveries');
+        });
+    };
 
     o.Page = function (template, data) {
         var self = this;
@@ -17,7 +26,7 @@
         var self = this;
         self.pages = ko.observableArray(pages);
         self.selectedPage = ko.observable();
-        self.userAuth = null;
+        self.userAuth = userAuth();
 
         userAuth.subscribe(function (value) {
             self.userAuth = value;
@@ -39,7 +48,15 @@
             route('login');
         };
 
-        route('login');
+        if (typeof userAuth() !== 'undefined') {
+            dt.authentications.get(userAuth(), function (value) {
+                goToDeliveries(value.Truck);
+            }, function () {
+                self.GoToLogin();
+            });
+        } else {
+            self.GoToLogin();
+        }
     };
 
     o.Login = function () {
@@ -83,12 +100,7 @@
                     self.Truck('');
                     if (typeof data !== 'undefined') {
                         userAuth(data);
-                        dt.deliveries.get(truck(), function (data) {
-                            for (var i = 0; i < data.length; i++) {
-                                Deliveries.push(data[i]);
-                            }
-                        });
-                        route('deliveries');
+                        goToDeliveries(truck());                        
                     }
                 });
             }

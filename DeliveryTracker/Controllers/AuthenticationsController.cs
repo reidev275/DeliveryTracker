@@ -23,6 +23,7 @@ namespace DeliveryTracker.Controllers
 		{
             if (id == null) throw new ArgumentNullException("id");
             var result = _manager.GetAuthentication(id);
+            if (result == null) throw new HttpResponseException(HttpStatusCode.NotFound);
             return result;
 		}
 
