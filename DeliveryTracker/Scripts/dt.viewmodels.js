@@ -1,4 +1,4 @@
-﻿var DT = (function (dt, ko) {
+﻿var DT = (function (dt, ko, $) {
 
     var o = dt.viewModels = dt.viewModels || {},
         route = ko.observable(''),
@@ -216,7 +216,10 @@
     };
 
     o.Deliveries = function () {
-        var self = this;
+        var self = this,
+            signature,
+            printed;
+
         self.Deliveries = ko.observableArray([]);
         self.CurrentDelivery = ko.observable();
 
@@ -234,8 +237,52 @@
 
         self.goToDeliveries = function () {
             route('deliveries');
+        };
+
+        self.goToSignature = function () {
+            if (self.CurrentDelivery().Signature) return;
+            route('signature');
+            signature = configureCanvas("#signatureCanvas");
+        };
+
+        self.goToPrint = function () {
+            if (self.CurrentDelivery().Printed) return;
+            route('print');
+            printed = configureCanvas("#printCanvas");
+        };
+
+        self.saveSignature = function () {
+            if (signature.Points().length > 0)
+                self.CurrentDelivery().Signature = 'signature';
+            route('delivery');
+        };
+
+        self.cancelSignature = function () {
+            cancel(signature);
+        };
+
+        self.savePrint = function () {
+            if (printed.Points().length > 0)
+                self.CurrentDelivery().Printed = 'printed';
+            route('delivery');
+        };
+
+
+
+        self.cancelPrint = function () {
+            cancel(printed);
+        };
+        
+        var configureCanvas = function (id) {
+            var canvas = $(id);
+            return canvas.Expand().PenTool().TopazTool();
         }
+
+        var cancel = function (obj) {
+            obj.clearPen();
+            obj.clearTopaz();
+        };
     };
 
     return dt;
-})(DT || {}, ko);
+})(DT || {}, ko, jQuery);

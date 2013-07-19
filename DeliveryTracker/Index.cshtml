@@ -136,8 +136,35 @@
                     </tbody>
                 </table>
                 <button class="btn" data-bind="click: $parent.goToDeliveries"><i class="icon-chevron-left"></i> Deliveries</button>
+                <button class="btn btn-info" data-bind="click: $parent.goToSignature, css: { disabled: Signature }">Signature</button>
+                <button class="btn btn-info" data-bind="click: $parent.goToPrint, css: { disabled: Printed }">Printed</button>
             </form>
+        </script>
 
+        <script type="text/html" id="signature">
+            <form class="form-signin">
+                <h3 class="form-signin-heading">Signature</h3>
+                <div class="row-fluid">
+                    <div class="span12">
+                        <canvas id="signatureCanvas"></canvas>
+                    </div>
+                </div>
+                <button class="btn btn-success" data-bind="click: saveSignature">Save</button>
+                <button class="btn btn-danger" data-bind="click: cancelSignature">Clear</button>
+            </form>
+        </script>
+
+        <script type="text/html" id="print">
+            <form class="form-signin">
+                <h3 class="form-signin-heading">Printed</h3>
+                <div class="row-fluid">
+                    <div class="span12">
+                        <canvas id="printCanvas"></canvas>
+                    </div>
+                </div>
+                <button class="btn btn-success" data-bind="click: savePrint">Save</button>
+                <button class="btn btn-danger" data-bind="click: cancelPrint">Clear</button>
+            </form>
         </script>
 
         <script type="text/html" id="deviceauth">
@@ -156,13 +183,14 @@
 <script src="~/Scripts/lib/jquery-1.9.1.min.js"></script>
 <script src="~/Scripts/lib/jquery.cookie.js"></script>
 <script src="~/Scripts/lib/knockout-2.2.1.js"></script>
+<script src="~/Scripts/canvas.js"></script>
 <script src="~/Scripts/dt.authentications.js"></script>
 <script src="~/Scripts/dt.deliveries.js"></script>
 <script src="~/Scripts/dt.handleError.js"></script>
 <script src="~/Scripts/dt.trucks.js"></script>
 <script src="~/Scripts/dt.users.js"></script>
 <script src="~/Scripts/dt.viewmodels.js"></script>
-<script src="~/Scripts/canvas.js"></script>
+
 @*<script src="~/DeliveryTracker.min.js"></script>*@
 <script type="text/javascript">
 	$(document).ready(function () {
@@ -182,6 +210,8 @@
             new dt.Page('register', new dt.Register()),
             new dt.Page('deliveries', deliveries),
             new dt.Page('delivery', deliveries),
+            new dt.Page('signature', deliveries),
+            new dt.Page('print', deliveries),
             new dt.Page('enterUsername', forgotPassword),
             new dt.Page('passwordHint', forgotPassword)
 		]);
