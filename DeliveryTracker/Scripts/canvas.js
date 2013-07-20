@@ -52,7 +52,7 @@
             });
 
             $(document).delegate('canvas', 'touchend', function (e) {
-                isMouseDown = false;);
+                isMouseDown = false;
             });
 
             function getCoordinates(e, obj) {
