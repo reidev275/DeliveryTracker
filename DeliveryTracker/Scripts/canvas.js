@@ -1,4 +1,6 @@
 ﻿(function ($) {
+    $(document).delegate("canvas", "scrollstart", false);
+
     $.fn.Expand = function () {
         if (this[0] && this[0].getContext) {
             var canvas = this[0],
