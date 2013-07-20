@@ -25,35 +25,21 @@
                 context = canvas.getContext("2d"),
                 isMouseDown = false;
 
-            this.mousedown(function (e) {
+            this.on('mousedown touchstart', function (e) {
                 isMouseDown = true;
                 context.moveTo(e.offsetX, e.offsetY);
-            }).mouseup(function () {
+            }).on('mouseup touchend', function () {
                 isMouseDown = false;
-            }).mousemove(function (e) {
+            }).on('mousemove touchmove', function (e) {
                 if (isMouseDown) {
                     drawTo(e.offsetX, e.offsetY);
                 }
-            });
-
-            $(document).delegate(canvas, 'touchmove', function (e) {
-                if (isMouseDown) {
-                    var coords = getCoordinates(e, this);
-                    drawTo(coords.X, coords.Y);
-                }
-            }).delegate(canvas, 'touchstart', function (e) {
-                isMouseDown = true;
-                var coords = getCoordinates(e, this);
-                context.moveTo(coords.X, coords.Y);
-            }).delegate(canvas, 'touchend', function (e) {
-                isMouseDown = false;
             });
 
             var drawTo = function (x, y) {
                 context.lineTo(x, y);
                 context.stroke();
             };
-
 
             this.clearPen = function () {
                 context.clearRect(0, 0, canvas.width, canvas.height);
@@ -85,19 +71,19 @@
                 }
             });
 
-            $(document).delegate(canvas, 'touchmove', function (e) {
-                if (isMouseDown) {
-                    var coords = getCoordinates(e, this);
-                    points.push({ X: coords.X, Y: coords.Y });
-                }
-            }).delegate(canvas, 'touchstart', function (e) {
-                isMouseDown = true;
-                var coords = getCoordinates(e, this);
-                points.push({ X: coords.X, Y: coords.Y });
-            }).delegate(canvas, 'touchend', function (e) {
-                isMouseDown = false;
-                penups.push(points.length);
-            });
+            //$(document).delegate(canvas, 'touchmove', function (e) {
+            //    if (isMouseDown) {
+            //        var coords = getCoordinates(e, this);
+            //        points.push({ X: coords.X, Y: coords.Y });
+            //    }
+            //}).delegate(canvas, 'touchstart', function (e) {
+            //    isMouseDown = true;
+            //    var coords = getCoordinates(e, this);
+            //    points.push({ X: coords.X, Y: coords.Y });
+            //}).delegate(canvas, 'touchend', function (e) {
+            //    isMouseDown = false;
+            //    penups.push(points.length);
+            //});
 
             this.clearTopaz = function () {
                 points = [],
