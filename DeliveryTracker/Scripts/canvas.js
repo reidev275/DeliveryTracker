@@ -36,16 +36,16 @@
                 }
             });
 
-            $(document).delegate(this, 'touchmove', function (e) {
+            $(document).delegate(canvas, 'touchmove', function (e) {
                 if (isMouseDown) {
                     var coords = getCoordinates(e, this);
                     drawTo(coords.X, coords.Y);
                 }
-            }).delegate(this, 'touchstart', function (e) {
+            }).delegate(canvas, 'touchstart', function (e) {
                 isMouseDown = true;
                 var coords = getCoordinates(e, this);
                 context.moveTo(coords.X, coords.Y);
-            }).delegate(this, 'touchend', function (e) {
+            }).delegate(canvas, 'touchend', function (e) {
                 isMouseDown = false;
             });
 
@@ -85,16 +85,16 @@
                 }
             });
 
-            $(document).delegate(this, 'touchmove', function (e) {
+            $(document).delegate(canvas, 'touchmove', function (e) {
                 if (isMouseDown) {
                     var coords = getCoordinates(e, this);
                     points.push({ X: coords.X, Y: coords.Y });
                 }
-            }).delegate(this, 'touchstart', function (e) {
+            }).delegate(canvas, 'touchstart', function (e) {
                 isMouseDown = true;
                 var coords = getCoordinates(e, this);
                 points.push({ X: coords.X, Y: coords.Y });
-            }).delegate(this, 'touchend', function (e) {
+            }).delegate(canvas, 'touchend', function (e) {
                 isMouseDown = false;
                 penups.push(points.length);
             });
