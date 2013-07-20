@@ -1,5 +1,7 @@
 ﻿(function ($) {
-    $(document).delegate("canvas", "scrollstart", false);
+    $(document).delegate("canvas", "touchmove, touchstart, touchend", function (e) {
+        e.preventDefault();
+    });
 
     $.fn.Expand = function () {
         if (this[0] && this[0].getContext) {
