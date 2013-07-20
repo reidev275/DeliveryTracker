@@ -238,6 +238,10 @@
         self.goToDeliveries = function () {
             route('deliveries');
         };
+        
+        self.goToMap = function () {
+            route('map');
+        };
 
         self.goToSignature = function () {
             if (self.CurrentDelivery().Signature) return;
