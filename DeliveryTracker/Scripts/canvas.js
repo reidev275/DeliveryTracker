@@ -36,6 +36,34 @@
                 }
             });
 
+            $(document).delegate('canvas', 'touchmove', function (e) {
+                var coords = getCoordinates(e, this);
+
+                if (isMouseDown) {
+                    context.lineTo(coords.X, coords.Y);
+                    context.stroke();
+                }
+            });
+
+            $(document).delegate('canvas', 'touchstart', function (e) {
+                isMouseDown = true;
+                var coords = getCoordinates(e, this);
+                context.moveTo(coords.X, coords.Y);
+            });
+
+            $(document).delegate('canvas', 'touchend', function (e) {
+                isMouseDown = false;);
+            });
+
+            function getCoordinates(e, obj) {
+                e.preventDefault();
+                var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+                var elm = $(obj).offset();
+                var x = touch.pageX - elm.left;
+                var y = touch.pageY - elm.top;
+                return { X: x, Y: y };
+            }
+
             var drawTo = function (x, y) {
                 context.lineTo(x, y);
                 context.stroke();
