@@ -1,109 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web.Http;
+﻿using DeliveryTracker.Filters;
+using DeliveryTracker.Managers;
 using DeliveryTracker.Models;
-using DeliveryTracker.Filters;
-using DeliveryTracker.QuerystringStrategies;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
 
 namespace DeliveryTracker.Controllers
 {
     [DeviceAuthRequired]
+    [UserAuthRequired]
 	public class DeliveriesController : ApiController
 	{
-        //readonly IEnumerable<IDeliveryQueryStrategy> _strategies;
+        readonly IDeliveryManager _manager;
 
-        //public DeliveriesController(IEnumerable<IDeliveryQueryStrategy> strategies)
-        //{
-        //    if (strategies == null) throw new ArgumentNullException("strategies");
-        //    _strategies = strategies;
-
-        //}
-
-		// GET deliveries
+        public DeliveriesController(IDeliveryManager manager)
+        {
+            if (manager == null) throw new ArgumentNullException("manager");
+            _manager = manager;
+        }
+		
 		public IEnumerable<Delivery> Get(int? truck = null)
 		{
-            //foreach (var strategy in _strategies)
-            //{
-            //    strategy.Apply(Request.RequestUri.Query);
-            //}
+            if (truck.HasValue) return _manager.GetByTruck(truck.Value);
 
-            return new List<Delivery>
-            {
-                new Delivery
-                {
-                    Company = "Kryptonite Inc.",
-                    Addr1 = "9302 Ashmeade Rd.",
-                    Contact = "Clark Kent",
-                    Truck = truck ?? 0,
-                    Number = "I    1234",
-                    PoNumber = "10923804",
-                    City = "Knoxville",
-                    State = "TN",
-                    Zip = "37922",
-                    Phone = "(865) 555-1122",
-                    Items = new List<Item>
-                    {
-                        new Item
-                        {
-                            Number = "CTG43",
-                            Description = "Countertop",
-                            Allocated = 60,
-                            Delivered = 60,
-                            UnitOfMeasure = "IN"
-                        }
-                    }
-                },
-                new Delivery
-                {
-                    Company = "Art Vandalay",
-                    Addr1 = "1900 Bishops Bridge Rd.",
-                    Contact = "Lois Lane",
-                    Truck = truck ?? 0,
-                    Number = "I    1235",
-                    PoNumber = "AEFD-82638",
-                    City = "Knoxville",
-                    State = "TN",
-                    Zip = "37922",
-                    Phone = "(865) 555-1122",
-                    Items = new List<Item>
-                    {
-                        new Item
-                        {
-                            Number = "01293",
-                            Description = "Widget",
-                            Allocated = 1,
-                            Delivered = 1,
-                            UnitOfMeasure = "EA"
-                        },
-                        new Item
-                        {
-                            Number = "203DFI-1",
-                            Description = "Brushed Nickel Faucet",
-                            Allocated = 2,
-                            Delivered = 2,
-                            UnitOfMeasure = "EA"
-                        }
-                    }
-                }
-            };
-
-			//throw new NotImplementedException();
+            throw new HttpResponseException(HttpStatusCode.NotImplemented);
 		}
 
-		//// GET deliveries/O    1234
-		//public Delivery Get(string id)
-		//{
-		//    throw new NotImplementedException();
-		//}
-
-		public void Post([FromBody]Delivery value)
+        public HttpResponseMessage Post([FromBody]Delivery value)
 		{
-
+            var result = _manager.Insert(value);
+            return new HttpResponseMessage(HttpStatusCode.Created);
 		}
 
-		public void Put(string id, [FromBody]Delivery value)
+        public HttpResponseMessage Put(string id, [FromBody]Delivery value)
 		{
-
+            var result = _manager.Update(value);
+            return new HttpResponseMessage(HttpStatusCode.OK);
 		}
 	}
 }
