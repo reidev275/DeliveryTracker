@@ -138,7 +138,7 @@
                 <button class="btn" data-bind="click: $parent.goToDeliveries"><i class="icon-chevron-left"></i> Deliveries</button>
                 <button class="btn btn-primary" data-bind="click: $parent.goToSignature, css: { disabled: Signature }">Signature</button>
                 <button class="btn btn-info" data-bind="click: $parent.goToPrint, css: { disabled: Printed }">Printed</button>
-                <button class="btn btn-inverse" data-bind="click: $parent.goToMap">Map</button>
+                @*<button class="btn btn-inverse" data-bind="click: $parent.goToMap">Map</button>*@
             </form>
         </script>
 
@@ -168,7 +168,7 @@
             </form>
         </script>
 
-        <script type="text/html" id="map">
+@*        <script type="text/html" id="map">
             <form class="form-signin" data-bind="with: CurrentDelivery">
                 <h3 class="form-signin-heading">Map</h3>
                 <div>
@@ -176,7 +176,7 @@
                 </div>
                 <button class="btn" data-bind="click: $parent.goToDelivery"><i class="icon-chevron-left"></i> Delivery</button>
             </form>
-        </script>
+        </script>*@
 
         <script type="text/html" id="deviceauth">
             <form class="form-signin">
@@ -223,7 +223,7 @@
             new dt.Page('delivery', deliveries),
             new dt.Page('signature', deliveries),
             new dt.Page('print', deliveries),
-            new dt.Page('map', deliveries),
+            //new dt.Page('map', deliveries),
             new dt.Page('enterUsername', forgotPassword),
             new dt.Page('passwordHint', forgotPassword)
 		]);
