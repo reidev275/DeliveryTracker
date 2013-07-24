@@ -140,6 +140,8 @@
     <Compile Include="Controllers\DeliveriesController.cs" />
     <Compile Include="Controllers\DeviceAuthenticationsController.cs" />
     <Compile Include="Controllers\HintsController.cs" />
+    <Compile Include="Filters\UserAuthRequiredAttribute.cs" />
+    <Compile Include="Managers\DeliveryManager.cs" />
     <Compile Include="QuerystringStrategies\IDeliveryQueryStrategy.cs" />
     <Compile Include="Controllers\TrucksController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -167,6 +169,7 @@
     <Compile Include="Repositories\DapperUsersRepository.cs" />
     <Compile Include="Repositories\IAuthenticationsRepository.cs" />
     <Compile Include="Managers\IPasswordHasher.cs" />
+    <Compile Include="Managers\IDeliveryManager.cs" />
     <Compile Include="Repositories\IDeviceAuthRepository.cs" />
     <Compile Include="Repositories\ITrucksRepository.cs" />
     <Compile Include="Repositories\IUsersRepository.cs" />
