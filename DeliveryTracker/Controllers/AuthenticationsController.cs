@@ -7,34 +7,34 @@ using System.Web.Http;
 
 namespace DeliveryTracker.Controllers
 {
-    [DeviceAuthRequired]
+	[DeviceAuthRequired]
 	public class AuthenticationsController : ApiController
 	{
-        private readonly IAuthenticationManager _manager;
+		private readonly IAuthenticationManager _manager;
 
-        public AuthenticationsController(IAuthenticationManager manager)
-        {
-            if (manager == null) throw new ArgumentNullException("manager");
-            _manager = manager;
-        }
+		public AuthenticationsController(IAuthenticationManager manager)
+		{
+			if (manager == null) throw new ArgumentNullException("manager");
+			_manager = manager;
+		}
 
 		// GET api/authentications/5
-        public AuthenticationResponse Get(string id)
+		public AuthenticationResponse Get(string id)
 		{
-            if (id == null) throw new ArgumentNullException("id");
-            var result = _manager.GetAuthentication(id);
-            if (result == null) throw new HttpResponseException(HttpStatusCode.NotFound);
-            return result;
+			if (id == null) throw new ArgumentNullException("id");
+			var result = _manager.GetAuthentication(id);
+			if (result == null) throw new HttpResponseException(HttpStatusCode.NotFound);
+			return result;
 		}
 
 		// POST api/authentications
 		public string Post([FromBody]Authentication value)
 		{
-            if (value == null) throw new ArgumentNullException("value");
+			if (value == null) throw new ArgumentNullException("value");
 
-            var result = _manager.Authenticate(value);
-            if (result == null) throw new HttpResponseException(HttpStatusCode.Unauthorized);
-            return result;
+			var result = _manager.Authenticate(value);
+			if (result == null) throw new HttpResponseException(HttpStatusCode.Unauthorized);
+			return result;
 		}
 	}
 }
