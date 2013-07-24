@@ -80,6 +80,7 @@ namespace DeliveryTracker.App_Start
             kernel.Bind<IAuthenticationManager>().To<AuthenticationManager>();
             kernel.Bind<IUsersManager>().To<UsersManager>();
             kernel.Bind<IDeviceAuthManager>().To<DeviceAuthManager>().WithConstructorArgument("authCode", _authCode);
+            kernel.Bind<IDeliveryManager>().To<DeliveryManager>();
 
             //Workers
             kernel.Bind<IPasswordHasher>().To<PasswordHasher>();
