@@ -8,9 +8,9 @@
 
     var goToDeliveries = function (truck) {
         dt.deliveries.get(truck, function (data) {
-            for (var i = 0; i < data.length; i++) {
-                Deliveries.push(data[i]);
-            }
+            $.each(data, function(index, value) {
+                Deliveries.push(new o.Delivery(value));
+            });
             route('deliveries');
         });
     };
@@ -280,6 +280,38 @@
             obj.clearPen();
             obj.clearTopaz();
         };
+    };
+
+    o.Delivery = function (delivery) {
+        var self = this;
+
+        self.Addr1 = delivery.Addr1;
+        self.City = delivery.City;
+        self.Company = delivery.Company;
+        self.Contact = delivery.Contact;
+        self.Items = [];
+        self.Number = delivery.Number;
+        self.Phone = delivery.Phone;
+        self.PoNumber = delivery.PoNumber;
+        self.Signature = delivery.Signature;
+        self.Printed = delivery.Printed;
+        self.State = delivery.State;
+        self.Zip = delivery.Zip;
+        
+        
+
+        $.each(delivery.Items, function (index, value) {
+            self.Items.push(new o.Item(value));
+        });
+    };
+
+    o.Item = function (item) {
+        var self = this;
+
+        self.Number = item.Number;
+        self.Description = item.Description;
+        self.Allocated = item.Allocated;
+        self.Delivered = ko.observable(item.Delivered);
     };
 
     return dt;
