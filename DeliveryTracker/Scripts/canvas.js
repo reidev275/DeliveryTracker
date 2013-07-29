@@ -71,7 +71,7 @@
             });
 
             this.clearTopaz = function () {
-                points = [],
+                points = [];
                 penups = [];
             };
 

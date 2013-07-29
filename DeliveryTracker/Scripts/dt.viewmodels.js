@@ -220,15 +220,9 @@
             signature,
             printed;
 
-        self.Deliveries = ko.observableArray([]);
-        self.CurrentDelivery = ko.observable();
+        self.Deliveries = ko.computed(Deliveries).extend({ throttle: 400 });
 
-        Deliveries.subscribe(function (data) {
-            self.Deliveries().length = 0;
-            for (var i = 0; i < data.length; i++) {
-                self.Deliveries.push(data[i]);
-            }
-        });
+        self.CurrentDelivery = ko.observable();
 
         self.goToDelivery = function () {
             self.CurrentDelivery(this);
@@ -280,7 +274,7 @@
         var configureCanvas = function (id) {
             var canvas = $(id);
             return canvas.Expand().PenTool().TopazTool();
-        }
+        };
 
         var cancel = function (obj) {
             obj.clearPen();

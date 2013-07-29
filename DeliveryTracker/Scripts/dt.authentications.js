@@ -30,7 +30,7 @@
         }).done(function (data) {
             if (callback) callback(data);
         }).error(function () {
-            if (errorHandler) errorHandler()
+            if (errorHandler) errorHandler();
         });
     };
 
