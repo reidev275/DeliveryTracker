@@ -137,34 +137,23 @@
 				</table>
 				<button class="btn" data-bind="click: $parent.goToDeliveries"><i class="icon-chevron-left"></i> Deliveries</button>
 				<button class="btn btn-primary" data-bind="click: $parent.goToSignature, css: { disabled: Signature }">Signature</button>
-				<button class="btn btn-info" data-bind="click: $parent.goToPrint, css: { disabled: Printed }">Printed</button>
 				@*<button class="btn btn-inverse" data-bind="click: $parent.goToMap">Map</button>*@
 			</form>
 		</script>
 
 		<script type="text/html" id="signature">
-			<form class="form-signin">
+			<form class="form-signin" data-bind="with: CurrentDelivery">
 				<h3 class="form-signin-heading">Signature</h3>
 				<div class="row-fluid">
 					<div class="span12">
 						<canvas id="signatureCanvas"></canvas>
 					</div>
 				</div>
-				<button class="btn btn-success" data-bind="click: saveSignature">Save</button>
-				<button class="btn btn-danger" data-bind="click: cancelSignature">Clear</button>
-			</form>
-		</script>
-
-		<script type="text/html" id="print">
-			<form class="form-signin">
-				<h3 class="form-signin-heading">Printed</h3>
-				<div class="row-fluid">
-					<div class="span12">
-						<canvas id="printCanvas"></canvas>
-					</div>
-				</div>
-				<button class="btn btn-success" data-bind="click: savePrint">Save</button>
-				<button class="btn btn-danger" data-bind="click: cancelPrint">Clear</button>
+				Printed:
+				<input type="text" class="input-block-level" data-bind="value: Printed, valueUpdate:'afterkeydown'" />
+				<button class="btn" data-bind="click: $parent.goToDelivery"><i class="icon-chevron-left"></i> Delivery</button>
+				<button class="btn btn-success" data-bind="click: $parent.saveSignature, css: { disabled: PrintedIsInvalid }">Save</button>
+				<button class="btn btn-danger" data-bind="click: $parent.cancelSignature">Clear</button>
 			</form>
 		</script>
 

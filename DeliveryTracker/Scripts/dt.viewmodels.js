@@ -217,8 +217,7 @@
 
     o.Deliveries = function () {
         var self = this,
-            signature,
-            printed;
+            signature;
 
         self.Deliveries = ko.computed(Deliveries).extend({ throttle: 400 });
 
@@ -240,13 +239,7 @@
         self.goToSignature = function () {
             if (self.CurrentDelivery().Signature) return;
             route('signature');
-            signature = configureCanvas("#signatureCanvas");
-        };
-
-        self.goToPrint = function () {
-            if (self.CurrentDelivery().Printed) return;
-            route('print');
-            printed = configureCanvas("#printCanvas");
+            signature = $("#signatureCanvas").Expand().PenTool().TopazTool();
         };
 
         self.saveSignature = function () {
@@ -256,30 +249,16 @@
         };
 
         self.cancelSignature = function () {
-            cancel(signature);
+            signature.clearPen();
+            signature.clearTopaz();
         };
 
-        self.savePrint = function () {
-            if (printed.Points().length > 0)
-                self.CurrentDelivery().Printed = 'printed';
-            route('delivery');
-        };
-
-
-
-        self.cancelPrint = function () {
-            cancel(printed);
-        };
-        
-        var configureCanvas = function (id) {
-            var canvas = $(id);
-            return canvas.Expand().PenTool().TopazTool();
-        };
-
-        var cancel = function (obj) {
-            obj.clearPen();
-            obj.clearTopaz();
-        };
+        self.SignatureIsInvalid = ko.computed(function () {
+            if (signature && signature.Points) {
+                return signature.Points().length === 0;
+            }
+            return false;
+        });
     };
 
     o.Delivery = function (delivery) {
@@ -294,14 +273,16 @@
         self.Phone = delivery.Phone;
         self.PoNumber = delivery.PoNumber;
         self.Signature = delivery.Signature;
-        self.Printed = delivery.Printed;
+        self.Printed = ko.observable(delivery.Printed);
         self.State = delivery.State;
         self.Zip = delivery.Zip;
-        
-        
 
         $.each(delivery.Items, function (index, value) {
             self.Items.push(new o.Item(value));
+        });
+
+        self.PrintedIsInvalid = ko.computed(function () {
+            return !(self.Printed() !== '');
         });
     };
 
