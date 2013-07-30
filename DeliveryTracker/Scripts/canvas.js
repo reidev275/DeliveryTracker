@@ -1,12 +1,18 @@
 ﻿(function ($) {
-    $.fn.Expand = function () {
-        if (this[0] && this[0].getContext) {
-            var canvas = this[0],
+
+    var resize = function (obj) {
+        if (obj[0] && obj[0].getContext) {
+            var canvas = obj[0],
                 context = canvas.getContext("2d");
 
-            context.canvas.width = this.parent().width();
-            context.canvas.height = this.parent().height();
+            context.canvas.width = obj.parent().width();
+            context.canvas.height = obj.parent().height();
         }
+    }
+
+    $.fn.Expand = function () {
+        var self = this;
+        resize(self);
         return this;
     };
 

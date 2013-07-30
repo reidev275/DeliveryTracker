@@ -224,6 +224,7 @@
         self.CurrentDelivery = ko.observable();
 
         self.goToDelivery = function () {
+            $(window).off('resize','**');
             self.CurrentDelivery(this);
             route('delivery');
         };
@@ -238,6 +239,9 @@
 
         self.goToSignature = function () {
             if (self.CurrentDelivery().Signature) return;
+            $(window).on('resize', function (e) {
+                e.preventDefault();
+            });
             route('signature');
             signature = $("#signatureCanvas").Expand().PenTool().TopazTool();
         };
@@ -245,7 +249,7 @@
         self.saveSignature = function () {
             if (signature.Points().length > 0)
                 self.CurrentDelivery().Signature = 'signature';
-            route('delivery');
+            self.goToDelivery();
         };
 
         self.cancelSignature = function () {
