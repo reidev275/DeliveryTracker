@@ -8,7 +8,7 @@
             context.canvas.width = obj.parent().width();
             context.canvas.height = obj.parent().height();
         }
-    }
+    };
 
     $.fn.Expand = function () {
         var self = this;

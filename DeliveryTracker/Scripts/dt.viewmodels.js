@@ -249,7 +249,7 @@
         self.saveSignature = function () {
             if (signature.Points().length > 0)
                 self.CurrentDelivery().Signature = 'signature';
-            self.goToDelivery();
+            route('delivery');
         };
 
         self.cancelSignature = function () {
@@ -286,7 +286,7 @@
         });
 
         self.PrintedIsInvalid = ko.computed(function () {
-            return !(self.Printed() !== '');
+            return (self.Printed() === '');
         });
     };
 
