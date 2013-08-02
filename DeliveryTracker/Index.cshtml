@@ -89,7 +89,7 @@
 								<p data-bind="text: Addr1"></p>
 							</td>
 							<td data-bind="text: Contact"></td>
-							<td><button class="btn" data-bind="click: $parent.goToDelivery">Details</button></td>
+							<td><button class="btn" data-bind="click: $parent.goToDelivery, css: { disabled: Completed }">Details</button></td>
 						</tr>
 					</tbody>
 				</table>

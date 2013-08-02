@@ -224,6 +224,7 @@
 		self.CurrentDelivery = ko.observable();
 
 		self.goToDelivery = function () {
+			if (this.Completed()) return;
 			$(window).off('resize','**');
 			self.CurrentDelivery(this);
 			route('delivery');
@@ -276,6 +277,7 @@
 		self.Addr1 = delivery.Addr1;
 		self.City = delivery.City;
 		self.Company = delivery.Company;
+		self.Completed = ko.observable(false);
 		self.Contact = delivery.Contact;
 		self.Items = [];
 		self.Number = delivery.Number;
@@ -284,7 +286,7 @@
 		self.Signature = ko.observable(delivery.Signature);
 		self.Printed = ko.observable(delivery.Printed);
 		self.State = delivery.State;
-		self.Zip = delivery.Zip;
+		self.Zip = delivery.Zip;		
 
 		$.each(delivery.Items, function (index, value) {
 			self.Items.push(new o.Item(value));
@@ -308,6 +310,8 @@
 			//  do something with response
 			//});
 			alert('this will save the delivery once the developer finishes that functionality :)');
+			self.Completed(true);
+			route('deliveries')
 		};
 	};
 
