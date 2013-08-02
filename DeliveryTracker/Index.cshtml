@@ -136,8 +136,18 @@
 					</tbody>
 				</table>
 				<button class="btn" data-bind="click: $parent.goToDeliveries"><i class="icon-chevron-left"></i> Deliveries</button>
-				<button class="btn btn-primary" data-bind="click: $parent.goToSignature, css: { disabled: Signature }">Signature</button>
+				<button class="btn btn-primary" data-bind="click: $parent.goToSignature, css: { disabled: canSubmit }"><i class="icon-pencil icon-white"></i> Signature</button>
+				<button class="btn btn-success" data-bind="click: submit, css: { disabled: !canSubmit() }"><i class="icon-upload icon-white"></i> Submit</button>
 				@*<button class="btn btn-inverse" data-bind="click: $parent.goToMap">Map</button>*@
+			</form>
+		</script>
+
+		<script type="text/html" id="submit">
+			<form class="form-signin" data-bind="with: CurrentDelivery">
+				<h3 class="form-signin-heading">Submit</h3>
+				<p>Are you sure you want to submit <span data-bind="text: Number"></span>?</p>
+				<button class="btn btn-danger" data-bind="click: $parent.goToDelivery"><i class="icon-remove icon-white"></i> No</button>
+				<button class="btn btn-success" data-bind="click: save"><i class="icon-ok icon-white"></i> Yes</button>
 			</form>
 		</script>
 
@@ -152,7 +162,7 @@
 				Printed:
 				<input type="text" class="input-block-level" data-bind="value: Printed, valueUpdate:'afterkeydown'" />
 				<button class="btn" data-bind="click: $parent.goToDelivery"><i class="icon-chevron-left"></i> Delivery</button>
-				<button class="btn btn-success" data-bind="click: $parent.saveSignature, css: { disabled: PrintedIsInvalid }">Save</button>
+				<button class="btn btn-success" data-bind="click: $parent.saveSignature, css: { disabled: !canSaveSignature() }">Save</button>
 				<button class="btn btn-danger" data-bind="click: $parent.cancelSignature">Clear</button>
 			</form>
 		</script>
@@ -212,6 +222,7 @@
 			new dt.Page('delivery', deliveries),
 			new dt.Page('signature', deliveries),
 			new dt.Page('print', deliveries),
+			new dt.Page('submit', deliveries),
 			//new dt.Page('map', deliveries),
 			new dt.Page('enterUsername', forgotPassword),
 			new dt.Page('passwordHint', forgotPassword)

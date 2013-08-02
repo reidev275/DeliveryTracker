@@ -1,303 +1,323 @@
 ﻿var DT = (function (dt, ko, $) {
 
-    var o = dt.viewModels = dt.viewModels || {},
-        route = ko.observable(''),
-        userAuth = ko.observable(dt.authentications.getUserAuth()),
-        truck = ko.observable(),
-        Deliveries = ko.observableArray([]);
+	var o = dt.viewModels = dt.viewModels || {},
+		route = ko.observable(''),
+		userAuth = ko.observable(dt.authentications.getUserAuth()),
+		truck = ko.observable(),
+		Deliveries = ko.observableArray([]);
 
-    var goToDeliveries = function (truck) {
-        dt.deliveries.get(truck, function (data) {
-            $.each(data, function(index, value) {
-                Deliveries.push(new o.Delivery(value));
-            });
-            route('deliveries');
-        });
-    };
+	var goToDeliveries = function (truck) {
+		dt.deliveries.get(truck, function (data) {
+			$.each(data, function(index, value) {
+				Deliveries.push(new o.Delivery(value));
+			});
+			route('deliveries');
+		});
+	};
 
-    o.Page = function (template, data) {
-        var self = this;
+	o.Page = function (template, data) {
+		var self = this;
 
-        self.template = template;
-        self.data = data;
-    };
+		self.template = template;
+		self.data = data;
+	};
 
-    o.ViewModel = function (pages) {
-        var self = this;
-        self.pages = ko.observableArray(pages);
-        self.selectedPage = ko.observable();
-        self.userAuth = userAuth();
+	o.ViewModel = function (pages) {
+		var self = this;
+		self.pages = ko.observableArray(pages);
+		self.selectedPage = ko.observable();
+		self.userAuth = userAuth();
 
-        userAuth.subscribe(function (value) {
-            self.userAuth = value;
-        });
+		userAuth.subscribe(function (value) {
+			self.userAuth = value;
+		});
 
-        route.subscribe(function (value) {
-            if (value === '') return;
+		route.subscribe(function (value) {
+			if (value === '') return;
 
-            for (var i = 0; i < self.pages().length; i++) {
-                if (self.pages()[i].template === value) {
-                    self.selectedPage(self.pages()[i]);
-                    return;
-                }
-            }
-            alert('Page: ' + value + ' not found.');
-        });
+			for (var i = 0; i < self.pages().length; i++) {
+				if (self.pages()[i].template === value) {
+					self.selectedPage(self.pages()[i]);
+					return;
+				}
+			}
+			alert('Page: ' + value + ' not found.');
+		});
 
-        self.GoToLogin = function () {
-            route('login');
-        };
+		self.GoToLogin = function () {
+			route('login');
+		};
 
-        if (typeof userAuth() !== 'undefined') {
-            dt.authentications.get(userAuth(), function (value) {
-                goToDeliveries(value.Truck);
-            }, function () {
-                self.GoToLogin();
-            });
-        } else {
-            self.GoToLogin();
-        }
-    };
+		if (typeof userAuth() !== 'undefined') {
+			dt.authentications.get(userAuth(), function (value) {
+				goToDeliveries(value.Truck);
+			}, function () {
+				self.GoToLogin();
+			});
+		} else {
+			self.GoToLogin();
+		}
+	};
 
-    o.Login = function () {
-        var self = this;
+	o.Login = function () {
+		var self = this;
 
-        self.UserName = ko.observable('');
-        self.Password = ko.observable('');
-        self.Truck = ko.observable('');
-        self.Trucks = ko.observableArray();
-        dt.trucks.get(self.Trucks);
+		self.UserName = ko.observable('');
+		self.Password = ko.observable('');
+		self.Truck = ko.observable('');
+		self.Trucks = ko.observableArray();
+		dt.trucks.get(self.Trucks);
 
-        self.Register = function () {
-            route('register');
-        };
+		self.Register = function () {
+			route('register');
+		};
 
-        self.AuthDevice = function () {
-            route('deviceauth');
-        };
+		self.AuthDevice = function () {
+			route('deviceauth');
+		};
 
-        self.Forgot = function () {
-            route('enterUsername');
-        };
+		self.Forgot = function () {
+			route('enterUsername');
+		};
 
-        self.IsInvalid = ko.computed(function () {
-            return self.UserName() === '' ||
-                self.Password() === '' ||
-                typeof self.Truck() === 'undefined';
-        });
+		self.IsInvalid = ko.computed(function () {
+			return self.UserName() === '' ||
+				self.Password() === '' ||
+				typeof self.Truck() === 'undefined';
+		});
 
-        self.Login = function () {
-            if (!self.IsInvalid()) {
-                var login = {
-                    UserName: self.UserName(),
-                    Truck: self.Truck(),
-                    Password: self.Password()
-                };
-                dt.authentications.create(login, function (data) {
-                    truck(self.Truck());
-                    self.UserName('');
-                    self.Password('');
-                    self.Truck('');
-                    if (typeof data !== 'undefined') {
-                        userAuth(data);
-                        goToDeliveries(truck());                        
-                    }
-                });
-            }
-        };
-    };
+		self.Login = function () {
+			if (!self.IsInvalid()) {
+				var login = {
+					UserName: self.UserName(),
+					Truck: self.Truck(),
+					Password: self.Password()
+				};
+				dt.authentications.create(login, function (data) {
+					truck(self.Truck());
+					self.UserName('');
+					self.Password('');
+					self.Truck('');
+					if (typeof data !== 'undefined') {
+						userAuth(data);
+						goToDeliveries(truck());                        
+					}
+				});
+			}
+		};
+	};
 
-    o.Register = function () {
-        var self = this;
-        self.UserName = ko.observable('');
-        self.Password = ko.observable('');
-        self.PasswordConfirm = ko.observable('');
-        self.HintQuestion = ko.observable('');
-        self.HintAnswer = ko.observable('');
+	o.Register = function () {
+		var self = this;
+		self.UserName = ko.observable('');
+		self.Password = ko.observable('');
+		self.PasswordConfirm = ko.observable('');
+		self.HintQuestion = ko.observable('');
+		self.HintAnswer = ko.observable('');
 
-        self.IsInvalid = ko.computed(function () {
-            return !(self.UserName() !== '' &&
-                self.Password() !== '' &&
-                self.PasswordConfirm() !== '' &&
-                self.HintQuestion() !== '' &&
-                self.HintAnswer() !== '' &&
-                self.Password() === self.PasswordConfirm());
-        });
+		self.IsInvalid = ko.computed(function () {
+			return !(self.UserName() !== '' &&
+				self.Password() !== '' &&
+				self.PasswordConfirm() !== '' &&
+				self.HintQuestion() !== '' &&
+				self.HintAnswer() !== '' &&
+				self.Password() === self.PasswordConfirm());
+		});
 
-        self.Register = function () {
-            if (!self.IsInvalid()) {
-                var user = {
-                    Name: self.UserName(),
-                    Password: self.Password(),
-                    HintQuestion: self.HintQuestion(),
-                    HintAnswer: self.HintAnswer()
-                };
-                dt.users.create(user, function () {
-                    route('login');
-                    self.UserName('');
-                    self.Password('');
-                    self.PasswordConfirm('');
-                    self.HintQuestion('');
-                    self.HintAnswer('');
-                });
-            }
-        };
-    };
+		self.Register = function () {
+			if (!self.IsInvalid()) {
+				var user = {
+					Name: self.UserName(),
+					Password: self.Password(),
+					HintQuestion: self.HintQuestion(),
+					HintAnswer: self.HintAnswer()
+				};
+				dt.users.create(user, function () {
+					route('login');
+					self.UserName('');
+					self.Password('');
+					self.PasswordConfirm('');
+					self.HintQuestion('');
+					self.HintAnswer('');
+				});
+			}
+		};
+	};
 
-    o.DeviceAuth = function () {
-        var self = this;
-        self.deviceAuth = ko.observable('');
-        self.deviceName = ko.observable('');
-        self.IsInvalid = ko.computed(function () {
-            return self.deviceAuth() === '' ||
-                self.deviceName() === '';
-        });
-        self.setAuthCode = function () {
-            if (!self.IsInvalid()) {
-                var device = {
-                    AuthCode: self.deviceAuth(),
-                    Name: self.deviceName()
-                };
-                dt.authentications.setDeviceAuth(device);
-                self.deviceAuth('');
-                route('login');
-            }
-        };
-    };
+	o.DeviceAuth = function () {
+		var self = this;
+		self.deviceAuth = ko.observable('');
+		self.deviceName = ko.observable('');
+		self.IsInvalid = ko.computed(function () {
+			return self.deviceAuth() === '' ||
+				self.deviceName() === '';
+		});
+		self.setAuthCode = function () {
+			if (!self.IsInvalid()) {
+				var device = {
+					AuthCode: self.deviceAuth(),
+					Name: self.deviceName()
+				};
+				dt.authentications.setDeviceAuth(device);
+				self.deviceAuth('');
+				route('login');
+			}
+		};
+	};
 
-    o.ForgotPassword = function () {
-        var self = this;
+	o.ForgotPassword = function () {
+		var self = this;
 
-        self.UserName = ko.observable('');
-        self.HintQuestion = ko.observable('');
-        self.HintAnswer = ko.observable('');
+		self.UserName = ko.observable('');
+		self.HintQuestion = ko.observable('');
+		self.HintAnswer = ko.observable('');
 
-        self.Password = ko.observable('');
-        self.PasswordConfirm = ko.observable('');
+		self.Password = ko.observable('');
+		self.PasswordConfirm = ko.observable('');
 
-        self.UserIsInvalid = ko.computed(function () {
-            return self.UserName() === '';
-        });
+		self.UserIsInvalid = ko.computed(function () {
+			return self.UserName() === '';
+		});
 
-        self.SubmitUserName = function () {
-            if (!self.UserIsInvalid()) {
-                dt.users.getHint(self.UserName(), self.HintQuestion);
-                route('passwordHint');
-            }
-        };
+		self.SubmitUserName = function () {
+			if (!self.UserIsInvalid()) {
+				dt.users.getHint(self.UserName(), self.HintQuestion);
+				route('passwordHint');
+			}
+		};
 
-        self.IsInvalid = ko.computed(function () {
-            return !(self.HintAnswer() !== '' &&
-                self.Password() !== '' &&
-                self.PasswordConfirm() !== '' &&
-                self.Password() === self.PasswordConfirm());
-        });
+		self.IsInvalid = ko.computed(function () {
+			return !(self.HintAnswer() !== '' &&
+				self.Password() !== '' &&
+				self.PasswordConfirm() !== '' &&
+				self.Password() === self.PasswordConfirm());
+		});
 
-        self.SavePassword = function () {
-            if (!self.IsInvalid()) {
-                var user = {
-                    Name: self.UserName(),
-                    Password: self.Password(),
-                    HintAnswer: self.HintAnswer(),
-                    HintQuestion: self.HintQuestion()
-                };
-                dt.users.update(user, function (success) {
-                    self.Password('');
-                    self.PasswordConfirm('');
-                    self.HintAnswer('');
-                    self.UserName('');
-                    self.HintQuestion('');
-                    if (success) alert('Password Changed');
-                    route('login');
-                });
-            }
-        };
+		self.SavePassword = function () {
+			if (!self.IsInvalid()) {
+				var user = {
+					Name: self.UserName(),
+					Password: self.Password(),
+					HintAnswer: self.HintAnswer(),
+					HintQuestion: self.HintQuestion()
+				};
+				dt.users.update(user, function (success) {
+					self.Password('');
+					self.PasswordConfirm('');
+					self.HintAnswer('');
+					self.UserName('');
+					self.HintQuestion('');
+					if (success) alert('Password Changed');
+					route('login');
+				});
+			}
+		};
 
-    };
+	};
 
-    o.Deliveries = function () {
-        var self = this,
-            signature;
+	o.Deliveries = function () {
+		var self = this,
+			signature;
 
-        self.Deliveries = ko.computed(Deliveries).extend({ throttle: 400 });
+		self.Deliveries = ko.computed(Deliveries).extend({ throttle: 400 });
 
-        self.CurrentDelivery = ko.observable();
+		self.CurrentDelivery = ko.observable();
 
-        self.goToDelivery = function () {
-            $(window).off('resize','**');
-            self.CurrentDelivery(this);
-            route('delivery');
-        };
+		self.goToDelivery = function () {
+			$(window).off('resize','**');
+			self.CurrentDelivery(this);
+			route('delivery');
+		};
 
-        self.goToDeliveries = function () {
-            route('deliveries');
-        };
-        
-        self.goToMap = function () {
-            route('map');
-        };
+		self.goToDeliveries = function () {
+			route('deliveries');
+		};
+		
+		self.goToMap = function () {
+			route('map');
+		};
 
-        self.goToSignature = function () {
-            if (self.CurrentDelivery().Signature) return;
-            $(window).on('resize', function (e) {
-                e.preventDefault();
-            });
-            route('signature');
-            signature = $("#signatureCanvas").Expand().PenTool().TopazTool();
-        };
+		self.goToSignature = function () {
+			if (self.CurrentDelivery().canSubmit()) return;
+			$(window).on('resize', function (e) {
+				e.preventDefault();
+			});
+			route('signature');
+			signature = $("#signatureCanvas").Expand().PenTool().TopazTool();
+		};
 
-        self.saveSignature = function () {
-            if (signature.Points().length > 0)
-                self.CurrentDelivery().Signature = 'signature';
-            route('delivery');
-        };
+		self.saveSignature = function () {
+			if (self.CurrentDelivery().canSaveSignature()) {
+				if (signature.Points().length > 0) {
+					self.CurrentDelivery().Signature('signature');
+					route('delivery');
+				} else {
+					alert('No signature to save');
+				}
+			}
+		};
 
-        self.cancelSignature = function () {
-            signature.clearPen();
-            signature.clearTopaz();
-        };
+		self.cancelSignature = function () {
+			signature.clearPen();
+			signature.clearTopaz();
+		};
 
-        self.SignatureIsInvalid = ko.computed(function () {
-            if (signature && signature.Points) {
-                return signature.Points().length === 0;
-            }
-            return false;
-        });
-    };
+		self.SignatureIsInvalid = ko.computed(function () {
+			if (signature && signature.Points) {
+				return signature.Points().length === 0;
+			}
+			return false;
+		});
+	};
 
-    o.Delivery = function (delivery) {
-        var self = this;
+	o.Delivery = function (delivery) {
+		var self = this;
 
-        self.Addr1 = delivery.Addr1;
-        self.City = delivery.City;
-        self.Company = delivery.Company;
-        self.Contact = delivery.Contact;
-        self.Items = [];
-        self.Number = delivery.Number;
-        self.Phone = delivery.Phone;
-        self.PoNumber = delivery.PoNumber;
-        self.Signature = delivery.Signature;
-        self.Printed = ko.observable(delivery.Printed);
-        self.State = delivery.State;
-        self.Zip = delivery.Zip;
+		self.Addr1 = delivery.Addr1;
+		self.City = delivery.City;
+		self.Company = delivery.Company;
+		self.Contact = delivery.Contact;
+		self.Items = [];
+		self.Number = delivery.Number;
+		self.Phone = delivery.Phone;
+		self.PoNumber = delivery.PoNumber;
+		self.Signature = ko.observable(delivery.Signature);
+		self.Printed = ko.observable(delivery.Printed);
+		self.State = delivery.State;
+		self.Zip = delivery.Zip;
 
-        $.each(delivery.Items, function (index, value) {
-            self.Items.push(new o.Item(value));
-        });
+		$.each(delivery.Items, function (index, value) {
+			self.Items.push(new o.Item(value));
+		});
 
-        self.PrintedIsInvalid = ko.computed(function () {
-            return (self.Printed() === '');
-        });
-    };
+		self.canSaveSignature = ko.computed(function () {
+			return self.Printed() && self.Printed() !== '';
+		});
 
-    o.Item = function (item) {
-        var self = this;
+		self.submit = function () {
+			if (self.canSubmit()) route('submit');
+		};
 
-        self.Number = item.Number;
-        self.Description = item.Description;
-        self.Allocated = item.Allocated;
-        self.Delivered = ko.observable(item.Delivered);
-    };
+		self.canSubmit = ko.computed(function () {
+			return self.Signature() && self.Signature() !== '';
+		});
 
-    return dt;
+		self.save = function () {
+			//unwrap self and self.Items
+			//dt.Deliveries.Update(self.Number, unwrappedSelf, function (obj) {
+			//  do something with response
+			//});
+		};
+	};
+
+	o.Item = function (item) {
+		var self = this;
+
+		self.Number = item.Number;
+		self.Description = item.Description;
+		self.Allocated = item.Allocated;
+		self.Delivered = ko.observable(item.Delivered);
+	};
+
+	return dt;
 })(DT || {}, ko, jQuery);
