@@ -307,6 +307,7 @@
 			//dt.Deliveries.Update(self.Number, unwrappedSelf, function (obj) {
 			//  do something with response
 			//});
+			alert('this will save the delivery once the developer finishes that functionality :)');
 		};
 	};
 
