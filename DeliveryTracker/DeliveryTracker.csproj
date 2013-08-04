@@ -142,7 +142,6 @@
     <Compile Include="Controllers\HintsController.cs" />
     <Compile Include="Filters\UserAuthRequiredAttribute.cs" />
     <Compile Include="Managers\DeliveryManager.cs" />
-    <Compile Include="QuerystringStrategies\IDeliveryQueryStrategy.cs" />
     <Compile Include="Controllers\TrucksController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Filters\ApiExtensions.cs" />
@@ -170,10 +169,12 @@
     <Compile Include="Repositories\IAuthenticationsRepository.cs" />
     <Compile Include="Managers\IPasswordHasher.cs" />
     <Compile Include="Managers\IDeliveryManager.cs" />
+    <Compile Include="Repositories\IDeliveryRepository.cs" />
     <Compile Include="Repositories\IDeviceAuthRepository.cs" />
     <Compile Include="Repositories\ITrucksRepository.cs" />
     <Compile Include="Repositories\IUsersRepository.cs" />
     <Compile Include="Repositories\MemoryAuthenticationsRepository.cs" />
+    <Compile Include="Repositories\MemoryDeliveryRepository.cs" />
     <Compile Include="Repositories\MemoryDeviceAuthRepository.cs" />
     <Compile Include="Repositories\MemoryTrucksRepository.cs" />
     <Compile Include="Repositories\MemoryUsersRepository.cs" />
