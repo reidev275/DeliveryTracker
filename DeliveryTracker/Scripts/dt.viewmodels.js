@@ -217,7 +217,7 @@
 
 	o.Deliveries = function () {
 		var self = this,
-			signature;
+			canvas;
 
 		self.Deliveries = ko.computed(Deliveries).extend({ throttle: 400 });
 
@@ -244,13 +244,14 @@
 				e.preventDefault();
 			});
 			route('signature');
-			signature = $("#signatureCanvas").Expand().PenTool().TopazTool();
+			canvas = $("#signatureCanvas").Expand().PenTool().TopazTool();
 		};
 
 		self.saveSignature = function () {
 			if (self.CurrentDelivery().canSaveSignature()) {
-				if (signature.Points().length > 0) {
-					self.CurrentDelivery().Signature('signature');
+				if (canvas.Points().length > 0) {
+
+					self.CurrentDelivery().Signature(canvas.Signature);
 					route('delivery');
 				} else {
 					alert('No signature to save');
@@ -259,13 +260,13 @@
 		};
 
 		self.cancelSignature = function () {
-			signature.clearPen();
-			signature.clearTopaz();
+			canvas.clearPen();
+			canvas.clearTopaz();
 		};
 
 		self.SignatureIsInvalid = ko.computed(function () {
-			if (signature && signature.Points) {
-				return signature.Points().length === 0;
+			if (canvas && canvas.Points) {
+				return canvas.Points().length === 0;
 			}
 			return false;
 		});
@@ -311,7 +312,7 @@
 			//});
 			alert('this will save the delivery once the developer finishes that functionality :)');
 			self.Completed(true);
-			route('deliveries')
+			route('deliveries');
 		};
 	};
 
