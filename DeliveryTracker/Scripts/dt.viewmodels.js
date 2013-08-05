@@ -322,7 +322,7 @@
 		self.Number = item.Number;
 		self.Description = item.Description;
 		self.Allocated = item.Allocated;
-		self.Delivered = ko.observable(item.Delivered);
+		self.Delivered = ko.observable(item.Delivered).extend({ numeric: self.Allocated });
 	};
 
 	return dt;

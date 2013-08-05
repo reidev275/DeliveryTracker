@@ -199,6 +199,7 @@
     <Content Include="Scripts\dt.users.js" />
     <Content Include="Scripts\dt.deliveries.js" />
     <Content Include="Scripts\dt.viewmodels.js" />
+    <Content Include="Scripts\ko.numeric.js" />
     <Content Include="Scripts\lib\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\lib\jquery-1.9.1.min.js" />
     <Content Include="Scripts\lib\jquery.cookie.js" />
