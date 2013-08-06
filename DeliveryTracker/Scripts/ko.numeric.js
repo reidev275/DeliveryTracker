@@ -11,6 +11,7 @@
 				observable(newValueAsNum);
 			}
 		});
+		result(observable());
 
 		return result;
 	};

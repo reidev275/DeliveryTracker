@@ -29,8 +29,7 @@ module.exports = function (grunt) {
             compress: {
                 files: {
                     '<%= pkg.name %>.min.css': [
-                        'Content/bootstrap.min.css',
-                        'Content/bootstrap-responsive.min.css',
+                        'Content/bootstrap3.min.css',
                         'Content/Site.css']
                 }
             }

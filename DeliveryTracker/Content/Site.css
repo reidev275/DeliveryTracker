@@ -1,16 +1,23 @@
-﻿.form-signin {
+﻿form {
 	max-width: 600px;
-	padding: 0 10px 10px 10px;
-	margin: 10px auto;
-    background-color: white;
-    box-shadow: rgba(0,0,0,0.3) 0 0 10px;
+	padding: 5px 10px 10px 10px;
+	margin: 0px auto;
+	background-color: white;
+	box-shadow: rgba(0,0,0,0.3) 0 0 10px;
+}
+
+legend, div.form-group {
+	margin-bottom: 10px;
+}
+
+label {
+	margin-bottom: 3px;
 }
 
 body {
-    /*background-color: #aba;*/
-    background: #eee;
+	background: #eee;
 }
 
 canvas {
-    border: 1px solid #aaa;
+	border: 1px solid #aaa;
 }
