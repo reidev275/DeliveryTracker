@@ -6,7 +6,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	@*<link href="/DeliveryTracker.min.css" rel="stylesheet" type="text/css" />*@
 	<link href="~/Content/bootstrap3.min.css" rel="stylesheet" />
-	<link href="~/Content/bootstrap-glyphicons.css" rel="stylesheet" />
 	<link href="~/Content/Site.css" rel="stylesheet" />
 </head>
 <body>
@@ -19,17 +18,17 @@
 			<form>
 				<fieldset>
 					<legend>Sign in</legend>
-					<div class="form-group">
-						<label>Username</label>
+					<div class="form-group" data-bind="validate: UserName()">
+						<label class="control-label">Username</label>
 						<input type="text" class="form-control" placeholder="Username" data-bind="value: UserName, valueUpdate:'afterkeydown'" />
 					</div>
-					<div class="form-group">
-						<label>Password</label>
+					<div class="form-group" data-bind="validate: Password()">
+						<label class="control-label">Password</label>
 						<a href="#" data-bind="click: Forgot">Forgot?</a>
 						<input type="password" class="form-control" placeholder="Password" data-bind="value: Password, valueUpdate:'afterkeydown'" />
 					</div>
-					<div class="form-group">
-						<label>Truck</label>
+					<div class="form-group" data-bind="validate: Truck()">
+						<label class="control-label">Truck</label>
 						<select class="form-control" data-bind="value: Truck, options: Trucks, optionsCaption: 'Select a Truck...'"></select>
 					</div>
 					<button class="btn btn-primary" type="submit" data-bind="click: Login, css: { disabled: IsInvalid }">Sign in</button>
@@ -43,24 +42,24 @@
 			<form>
 				<fieldset>
 					<legend>Register</legend>
-					<div class="form-group">
-						<label>Username</label>
+					<div class="form-group" data-bind="validate: UserName()">
+						<label class="control-label">Username</label>
 						<input type="text" class="form-control" placeholder="Username" data-bind="value: UserName, valueUpdate:'afterkeydown'" />
 					</div>
-					<div class="form-group">
-						<label>Password</label>
+					<div class="form-group" data-bind="validate: Password() && Password() === PasswordConfirm()">
+						<label class="control-label">Password</label>
 						<input type="password" class="form-control" placeholder="Password" data-bind="value: Password, valueUpdate:'afterkeydown'" />
 					</div>
-					<div class="form-group">
-						<label>Confirm Password</label>
+					<div class="form-group" data-bind="validate: PasswordConfirm() && Password() === PasswordConfirm()">
+						<label class="control-label">Confirm Password</label>
 						<input type="password" class="form-control" placeholder="Password" data-bind="value: PasswordConfirm, valueUpdate:'afterkeydown'" />
 					</div>
-					<div class="form-group">
-						<label>Hint Question (Will be asked if you forget your password)</label>
+					<div class="form-group" data-bind="validate: HintQuestion()">
+						<label class="control-label">Hint Question (Will be asked if you forget your password)</label>
 						<input type="text" class="form-control" placeholder="Hint Question" data-bind="value: HintQuestion, valueUpdate:'afterkeydown'" />
 					</div>
-					<div class="form-group">
-						<label>Hint Answer</label>
+					<div class="form-group" data-bind="validate: HintAnswer()">
+						<label class="control-label">Hint Answer</label>
 						<input type="text" class="form-control" placeholder="Hint Answer" data-bind="value: HintAnswer, valueUpdate:'afterkeydown'" />
 					</div>
 
@@ -74,8 +73,8 @@
 			<form>
 				<fieldset>
 					<legend>Enter Username</legend>
-					<div class="form-group">
-						<label>Username</label>
+					<div class="form-group" data-bind="validate: UserName()">
+						<label class="control-label">Username</label>
 						<input type="text" class="form-control" placeholder="Username" data-bind="value: UserName, valueUpdate:'afterkeydown'" />
 					</div>					
 					<button class="btn btn-primary" type="submit" data-bind="click: SubmitUserName, css: { disabled: UserIsInvalid }">Submit</button>
@@ -91,16 +90,16 @@
 					<div data-bind="if: HintQuestion() !== ''">
 						<h3>Answer Hint</h3>
 						<span data-bind="text: HintQuestion"></span>?
-						<div class="form-group">
-							<label>Answer</label>
+						<div class="form-group" data-bind="validate: HintAnswer()">
+							<label class="control-label">Answer</label>
 							<input type="text" class="form-control" placeholder="Answer" data-bind="value: HintAnswer, valueUpdate:'afterkeydown'" />
 						</div>	
-						<div class="form-group">
-							<label>New Password</label>
+						<div class="form-group" data-bind="validate: Password() && Password() === PasswordConfirm()">
+							<label class="control-label">New Password</label>
 							<input type="password" class="form-control" placeholder="Password" data-bind="value: Password, valueUpdate:'afterkeydown'" />
 						</div>	
-						<div class="form-group">
-							<label>Confirm Password</label>
+						<div class="form-group" data-bind="validate: PasswordConfirm() && Password() === PasswordConfirm()">
+							<label class="control-label">Confirm Password</label>
 							<input type="password" class="form-control" placeholder="Password" data-bind="value: PasswordConfirm, valueUpdate:'afterkeydown'" />
 						</div>	
 						<button class="btn btn-primary" type="submit" data-bind="click: SavePassword, css: { disabled: IsInvalid }">Submit</button>
@@ -203,7 +202,7 @@
 				<fieldset>
 					<legend>Submit</legend>
 					<div class="form-group">
-							<label>Are you sure you want to submit <span data-bind="text: Number"></span>?</label>
+						<label>Are you sure you want to submit <span data-bind="text: Number"></span>?</label>
 					</div>
 					<button class="btn btn-danger" data-bind="click: $parent.goToDelivery">No</button>
 					<button class="btn btn-success" data-bind="click: save">Yes</button>
@@ -220,8 +219,8 @@
 							<canvas id="signatureCanvas"></canvas>
 						</div>
 					</div>
-					<div class="form-group">
-						<label>Printed</label>
+					<div class="form-group" data-bind="validate: Printed()">
+						<label class="control-label">Printed</label>
 						<input type="text" class="form-control" data-bind="value: Printed, valueUpdate:'afterkeydown'" />
 					</div>
 
@@ -248,12 +247,12 @@
 			<form>
 				<fieldset>
 					<legend>Authorize Device</legend>
-					<div class="form-group">
-						<label>Device Name</label>
+					<div class="form-group" data-bind="validate: deviceName()">
+						<label class="control-label">Device Name</label>
 						<input type="text" class="form-control" data-bind="value: deviceName, valueUpdate:'afterkeydown'" />
 					</div>
-					<div class="form-group">
-						<label>Authorization Code</label>
+					<div class="form-group" data-bind="validate: deviceAuth()">
+						<label class="control-label">Authorization Code</label>
 						<input type="password" class="form-control" data-bind="value: deviceAuth, valueUpdate:'afterkeydown'" />
 					</div>
 					<button class="btn btn-success" data-bind="click: setAuthCode, css: { disabled: IsInvalid }">Authorize</button>
@@ -268,6 +267,7 @@
 <script src="~/Scripts/lib/jquery.cookie.js"></script>
 <script src="~/Scripts/lib/knockout-2.2.1.js"></script>
 <script src="~/Scripts/ko.numeric.js"></script>
+<script src="~/Scripts/ko.validate.js"></script>
 <script src="~/Scripts/canvas.js"></script>
 <script src="~/Scripts/dt.authentications.js"></script>
 <script src="~/Scripts/dt.deliveries.js"></script>
@@ -286,6 +286,7 @@
 		$.ajaxSetup({
 			headers: authHeaders
 		});
+
 		var forgotPassword = new dt.ForgotPassword(),
 			deliveries = new dt.Deliveries();
 

@@ -219,6 +219,7 @@
   <ItemGroup>
     <Content Include="package.json" />
     <Content Include="Scripts\canvas.js" />
+    <Content Include="Scripts\ko.validate.js" />
     <None Include="Scripts\lib\jquery-1.9.1.min.map" />
     <Content Include="Index.cshtml" />
   </ItemGroup>
