@@ -100,8 +100,8 @@
 
 			this.Signature = function () {
 				var result = [];
-				result.push(prefixWith3(points.length) + '0D0A');
-				result.push(prefixWith3(penups.length) + '0D0A');
+				result.push(prefixWith3(''+points.length) + '0D0A');
+				result.push(prefixWith3(''+penups.length) + '0D0A');
 
 				$.each(points, function (index, value) {
 					result.push(value.X + '20' + value.Y + '0D0A');
@@ -110,7 +110,7 @@
 				result.push('300D0A');
 
 				$.each(penups, function (index, value) {
-					result.push(prefixWith3(value) + '0D0A');
+					result.push(prefixWith3(''+value) + '0D0A');
 				});
 				result.push('00000');
 				return result.join('');

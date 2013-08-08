@@ -11,5 +11,17 @@
 		}).error(dt.handleError);
 	};
 
+	o.update = function (id, delivery, callback) {
+		$.ajax({
+			type: 'PUT',
+			data: delivery,
+			url: 'Deliveries/' + id,
+			datatype: 'json',
+			cache: false
+		}).done(function (data) {
+			if (callback) callback(data);
+		}).error(dt.handleError);
+	};
+
 	return dt;
 })(DT || {}, jQuery, JSON);

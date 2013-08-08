@@ -250,8 +250,8 @@
 		self.saveSignature = function () {
 			if (self.CurrentDelivery().canSaveSignature()) {
 				if (canvas.Points().length > 0) {
-
-					self.CurrentDelivery().Signature(canvas.Signature);
+					var signature = canvas.Signature();
+					self.CurrentDelivery().Signature(signature);
 					route('delivery');
 				} else {
 					alert('No signature to save');
@@ -274,7 +274,7 @@
 
 	o.Delivery = function (delivery) {
 		var self = this;
-
+		self.Id = delivery.Id;
 		self.Addr1 = delivery.Addr1;
 		self.City = delivery.City;
 		self.Company = delivery.Company;
@@ -306,23 +306,38 @@
 		});
 
 		self.save = function () {
-			//unwrap self and self.Items
-			//dt.Deliveries.Update(self.Number, unwrappedSelf, function (obj) {
-			//  do something with response
-			//});
-			alert('this will save the delivery once the developer finishes that functionality :)');
-			self.Completed(true);
+			var obj = {
+				Id: self.Id,
+				Signature: self.Signature(),
+				Printed: self.Printed(),
+				Items: []
+			};
+
+			$.each(self.Items, function (i, value) {
+				obj.Items.push(value.getUnwrapped());
+			});
+
+			dt.deliveries.update(self.Id, obj, function (response) {
+				self.Completed(true);				
+			});		
 			route('deliveries');
 		};
 	};
 
 	o.Item = function (item) {
 		var self = this;
-
+		self.Id = item.Id;
 		self.Number = item.Number;
 		self.Description = item.Description;
 		self.Allocated = item.Allocated;
 		self.Delivered = ko.observable(item.Delivered).extend({ numeric: self.Allocated });
+
+		self.getUnwrapped = function () {
+			return {
+				Id: self.Id,
+				Delivered: self.Delivered()
+			}
+		}
 	};
 
 	return dt;

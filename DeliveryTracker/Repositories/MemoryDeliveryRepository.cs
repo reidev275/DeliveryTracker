@@ -29,6 +29,11 @@ namespace DeliveryTracker.Repositories
 			old.Printed = delivery.Printed;
 			old.Completed = DateTime.Now;
 
+			foreach (var item in delivery.Items)
+			{
+				old.Items.First(x => x.Id == item.Id).Delivered = item.Delivered;
+			}
+
 			return delivery;
 		}
 
