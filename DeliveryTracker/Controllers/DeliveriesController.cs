@@ -34,9 +34,9 @@ namespace DeliveryTracker.Controllers
 			return new HttpResponseMessage(HttpStatusCode.Created);
 		}
 
-		public HttpResponseMessage Put(string id, [FromBody]Delivery value)
+		public HttpResponseMessage Put(int id, [FromBody]Delivery value)
 		{
-			var result = _manager.Update(value);
+			var result = _manager.Update(id, value);
 			return new HttpResponseMessage(HttpStatusCode.OK);
 		}
 	}

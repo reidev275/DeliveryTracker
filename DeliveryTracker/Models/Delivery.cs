@@ -30,11 +30,11 @@ namespace DeliveryTracker.Models
 
 	public class Item
 	{
+		public int Id { get; set; }
 		public string Number { get; set; }
 		public string Description { get; set; }
 		public double Allocated { get; set; }
 		public double Delivered { get; set; }
 		public string UnitOfMeasure { get; set; }
-		public string Line { get; set; }
 	}
 }

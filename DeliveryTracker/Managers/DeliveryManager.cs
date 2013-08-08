@@ -17,16 +17,22 @@ namespace DeliveryTracker.Managers
 			_deliveryRepository = deliveryRepository;
 		}
 
-		public Delivery Update(Delivery delivery)
+		public Delivery Update(int id, Delivery delivery)
 		{
+			if (id != delivery.Id) return null;
+			var old = _deliveryRepository.GetById(id);
+			if (old == null) return null;
+			Delivery result = null;
 
-			throw new NotImplementedException();
+			if (!String.IsNullOrEmpty(delivery.Printed) && !String.IsNullOrEmpty(delivery.Signature))
+				result = _deliveryRepository.Complete(delivery);
+
+			return delivery;
 		}
 
 		public Delivery Insert(Delivery delivery)
 		{
-
-			throw new NotImplementedException();
+			return _deliveryRepository.Insert(delivery);			
 		}
 
 		public IEnumerable<Delivery> GetByTruck(int truck)

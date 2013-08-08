@@ -8,10 +8,48 @@ namespace DeliveryTracker.Repositories
 {
 	public class MemoryDeliveryRepository : IDeliveryRepository
 	{
+		public IEnumerable<Delivery> GetByTruck(int truck)
+		{
+			return _repo.Where(x => x.Truck == truck && x.Completed == null);
+		}
+
+
+		public Delivery GetById(int id)
+		{
+			return _repo.Where(x => x.Id == id).FirstOrDefault();			
+		}
+
+
+		public Delivery Complete(Delivery delivery)
+		{
+			var old = _repo.Where(x => x.Id == delivery.Id).FirstOrDefault();
+			if (old == null) return null;
+
+			old.Signature = delivery.Signature;
+			old.Printed = delivery.Printed;
+			old.Completed = DateTime.Now;
+
+			return delivery;
+		}
+
+		public Delivery Insert(Delivery delivery)
+		{
+			lock (locker)
+			{
+				delivery.Id = id++;
+			}
+			_repo.Add(delivery);
+			return delivery;					
+		}
+
+
+		static int id = 0;
+		static object locker = new object();
 		private static readonly List<Delivery> _repo = new List<Delivery>
 			{
 				new Delivery
 				{
+					Id = id++,
 					Company = "Kryptonite Inc.",
 					Addr1 = "9302 Ashmeade Rd.",
 					Contact = "Clark Kent",
@@ -36,6 +74,7 @@ namespace DeliveryTracker.Repositories
 				},
 				new Delivery
 				{
+					Id = id++,
 					Company = "Luther Industries",
 					Addr1 = "1900 Bishops Bridge Rd.",
 					Contact = "Lois Lane",
@@ -68,6 +107,7 @@ namespace DeliveryTracker.Repositories
 				},
 				new Delivery
 				{
+					Id = id++,
 					Company = "Wayne Enterprises",
 					Addr1 = "1902 Bishops Bridge Rd.",
 					Contact = "Bruce Wayne",
@@ -99,11 +139,5 @@ namespace DeliveryTracker.Repositories
 					}
 				}
 			};
-
-
-		public IEnumerable<Delivery> GetByTruck(int truck)
-		{
-			return _repo.Where(x => x.Truck == truck);
-		}
 	}
 }
