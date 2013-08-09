@@ -35,7 +35,6 @@
 		});
 
 		route.subscribe(function (value) {
-			if (value === '') return;
 
 			for (var i = 0; i < self.pages().length; i++) {
 				if (self.pages()[i].template === value) {

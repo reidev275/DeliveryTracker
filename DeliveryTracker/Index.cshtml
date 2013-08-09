@@ -115,26 +115,31 @@
 			<form>
 				<fieldset>
 					<legend>Deliveries</legend>
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>Company</th>
-								<th>Contact</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody data-bind="foreach: Deliveries">
-							<tr>
-								<td>
-									<p data-bind="text: Company"></p>
-									<p data-bind="text: Addr1"></p>
-								</td>
-								<td data-bind="text: Contact"></td>
-								<td>
-									<button class="btn btn-default" data-bind="click: $parent.goToDelivery, css: { disabled: Completed }">Details</button></td>
-							</tr>
-						</tbody>
-					</table>
+					<div data-bind="if: Deliveries().length > 0">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Company</th>
+									<th>Contact</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody data-bind="foreach: Deliveries">
+								<tr>
+									<td>
+										<p data-bind="text: Company"></p>
+										<p data-bind="text: Addr1"></p>
+									</td>
+									<td data-bind="text: Contact"></td>
+									<td>
+										<button class="btn btn-default" data-bind="click: $parent.goToDelivery, css: { disabled: Completed }">Details</button></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div data-bind="if: Deliveries().length == 0">
+						There are no pending deliveries for this truck
+					</div>
 				</fieldset>
 			</form>
 		</script>

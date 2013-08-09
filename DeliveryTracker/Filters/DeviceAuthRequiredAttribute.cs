@@ -1,6 +1,7 @@
 ﻿using DeliveryTracker.Repositories;
 using System;
 using System.Net.Http;
+using System.Web.Http.Controllers;
 
 namespace DeliveryTracker.Filters
 {
@@ -8,7 +9,7 @@ namespace DeliveryTracker.Filters
     {
         static IDeviceAuthRepository _repository = App_Start.NinjectWebCommon.Resolve<IDeviceAuthRepository>();
 
-        public override void OnAuthorization(System.Web.Http.Controllers.HttpActionContext actionContext)
+        public override void OnAuthorization(HttpActionContext actionContext)
         {
             base.OnAuthorization(actionContext);
             var auth = actionContext.Request.Headers.GetValue("DeviceAuth");

@@ -69,6 +69,7 @@ namespace DeliveryTracker.App_Start
 		}
 
 		static string _authCode = ConfigurationManager.AppSettings["authCode"];
+		static int _timeoutMinutes = Convert.ToInt32(ConfigurationManager.AppSettings["timeoutMinutes"]);
 		static string _connectionString = ConfigurationManager.ConnectionStrings["Deliveries"].ConnectionString;
 
 		private static void RegisterServices(IKernel kernel)
@@ -77,7 +78,7 @@ namespace DeliveryTracker.App_Start
 			kernel.Bind<IDapperQueryExecutor>().To<SqlDapperQueryExecutor>().InSingletonScope();
 
 			//Managers
-			kernel.Bind<IAuthenticationManager>().To<AuthenticationManager>();
+			kernel.Bind<IAuthenticationManager>().To<AuthenticationManager>().WithConstructorArgument("timeoutMinutes", _timeoutMinutes);
 			kernel.Bind<IUsersManager>().To<UsersManager>();
 			kernel.Bind<IDeviceAuthManager>().To<DeviceAuthManager>().WithConstructorArgument("authCode", _authCode);
 			kernel.Bind<IDeliveryManager>().To<DeliveryManager>();

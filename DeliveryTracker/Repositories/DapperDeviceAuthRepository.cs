@@ -14,7 +14,7 @@ namespace DeliveryTracker.Repositories
         {
             var query = new DapperQuery(ConnectionString)
             {
-                Sql = @"INSERT INTO [empiredeliveries].[dbo].[DeviceAuthentication] ([Code], [Name]) VALUES (@Code, @Name)",
+                Sql = @"INSERT INTO [DeviceAuthentication] ([Code], [Name]) VALUES (@Code, @Name)",
                 Parameters = new { Code = auth.AuthCode, Name = auth.Name }
             };
             try

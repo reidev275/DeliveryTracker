@@ -42,21 +42,24 @@ namespace DeliveryTracker.Repositories
 			};
 
 			var result = QueryExecutor.Query<Authentication>(select).FirstOrDefault();
-			if (result == null) return null;
+			return result;
+		}
 
+
+		public void SetUpdated(string authCode, DateTime date)
+		{
 			var update = new DapperQuery(ConnectionString)
 			{
 				Sql = @"UPDATE dbo.[UserAuthentication] Set [Updated] = @Updated
-						WHERE [Id] = @Id",
-				Parameters = new 
-				{ 
-					Id = result.Id,
-					Updated = DateTime.UtcNow
+						WHERE [Code] = @Code",
+				Parameters = new
+				{
+					Code = authCode,
+					Updated = date
 				}
 			};
 
 			QueryExecutor.Execute(update);
-			return result;
 		}
 	}
 }
