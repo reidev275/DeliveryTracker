@@ -17,7 +17,7 @@ namespace DeliveryTracker.Filters
             var auth = actionContext.Request.Headers.GetValue("UserAuth");
             if (String.IsNullOrEmpty(auth)) actionContext.Request.CreateErrorResponse(System.Net.HttpStatusCode.Unauthorized, new UnauthorizedAccessException());
             var result = _repository.GetByCode(auth);
-            if (result == null || !result.IsValid) actionContext.Response = actionContext.Request.CreateErrorResponse(System.Net.HttpStatusCode.Unauthorized, new UnauthorizedAccessException("Your device is not authorized."));
+            if (result == null || !result.IsValid) actionContext.Response = actionContext.Request.CreateErrorResponse(System.Net.HttpStatusCode.Unauthorized, new UnauthorizedAccessException("Your user is not authorized."));
         }
     }
 }

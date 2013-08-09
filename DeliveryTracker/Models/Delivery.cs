@@ -7,9 +7,7 @@ namespace DeliveryTracker.Models
 	{
 		public int Id { get; set; }
 		public string Number { get; set; }
-		public DateTime Date { get; set; }
 		public int SeqNum { get; set; }
-		public DateTime DeliveryDate { get; set; }
 		public string Company { get; set; }
 		public string Salesman { get; set; }
 		public string Addr1 { get; set; }
@@ -36,5 +34,6 @@ namespace DeliveryTracker.Models
 		public double Allocated { get; set; }
 		public double Delivered { get; set; }
 		public string UnitOfMeasure { get; set; }
+		public string Line { get; set; }
 	}
 }

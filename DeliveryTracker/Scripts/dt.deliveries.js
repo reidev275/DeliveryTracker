@@ -1,14 +1,17 @@
 ﻿var DT = (function (dt, $, json) {
 	var o = dt.deliveries = dt.deliveries || {};
 
-	o.get = function (truck, callback) {
+	o.get = function (truck, callback, error) {
 		$.ajax({
 			type: 'GET',
 			cache: false,
 			url: 'Deliveries/?truck=' + truck
 		}).done(function (data) {
 			callback(data);
-		}).error(dt.handleError);
+		}).error(function (jqXHR, textStatus, errorThrown) {			
+			dt.handleError(jqXHR, textStatus, errorThrown);
+			if (error) error();
+		});
 	};
 
 	o.update = function (id, delivery, callback) {

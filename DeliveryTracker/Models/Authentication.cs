@@ -4,18 +4,18 @@ namespace DeliveryTracker.Models
 {
 	public class Authentication : AuthenticationResponse
 	{
-        public int Id { get; set; }
-        public int UserId { get; set; }
+		public int Id { get; set; }
+		public int UserId { get; set; }
 		public string Password { get; set; }
-        public DateTime Created { get; set; }
-        public DateTime Updated { get; set; }
+		public DateTime Created { get; set; }
+		public DateTime Updated { get; set; }
 
-        public bool IsValid
-        {
-            get
-            {
-                return Updated.DayOfYear == DateTime.Now.DayOfYear;
-            }
-        }
-    }
+		public bool IsValid
+		{
+			get
+			{
+				return Updated.DayOfYear == DateTime.UtcNow.DayOfYear;
+			}
+		}
+	}
 }

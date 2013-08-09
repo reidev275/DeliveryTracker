@@ -87,7 +87,7 @@ namespace DeliveryTracker.App_Start
 
 			//Repositories
 			kernel.Bind<ITrucksRepository>().To<MemoryTrucksRepository>();
-			kernel.Bind<IDeliveryRepository>().To<MemoryDeliveryRepository>();
+			
 		}
 
 		private static void MemoryRepositories(IKernel kernel)
@@ -95,6 +95,7 @@ namespace DeliveryTracker.App_Start
 			kernel.Bind<IAuthenticationsRepository>().To<MemoryAuthenticationsRepository>();
 			kernel.Bind<IUsersRepository>().To<MemoryUsersRepository>();
 			kernel.Bind<IDeviceAuthRepository>().To<MemoryDeviceAuthRepository>();
+			kernel.Bind<IDeliveryRepository>().To<MemoryDeliveryRepository>();
 		}
 
 		private static void SqlRepositories(IKernel kernel)
@@ -102,6 +103,7 @@ namespace DeliveryTracker.App_Start
 			kernel.Bind<IAuthenticationsRepository>().To<DapperAuthenticationsRepository>().WithConnectionString();
 			kernel.Bind<IUsersRepository>().To<DapperUsersRepository>().WithConnectionString();            
 			kernel.Bind<IDeviceAuthRepository>().To<DapperDeviceAuthRepository>().WithConnectionString();
+			kernel.Bind<IDeliveryRepository>().To<DapperDeliveryRepository>().WithConnectionString();
 		}
 	}
 }

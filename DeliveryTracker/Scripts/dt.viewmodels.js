@@ -12,6 +12,8 @@
 				Deliveries.push(new o.Delivery(value));
 			});
 			route('deliveries');
+		}, function () {
+			route('login');
 		});
 	};
 
@@ -317,9 +319,10 @@
 				obj.Items.push(value.getUnwrapped());
 			});
 
-			dt.deliveries.update(self.Id, obj, function (response) {
-				self.Completed(true);				
-			});		
+			dt.deliveries.update(self.Id, obj, null, function () {
+				self.Completed(false);
+			});
+			self.Completed(true);
 			route('deliveries');
 		};
 	};
